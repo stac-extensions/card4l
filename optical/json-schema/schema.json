@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.stacspec.org/extensions/card4l/optical/json-schema/schema.json#",
+  "title": "CARD4L Optical Extension",
+  "description": "STAC CARD4L Optical Extension to a STAC Item",
+  "allOf": [
+    {
+      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/item-spec/json-schema/item.json"
+    },
+    {
+      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/eo/json-schema/schema.json"
+    },
+    {
+      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/file/json-schema/schema.json"
+    },
+    {
+      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/projection/json-schema/schema.json"
+    },
+    {
+      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/view/json-schema/schema.json"
+    },
+    {
+      "$ref": "../../commons.json"
+    },
+    {
+      "$ref": "#/definitions/card4l-eo"
+    }
+  ],
+  "oneOf": [
+    {
+      "$ref": "#/definitions/card4l-sr"
+    },
+    {
+      "$ref": "#/definitions/card4l-st"
+    }
+  ],
+  "anyOf": [
+    {
+      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/processing/json-schema/schema.json"
+    }
+  ],
+  "definitions": {
+    "card4l-eo": {
+      "type": "object",
+      "required": [
+        "stac_extensions",
+        "geometry",
+        "bbox",
+        "properties",
+        "links",
+        "assets"
+      ],
+      "properties": {
+        "stac_extensions": {
+          "type": "array",
+          "contains": {
+            "const": "https://schemas.stacspec.org/extensions/card4l/optical/json-schema/schema.json"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "required": [
+            "datetime",
+            "instruments",
+            "view:off_nadir",
+            "view:incidence_angle",
+            "view:azimuth",
+            "view:sun_azimuth",
+            "view:sun_elevation"
+          ],
+          "anyOf": [
+            {
+              "required": [
+                "proj:epsg"
+              ]
+            },
+            {
+              "required": [
+                "proj:wkt2"
+              ]
+            },
+            {
+              "required": [
+                "proj:projjson"
+              ]
+            }
+          ]
+        },
+        "links": {
+          "type": "array",
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "required": [
+                  "href",
+                  "rel"
+                ],
+                "properties": {
+                  "rel": {
+                    "const": "related"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "assets": {
+          "type": "object",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$comment": "TODO"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "card4l-sr": {
+      "type": "object",
+      "properties": {
+        "card4l:specification": {
+          "const": "SR"
+        },
+        "card4l:specification_version": {
+          "const": "5.0"
+        }
+      }
+    },
+    "card4l-st": {
+      "type": "object",
+      "properties": {
+        "card4l:specification": {
+          "const": "ST"
+        },
+        "card4l:specification_version": {
+          "const": "5.0"
+        }
+      }
+    }
+  }
+} 
