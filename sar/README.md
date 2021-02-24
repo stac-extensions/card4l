@@ -241,4 +241,6 @@ For all assets of with the role set to `data`, the following additional properti
 
 1.6.1 / 1.7.1: `SourceDataRepository` and `RepositoryURL` are covered by STAC link structures. All CARD4L compliant STAC Catalog are **required** to make intensive use of STAC link relation types such as `root`, `parent`, `child`, `item` and `collection`.
 
+1.6.6 / 1.7.1 / 4.1: STAC only mandates to use `processing:lineage` to describe processing chains, but you may also include or link to a more machine-readable processing chain description such as a Dask graph, an openEO process or a SNAP graph. It is recommended to use the field name `card4l:processing_chain`.
+
 1.6.9: `SideLobeLevel`, `IntegratedSideLobeRatio`, `CrossCorrelationWidth`, `CrossCorelationPeakLoc` are *recommended* to be included in the resource linked to with the relation type [`performance-indicators`](#stac-item-links).

@@ -182,9 +182,9 @@ The following table lists properties that may occur in the assets. The list does
 
 ## Notes
 
-1.13: The algorithms can be given either in `proc:software` or as link with relation type `about`. One of them is **required** by CARD4L.
+1.13: The algorithms can be given either in `processing:software` or as link with relation type `about`. One of them is **required** by CARD4L.
 
-1.15: STAC only mandates to use `processing:lineage` to describe processing chains, but you may also include or link to a more machine-readable processing chain description such as a Dask graph, an openEO process or a SNAP graph.
+1.15: STAC only mandates to use `processing:lineage` to describe processing chains, but you may also include or link to a more machine-readable processing chain description such as a Dask graph, an openEO process or a SNAP graph. It is recommended to use the field name `card4l:processing_chain`.
 
 1.17: Other data quality flags than `eo:cloud_cover` should be set.
 
