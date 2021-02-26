@@ -142,9 +142,9 @@ See also the [notes](#notes) regarding the requirements 1.13 and 1.15 for a bett
 
 Whether the metadata are provided in a single record relevant to all pixels, or separately for each pixel, is at the discretion of the data provider. 
 
-Each of the assets can either be exposed individually or grouped together in any form. In the latter case the role names can simply be merged to a set of unique role names. Roles can also be combined for a single file. For example, a cloud mask which is also including cloud shadows can use the roles `cloud` and `cloud-shadow` for a single file. The `file:values` property can the contain which value(s) correspond to clouds and which value(s) correspond to cloud shadows respectively.
+The role names specify the values to be used in the Asset's `roles`. Each of the assets can either be exposed individually or grouped together in any form. In the latter case the role names can simply be merged to a set of unique role names. Roles can also be combined for a single file. For example, a cloud mask which is also including cloud shadows can use the roles `cloud` and `cloud-shadow` for a single file. The `file:values` property can the contain which value(s) correspond to clouds and which value(s) correspond to cloud shadows respectively. The *italic* role names could be used as the asset's key.
 
-The *italic* role names are proposed to be the asset's key. The **bold** additional properties are required.
+ The **bold** additional properties are required.
 
 | Role Name(s)                           | Additional properties                                        | Description                                                  | Req.                 |
 | -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------- |
