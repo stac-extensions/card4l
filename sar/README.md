@@ -246,3 +246,9 @@ For all assets of with the role set to `data`, the following additional properti
 1.6.9: `SideLobeLevel`, `IntegratedSideLobeRatio`, `CrossCorrelationWidth`, `CrossCorelationPeakLoc` are *recommended* to be included in the resource linked to with the relation type [`performance-indicators`](#stac-item-links).
 
 2.3: From the metadata specification it seems the sample type unit should be square meters (m²) although it is per-pixel data, which we think should be unitless itself.
+
+2.3 / 2.4: These fields may not be required in a future iteration of the specification as several tools don't generate such metadata, e.g. SNAP.
+
+4.3: A revision of the CEOS specification is planned and may change or relax the requirement.
+
+4.4: There's an inconsistency in the CEOS specification and the CEOS metadata specification. The metadata specification asks for the gridding convention as specified here, but the text in the specification doesn't mention it. We think the description really means you just need to use a consistent grid for the data, across tiles/scenes.
