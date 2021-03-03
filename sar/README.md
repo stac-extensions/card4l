@@ -1,12 +1,13 @@
-# STAC CARD4L SAR Extension
+# STAC CARD4L SAR Extension Specification
 
-- **Title: CARD4L SAR**
-- **Identifier: card4l-sar**
-- **Field Name Prefix: card4l** (shared with the CARD4L Optical Extension)
-- **Scope: Item**
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/README.md#extension-maturity): Proposal**
+- **Title:** CARD4L SAR
+- **Identifier:** https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json
+- **Field Name Prefix:** card4l (shared with the CARD4L Optical Extension)
+- **Scope:** Item
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
+- **Owner**: @m-mohr
 
-This extension specifies how to create STAC Items that comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
+This extension specifies how to create [STAC](https://github.com/radiantearth/stac-spec) Items that comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
 - *SAR Normalized Radar Backscatter* (NRB) products in version 5.0
   ([PDF](http://ceos.org/ard/files/PFS/NRB/v5.0/CARD4L-PFS_Normalised_Radar_Backscatter-v5.0.pdf),
   [Word](http://ceos.org/ard/files/PFS/NRB/v5.0/CARD4L-PFS_Normalised_Radar_Backscatter-v5.0.docx))
@@ -34,12 +35,12 @@ The column *XML Tag* refers to the XML tag proposed in the CARD4L metadata speci
 
 **STAC Extensions:** This extension makes use of a number of existing STAC extensions:
 
-- [File](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md)
-- [Processing](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/processing/README.md)
-- [Projection](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/projection/README.md)
-- [SAR](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/sar/README.md)
-- [Satellite](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/sat/README.md)
-- [View](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/view/README.md) (optional)
+- [File](https://github.com/stac-extensions/file)
+- [Processing](https://github.com/stac-extensions/processing)
+- [Projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection/README.md)
+- [SAR](https://github.com/stac-extensions/sar)
+- [Satellite](https://github.com/stac-extensions/sat)
+- [View](https://github.com/radiantearth/stac-spec/tree/master/extensions/view/README.md) (optional)
 
 You have to read the STAC extensions in combination with this extension as this extension just provides the mapping between the STAC fields and the CARD4L requirements, but this extension doesn't give information on the data type or an actual detailed description about the fields.
 
@@ -66,7 +67,7 @@ STAC Items must always be valid, but not all STAC Item requirements are covered 
 
 | Field Name      | XML Tag                                                      | Description                                                  | Src     | Prod    |
 | --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | ------- |
-| stac_extensions | *n/a*                                                        | **REQUIRED.** Must contain all extensions used, for the product at least the following values: `https://schemas.stacspec.org/extensions/card4l/sar/json-schema/schema.json`, `file`, `processing`, `projection`, `sar`, `sat`, `view`. | ✓       | ✓       |
+| stac_extensions | *n/a*                                                        | **REQUIRED.** Must contain all extensions used, for the product at least the following values: `https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json`, `https://stac-extensions.github.io/file/v1.0.0/schema.json`, `processing`, `projection`, `sar`, `sat`, `view`. | ✓       | ✓       |
 | id              | `ProductID`                                                  | **REQUIRED.**                                                | ✓ 1.6.6 | ✓       |
 | geometry        | `GeodeticCoordinates`, `Latitude`, `Longitude`, `Height` (Src), `GeographicalExtent` (Prod) | **REQUIRED.**                 | ✓ 1.6.7 | ✓ 1.7.6 |
 | bbox            | derived from `geometry` (Src), `GeographicalBoundingBox` (Prod) | **REQUIRED.**                                             | ✓ 1.6.7 | ✓ 1.7.5 |

@@ -1,12 +1,13 @@
-# STAC CARD4L Optical Extension
+# STAC CARD4L Optical Extension Specification
 
-- **Title: CARD4L Optical**
-- **Identifier: card4l-eo**
-- **Field Name Prefix: card4l** (shared with the CARD4L SAR Extension)
-- **Scope: Item**
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/README.md#extension-maturity): Proposal**
+- **Title:** CARD4L Optical
+- **Identifier:** https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json
+- **Field Name Prefix:** card4l (shared with the CARD4L SAR Extension)
+- **Scope:** Item
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
+- **Owner**: @m-mohr
 
-This extension specifies how to create STAC Items that comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
+This extension specifies how to create [STAC](https://github.com/radiantearth/stac-spec) Items that comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
 - *Optical Surface Reflectance* (SR) products in version 5.0
   ([PDF](http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf),
   [Word](http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.docx))
@@ -21,11 +22,11 @@ The column *Field Name* refers to the STAC field names. The column *Req.* refers
 
 **STAC Extensions:** This extension makes use of a number of existing STAC extensions:
 
-- [EO](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/eo/README.md)
-- [File](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md)
-- [Processing](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/processing/README.md) (optional)
-- [Projection](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/projection/README.md)
-- [View](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/view/README.md)
+- [EO](https://github.com/radiantearth/stac-spec/tree/master/extensions/eo/README.md)
+- [File](https://github.com/stac-extensions/file)
+- [Processing](https://github.com/stac-extensions/processing) (optional)
+- [Projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection/README.md)
+- [View](https://github.com/radiantearth/stac-spec/tree/master/extensions/view/README.md)
 
 You have to read the STAC extensions in combination with this extension as this extension just provides the mapping between the STAC fields and the CARD4L requirements, but this extension doesn't give information on the data type or an actual detailed description about the fields.
 
@@ -50,7 +51,7 @@ STAC Items must always be valid, but not all STAC Item requirements are covered 
 
 | Field Name      | Description                                                  | Req.  |
 | --------------- | ------------------------------------------------------------ | ----- |
-| stac_extensions | **REQUIRED.** Must contain all extensions used, for the product at least the following values: `https://schemas.stacspec.org/extensions/card4l/optical/json-schema/schema.json`, `eo`, `projection` and  `view`. You may add `processing` and `file` if used. | *n/a* |
+| stac_extensions | **REQUIRED.** Must contain all extensions used, for the product at least the following values: `https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json`, `eo`, `projection` and  `view`. You may add `processing` and `https://stac-extensions.github.io/file/v1.0.0/schema.json` if used. | *n/a* |
 | geometry        | **REQUIRED.** The geometry of the acquisition.               | 1.4   |
 | bbox            | **REQUIRED.** The bounding box of the acquisition.           | 1.4   |
 
