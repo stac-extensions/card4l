@@ -4,7 +4,7 @@ This repository contains two STAC extensions that specifies how to create STAC I
 - Optical - Surface Reflectance
 - Optical - Surface Temperature
 - SAR - Normalized Radar Backscatter
-- SAR - Poliametric Radar
+- SAR - Polarimetric Radar
 
 There are two STAC extensions, one for Optical and one for SAR:
 - [Optical](optical/README.md)
