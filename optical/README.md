@@ -38,7 +38,9 @@ on the data type or an actual detailed description about the fields.
 **Additional resources:**
 
 - [Examples](examples/)
+  *Please note that parts of the examples are made-up as we can't fulfill all CARD4L requirements yet.*
 - [JSON Schema](json-schema/)
+  *Please note that assets don't get validated yet.*
 
 ## STAC Collections
 

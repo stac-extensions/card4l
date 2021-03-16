@@ -58,10 +58,10 @@
     ],
     "proj:epsg": null,
     "proj:wkt2": "PROJCS[\"Azimuthal_Equidistant\",GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Azimuthal_Equidistant\"],PARAMETER[\"latitude_of_center\",53],PARAMETER[\"longitude_of_center\",24],PARAMETER[\"false_easting\",5837287.81977],PARAMETER[\"false_northing\",2121415.69617],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]]]",
-    "view:incidence_angle": 0,
-    "view:azimuth": 0,
-    "view:sun_azimuth": 0,
-    "view:sun_elevation": 0
+    "view:incidence_angle": 45.6789,
+    "view:azimuth": 45.6789,
+    "view:sun_azimuth": 45.6789,
+    "view:sun_elevation": 45.6789
   },
   "links": [
     {
@@ -101,7 +101,7 @@
   ],
   "assets": {
     "cloud": {
-      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
+      "href": "https://example.com/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
       "roles": [
         "cloud",
         "metadata"
@@ -132,11 +132,10 @@
           "summary": "cirrus"
         }
       ],
-      "type": "image/tiff; application=geotiff",
-      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The cloud state is available in bit 1-2."
+      "type": "image/tiff; application=geotiff"
     },
     "saturation": {
-      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
+      "href": "https://example.com/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
       "roles": [
         "saturation",
         "metadata"
@@ -155,11 +154,10 @@
           "summary": "yes - pixel is saturated"
         }
       ],
-      "type": "image/tiff; application=geotiff",
-      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The saturation flag is available in bit 9."
+      "type": "image/tiff; application=geotiff"
     },
     "cloud_shadow": {
-      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
+      "href": "https://example.com/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
       "roles": [
         "cloud-shadow",
         "metadata"
@@ -178,11 +176,32 @@
           "summary": "yes - cloud-shadow on pixel"
         }
       ],
-      "type": "image/tiff; application=geotiff",
-      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The cloud-shadow flag is available in bit 3."
+      "type": "image/tiff; application=geotiff"
+    },
+    "incomplete_testing": {
+      "href": "https://example.com/EU010M/E053N015T1/20180616_LEVEL2_SEN2B_QAI_it.tif",
+      "roles": [
+        "cloud-shadow",
+        "metadata"
+      ],
+      "file:values": [
+        {
+          "values": [
+            0
+          ],
+          "summary": "tests have NOT been successfully completed"
+        },
+        {
+          "values": [
+            1
+          ],
+          "summary": "tests have been successfully completed"
+        }
+      ],
+      "type": "image/tiff; application=geotiff"
     },
     "data": {
-      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20161208_LEVEL2_LND08_BOA.tif",
+      "href": "https://example.com/EU010M/E053N015T1/20161208_LEVEL2_LND08_BOA.tif",
       "file:unit": "fraction",
       "eo:bands": [
         {
