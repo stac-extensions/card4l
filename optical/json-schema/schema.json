@@ -91,15 +91,6 @@
             }
           ]
         },
-        "links": {
-          "contains": {
-            "properties": {
-              "rel": {
-                "const": "related"
-              }
-            }
-          }
-        },
         "assets": {
           "type": "object",
           "additionalProperties": {

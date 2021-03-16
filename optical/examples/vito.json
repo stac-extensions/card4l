@@ -167,10 +167,6 @@
     {
       "href": "http://www.example.com/processing/ard/water-vapor.pdf",
       "rel": "water-vapor"
-    },
-    {
-      "href": "http://www.example.com/processing/ard/related.pdf",
-      "rel": "related"
     }
   ],
   "assets": {

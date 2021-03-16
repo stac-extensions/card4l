@@ -132,7 +132,7 @@ either `proj:epsg` or one of the alternatives.
 | card4l-document           | **REQUIRED.** Provides at least one link to the CARD4L specification document. Word (media type: `application/vnd.openxmlformats-officedocument.wordprocessingml.document`) and/or PDF (media type: `application/pdf`). | *n/a*               |
 | derived_from              | Points back to the source's STAC Item. May be multiple items, if the product is derived from multiple acquisitions. | 1.15                |
 | about                     | Link to algorithms used in the generation process. See also the [notes](#notes) regarding req. 1.13. | 1.13                |
-| related                   | **REQUIRED.** Link to the sources of ancillary or auxiliary data used in the generation process. Excludes DEMs, which use the relation `elevation-model` instead. | 1.14                |
+| related                   | Link to the sources of auxiliary data used in the generation process. This is **required** if auxiliary data used in the generation process. Excludes DEMs, which use the relation `elevation-model` instead.   | 1.14                |
 | access                    | STRONGLY RECOMMENDED. Link to data access information.       | 1.16                |
 | sensor-calibration        | Link to the sensor calibration parameters.                   | 1.11                |
 | radiometric-accuracy      | Link describing the assessed absolute radiometric uncertainty of the version of the data or product. | 1.12                |

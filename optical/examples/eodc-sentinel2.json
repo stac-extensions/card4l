@@ -70,10 +70,6 @@
       "href": "http://doi.org/10.3390/rs11091124"
     },
     {
-      "rel": "related",
-      "href": "https://sentinel.esa.int/web/sentinel/toolboxes/sentinel-2"
-    },
-    {
       "rel": "cloud",
       "href": "http://doi.org/10.1016/j.rse.2018.04.046"
     },
