@@ -1,0 +1,231 @@
+{
+  "stac_version": "1.0.0-rc.1",
+  "stac_extensions": [
+    "eo",
+    "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json",
+    "https://stac-extensions.github.io/file/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.0.0/schema.json",
+    "projection",
+    "view"
+  ],
+  "id": "51e1f769-f6b1-4f4a-91be-55451b6990e3",
+  "type": "Feature",
+  "bbox": [
+    6.022720992309466,
+    45.120187268680816,
+    10.65453202974471,
+    48.31266918320008
+  ],
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          6.022720992309466,
+          45.120187268680816
+        ],
+        [
+          6.022720992309466,
+          48.31266918320008
+        ],
+        [
+          10.65453202974471,
+          48.31266918320008
+        ],
+        [
+          10.65453202974471,
+          45.120187268680816
+        ],
+        [
+          6.022720992309466,
+          45.120187268680816
+        ]
+      ]
+    ]
+  },
+  "properties": {
+    "processing:lineage": "FORCE Level 2 Processing System",
+    "processing:software": {
+      "FORCE": "3.6.2"
+    },
+    "datetime": "2016-12-08T12:00:00+00:00",
+    "card4l:specification_version": "5.0",
+    "processing:level": "L2",
+    "platform": "landsat-8",
+    "card4l:specification": "SR",
+    "instruments": [
+      "oli"
+    ],
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCS[\"Azimuthal_Equidistant\",GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Azimuthal_Equidistant\"],PARAMETER[\"latitude_of_center\",53],PARAMETER[\"longitude_of_center\",24],PARAMETER[\"false_easting\",5837287.81977],PARAMETER[\"false_northing\",2121415.69617],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]]]",
+    "view:incidence_angle": 0,
+    "view:azimuth": 0,
+    "view:sun_azimuth": 0,
+    "view:sun_elevation": 0
+  },
+  "links": [
+    {
+      "rel": "about",
+      "href": "http://doi.org/10.3390/rs11091124"
+    },
+    {
+      "rel": "cloud",
+      "href": "http://doi.org/10.1109/lgrs.2015.2390673"
+    },
+    {
+      "rel": "related",
+      "href": "https://doi.pangaea.de/10.1594/PANGAEA.893109"
+    },
+    {
+      "rel": "water-vapor",
+      "href": "http://doi.org/10.1594/PANGAEA.893109"
+    },
+    {
+      "rel": "cloud-shadow",
+      "href": "http://doi.org/10.1109/lgrs.2015.2390673"
+    },
+    {
+      "rel": "card4l-document",
+      "href": "https://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
+      "type": "application/pdf"
+    },
+    {
+      "rel": "elevation-model",
+      "href": "https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198",
+      "title": "Copernicus DEM 30m"
+    },
+    {
+      "rel": "atmospheric-scattering",
+      "href": "http://doi.org/10.3390/rs11030257"
+    }
+  ],
+  "assets": {
+    "cloud": {
+      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
+      "roles": [
+        "cloud",
+        "metadata"
+      ],
+      "file:values": [
+        {
+          "values": [
+            0
+          ],
+          "summary": "clear"
+        },
+        {
+          "values": [
+            1
+          ],
+          "summary": "less confident cloud (i.e., buffered cloud)"
+        },
+        {
+          "values": [
+            2
+          ],
+          "summary": "confident, opaque cloud"
+        },
+        {
+          "values": [
+            3
+          ],
+          "summary": "cirrus"
+        }
+      ],
+      "type": "image/tiff; application=geotiff",
+      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The cloud state is available in bit 1-2."
+    },
+    "saturation": {
+      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
+      "roles": [
+        "saturation",
+        "metadata"
+      ],
+      "file:values": [
+        {
+          "values": [
+            0
+          ],
+          "summary": "no - pixel is NOT saturated"
+        },
+        {
+          "values": [
+            1
+          ],
+          "summary": "yes - pixel is saturated"
+        }
+      ],
+      "type": "image/tiff; application=geotiff",
+      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The saturation flag is available in bit 9."
+    },
+    "cloud_shadow": {
+      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
+      "roles": [
+        "cloud-shadow",
+        "metadata"
+      ],
+      "file:values": [
+        {
+          "values": [
+            0
+          ],
+          "summary": "no - no cloud-shadow on pixel"
+        },
+        {
+          "values": [
+            1
+          ],
+          "summary": "yes - cloud-shadow on pixel"
+        }
+      ],
+      "type": "image/tiff; application=geotiff",
+      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The cloud-shadow flag is available in bit 3."
+    },
+    "data": {
+      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20161208_LEVEL2_LND08_BOA.tif",
+      "file:unit": "fraction",
+      "eo:bands": [
+        {
+          "name": "band_1",
+          "center_wavelength": 0,
+          "common_name": "blue"
+        },
+        {
+          "name": "band_2",
+          "center_wavelength": 0,
+          "common_name": "green"
+        },
+        {
+          "name": "band_3",
+          "center_wavelength": 0,
+          "common_name": "red"
+        },
+        {
+          "name": "band_4",
+          "center_wavelength": 0,
+          "common_name": "nir08"
+        },
+        {
+          "name": "band_5",
+          "center_wavelength": 1,
+          "common_name": "swir16"
+        },
+        {
+          "name": "band_6",
+          "center_wavelength": 2,
+          "common_name": "swir22"
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "created": "2021-02-09T12:46:11Z",
+      "file:nodata": [
+        -9999
+      ],
+      "type": "image/tiff; application=geotiff",
+      "file:data_type": "int16"
+    }
+  }
+}

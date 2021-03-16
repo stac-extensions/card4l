@@ -1,0 +1,260 @@
+{
+  "stac_version": "1.0.0-rc.1",
+  "stac_extensions": [
+    "eo",
+    "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json",
+    "https://stac-extensions.github.io/file/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.0.0/schema.json",
+    "projection",
+    "view"
+  ],
+  "id": "33815fdb-8b43-441a-9926-758a73072dcd",
+  "type": "Feature",
+  "bbox": [
+    8.896022536230403,
+    46.37974744891577,
+    10.428304773879523,
+    47.43268391106645
+  ],
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          8.896022536230403,
+          46.37974744891577
+        ],
+        [
+          8.896022536230403,
+          47.43268391106645
+        ],
+        [
+          10.428304773879523,
+          47.43268391106645
+        ],
+        [
+          10.428304773879523,
+          46.37974744891577
+        ],
+        [
+          8.896022536230403,
+          46.37974744891577
+        ]
+      ]
+    ]
+  },
+  "properties": {
+    "processing:lineage": "FORCE Level 2 Processing System",
+    "processing:software": {
+      "FORCE": "3.6.2"
+    },
+    "datetime": "2018-06-16T12:00:00+00:00",
+    "card4l:specification_version": "5.0",
+    "processing:level": "L2",
+    "platform": "sentinel-2b",
+    "card4l:specification": "SR",
+    "constellation": "sentinel-2",
+    "instruments": [
+      "msi"
+    ],
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCS[\"Azimuthal_Equidistant\",GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Azimuthal_Equidistant\"],PARAMETER[\"latitude_of_center\",53],PARAMETER[\"longitude_of_center\",24],PARAMETER[\"false_easting\",5837287.81977],PARAMETER[\"false_northing\",2121415.69617],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]]]",
+    "view:incidence_angle": 0,
+    "view:azimuth": 0,
+    "view:sun_azimuth": 0,
+    "view:sun_elevation": 0
+  },
+  "links": [
+    {
+      "rel": "about",
+      "href": "http://doi.org/10.3390/rs11091124"
+    },
+    {
+      "rel": "related",
+      "href": "https://sentinel.esa.int/web/sentinel/toolboxes/sentinel-2"
+    },
+    {
+      "rel": "cloud",
+      "href": "http://doi.org/10.1016/j.rse.2018.04.046"
+    },
+    {
+      "rel": "snow-ice",
+      "href": "https://doi.org/10.3390/rs13010137"
+    },
+    {
+      "rel": "land-water",
+      "href": "https://doi.org/10.3390/rs13010137"
+    },
+    {
+      "rel": "water-vapor",
+      "href": "http://doi.org/10.3390/rs10020352"
+    },
+    {
+      "rel": "cloud-shadow",
+      "href": "https://doi.org/10.3390/rs13010137"
+    },
+    {
+      "rel": "card4l-document",
+      "href": "https://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
+      "type": "application/pdf"
+    },
+    {
+      "rel": "elevation-model",
+      "href": "https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198",
+      "title": "Copernicus DEM 30m"
+    },
+    {
+      "rel": "atmospheric-scattering",
+      "href": "http://doi.org/10.3390/rs10020352"
+    }
+  ],
+  "assets": {
+    "cloud": {
+      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20180616_LEVEL2_SEN2B_QAI.tif",
+      "roles": [
+        "cloud",
+        "metadata"
+      ],
+      "file:values": [
+        {
+          "values": [
+            0
+          ],
+          "summary": "clear"
+        },
+        {
+          "values": [
+            1
+          ],
+          "summary": "less confident cloud (i.e., buffered cloud)"
+        },
+        {
+          "values": [
+            2
+          ],
+          "summary": "confident, opaque cloud"
+        },
+        {
+          "values": [
+            3
+          ],
+          "summary": "cirrus"
+        }
+      ],
+      "type": "image/tiff; application=geotiff",
+      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The cloud state is available in bit 1-2."
+    },
+    "saturation": {
+      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20180616_LEVEL2_SEN2B_QAI.tif",
+      "roles": [
+        "saturation",
+        "metadata"
+      ],
+      "file:values": [
+        {
+          "values": [
+            0
+          ],
+          "summary": "no - pixel is NOT saturated"
+        },
+        {
+          "values": [
+            1
+          ],
+          "summary": "yes - pixel is saturated"
+        }
+      ],
+      "type": "image/tiff; application=geotiff",
+      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The saturation flag is available in bit 9."
+    },
+    "cloud_shadow": {
+      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20180616_LEVEL2_SEN2B_QAI.tif",
+      "roles": [
+        "cloud-shadow",
+        "metadata"
+      ],
+      "file:values": [
+        {
+          "values": [
+            0
+          ],
+          "summary": "no - no cloud-shadow on pixel"
+        },
+        {
+          "values": [
+            1
+          ],
+          "summary": "yes - cloud-shadow on pixel"
+        }
+      ],
+      "type": "image/tiff; application=geotiff",
+      "description": "The QAI dataset contains bit-wise stored quality information for each pixel. The cloud-shadow flag is available in bit 3."
+    },
+    "data": {
+      "href": "/home/sherrmann/data/openeo/data/EU010M/E053N015T1/20180616_LEVEL2_SEN2B_BOA.tif",
+      "file:unit": "fraction",
+      "eo:bands": [
+        {
+          "name": "band_1",
+          "center_wavelength": 0,
+          "common_name": "blue"
+        },
+        {
+          "name": "band_2",
+          "center_wavelength": 0,
+          "common_name": "green"
+        },
+        {
+          "name": "band_3",
+          "center_wavelength": 0,
+          "common_name": "red"
+        },
+        {
+          "name": "band_4",
+          "center_wavelength": 0,
+          "common_name": "rededge"
+        },
+        {
+          "name": "band_5",
+          "center_wavelength": 0,
+          "common_name": "rededge"
+        },
+        {
+          "name": "band_6",
+          "center_wavelength": 0,
+          "common_name": "rededge"
+        },
+        {
+          "name": "band_7",
+          "center_wavelength": 0,
+          "common_name": "nir"
+        },
+        {
+          "name": "band_8",
+          "center_wavelength": 0,
+          "common_name": "nir08"
+        },
+        {
+          "name": "band_9",
+          "center_wavelength": 1,
+          "common_name": "swir16"
+        },
+        {
+          "name": "band_10",
+          "center_wavelength": 2,
+          "common_name": "swir22"
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "created": "2021-03-08T14:24:30Z",
+      "file:nodata": [
+        0
+      ],
+      "type": "image/tiff; application=geotiff",
+      "file:data_type": "int16"
+    }
+  }
+}

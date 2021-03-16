@@ -1,0 +1,199 @@
+{
+  "stac_version": "1.0.0-rc.1",
+  "stac_extensions": [
+    "eo",
+    "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json",
+    "https://stac-extensions.github.io/file/v1.0.0/schema.json",
+    "projection",
+    "view"
+  ],
+  "id": "8451aaa8-7623-44ed-9174-e125529011c4",
+  "type": "Feature",
+  "bbox": [
+    10.823593,
+    45.833081,
+    11.063232,
+    45.924862
+  ],
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          10.823593,
+          45.833081
+        ],
+        [
+          10.823593,
+          45.924862
+        ],
+        [
+          11.063232,
+          45.924862
+        ],
+        [
+          11.063232,
+          45.833081
+        ],
+        [
+          10.823593,
+          45.833081
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "properties": {
+    "card4l:specification": "SR",
+    "card4l:specification_version": "5.0",
+    "card4l:processing_chain": {
+      "process_graph": {
+        "atmosphericcorrection1": {
+          "arguments": {
+            "data": {
+              "from_node": "loadcollection1"
+            },
+            "elevation_model": null,
+            "method": "iCor"
+          },
+          "process_id": "atmospheric_correction"
+        },
+        "filterbands1": {
+          "arguments": {
+            "bands": [
+              "B02",
+              "B03",
+              "B04"
+            ],
+            "data": {
+              "from_node": "atmosphericcorrection1"
+            }
+          },
+          "process_id": "filter_bands"
+        },
+        "loadcollection1": {
+          "arguments": {
+            "bands": [
+              "B02",
+              "B03",
+              "B04",
+              "B08",
+              "CLM",
+              "B09",
+              "B8A",
+              "B11",
+              "sunAzimuthAngles",
+              "sunZenithAngles",
+              "viewAzimuthMean",
+              "viewZenithMean"
+            ],
+            "id": "SENTINEL2_L1C_SENTINELHUB",
+            "spatial_extent": {
+              "east": 11.063232,
+              "north": 45.924862,
+              "south": 45.833081,
+              "west": 10.823593
+            },
+            "temporal_extent": [
+              "2018-07-22",
+              "2018-07-24"
+            ]
+          },
+          "process_id": "load_collection"
+        },
+        "reducedimension1": {
+          "arguments": {
+            "data": {
+              "from_node": "filterbands1"
+            },
+            "dimension": "t",
+            "reducer": {
+              "process_graph": {
+                "mean1": {
+                  "arguments": {
+                    "data": {
+                      "from_parameter": "data"
+                    }
+                  },
+                  "process_id": "mean",
+                  "result": true
+                }
+              }
+            }
+          },
+          "process_id": "reduce_dimension"
+        },
+        "saveresult1": {
+          "arguments": {
+            "data": {
+              "from_node": "reducedimension1"
+            },
+            "format": "GTIFF",
+            "options": {}
+          },
+          "process_id": "save_result",
+          "result": true
+        }
+      }
+    },
+    "created": "2021-03-16T12:07:40Z",
+    "datetime": null,
+    "end_datetime": "2018-07-24T00:00:00Z",
+    "instruments": [
+      "msi"
+    ],
+    "proj:epsg": 32632,
+    "start_datetime": "2018-07-22T00:00:00Z",
+    "updated": "2021-03-16T12:08:42Z",
+    "view:incidence_angle": 0,
+    "view:azimuth": 0,
+    "view:sun_azimuth": 0,
+    "view:sun_elevation": 0
+  },
+  "links": [
+    {
+      "href": "https://openeo-dev.vito.be/openeo/1.0/jobs/8451aaa8-7623-44ed-9174-e125529011c4/results",
+      "rel": "self",
+      "type": "application/json"
+    },
+    {
+      "href": "http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
+      "rel": "card4l-document",
+      "type": "application/pdf"
+    },
+    {
+      "href": "http://www.example.com/processing/ard/atmospheric-scattering.pdf",
+      "rel": "atmospheric-scattering"
+    },
+    {
+      "href": "http://www.example.com/processing/ard/water-vapor.pdf",
+      "rel": "water-vapor"
+    },
+    {
+      "href": "http://www.example.com/processing/ard/related.pdf",
+      "rel": "related"
+    }
+  ],
+  "assets": {
+    "out": {
+      "file:nodata": [
+        0
+      ],
+      "eo:bands": [
+        {
+          "center_wavelength": 0.4924,
+          "name": "B02"
+        },
+        {
+          "center_wavelength": 0.5598,
+          "name": "B03"
+        },
+        {
+          "center_wavelength": 0.6646,
+          "name": "B04"
+        }
+      ],
+      "href": "https://openeo-dev.vito.be/openeo/1.0/jobs/8451aaa8-7623-44ed-9174-e125529011c4/results/out",
+      "type": "image/tiff; application=geotiff"
+    }
+  }
+}
