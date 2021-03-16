@@ -149,15 +149,16 @@ It is **required** to add all speckle filter parameters to this object.
 
 #### Projection
 
-| Field Name     | XML Tag                              | Description                                                  | Src  | Prod     |
-| -------------- | ------------------------------------ | ------------------------------------------------------------ | ---- | -------- |
-| proj:shape     | `NumberLines`, `NumberPixelsPerLine` | **REQUIRED.** To be specified either globally for all assets with role `data` or individually [per asset](#stac-item-assets). | ✗    | ✓ 1.7.7  |
-| proj:epsg      | `CoordinateReferenceSystem`          | See comment below*.                                          | (✓)  | ✓ 1.7.9  |
-| proj:wkt2      | `MapProjection`                      | See comment below*.                                          | (✓)  | ✓ 1.7.10 |
-| proj:transform | *n/a*                                | To be specified either globally for all assets with role `data` or individually [per asset](#stac-item-assets). | ✗    | (✓)      |
+| Field Name                | XML Tag                                         | Description                                                  | Src  | Prod               |
+| ------------------------- | ----------------------------------------------- | ------------------------------------------------------------ | ---- | ------------------ |
+| proj:shape                | `NumberLines`, `NumberPixelsPerLine`            | **REQUIRED.** To be specified either globally for all assets with role `data` or individually [per asset](#stac-item-assets). | ✗    | ✓ 1.7.7            |
+| proj:epsg                 | `CoordinateReferenceSystem` / (`MapProjection`) | **REQUIRED.** See comment below*.                            | (✓)  | ✓ 1.7.9 / (1.7.10) |
+| proj:wkt2 / proj:projjson | `MapProjection` / (`CoordinateReferenceSystem`) | See comment below*.                                          | (✓)  | ✓ 1.7.10 / (1.7.9) |
+| proj:transform            | *n/a*                                           | To be specified either globally for all assets with role `data` or individually [per asset](#stac-item-assets). | ✗    | (✓)                |
 
-\* At least one of the three properties `proj:epsg`, `proj:wkt2` or `proj:projjson` is **required**.
-It must specify the coordinate reference system (1.7.9) and map projection (1.7.10).
+\* The metadata must specify the coordinate reference system (1.7.9) and map projection (1.7.10).
+`proj:epsg` is **required** by STAC. If there's no suitable EPSG code, set the field to `null`,
+which then requires one of `proj:wkt2` or `proj:projjson` to be specified.
 For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and the Map Projection a human readable code such as WKT.
 
 #### SAR

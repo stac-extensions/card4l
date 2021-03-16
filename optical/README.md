@@ -105,9 +105,13 @@ See also the [notes](#notes) regarding the requirements 1.13 and 1.15 for a bett
 
 #### Projection
 
-| Field Name                            | Description                                                  | Req.      |
-| ------------------------------------- | ------------------------------------------------------------ | --------- |
-| proj:epsg / proj:wkt2 / proj:projjson | **REQUIRED.** At least one of the three properties `proj:epsg`, `proj:wkt2` or `proj:projjson` is required. It MUST specify the coordinate reference system (1.5) and MAY specify the map projection (1.6). | 1.5 / 1.6 |
+The metadata MUST specify the coordinate reference system (1.5) and MAY specify the map projection (1.6) through
+either `proj:epsg` or one of the alternatives.
+
+| Field Name                | Description                                                  | Req.      |
+| ------------------------- | ------------------------------------------------------------ | --------- |
+| proj:epsg                 | **REQUIRED.** This is required by STAC. If there's no suitable EPSG code, set this to `null` and add either `proj:wkt2` or `proj:projjson`. | 1.5 / 1.6 |
+| proj:wkt2 / proj:projjson | One of `proj:wkt2` or `proj:projjson` is **required** if `proj:epsg` is set to `null`. | 1.5 / 1.6 |
 
 #### View
 

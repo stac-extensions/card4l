@@ -56,25 +56,37 @@
           "required": [
             "datetime",
             "instruments",
+            "proj:epsg",
             "view:incidence_angle",
             "view:azimuth",
             "view:sun_azimuth",
             "view:sun_elevation"
           ],
-          "anyOf": [
+          "oneOf": [
             {
-              "required": [
-                "proj:epsg"
-              ]
+              "properties": {
+                "proj:epsg": {
+                  "type": "integer"
+                }
+              }
             },
             {
-              "required": [
-                "proj:wkt2"
-              ]
-            },
-            {
-              "required": [
-                "proj:projjson"
+              "properties": {
+                "proj:epsg": {
+                  "type": "null"
+                }
+              },
+              "anyOf": [
+                {
+                  "required": [
+                    "proj:wkt2"
+                  ]
+                },
+                {
+                  "required": [
+                    "proj:projjson"
+                  ]
+                }
               ]
             }
           ]
