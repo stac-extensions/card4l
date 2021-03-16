@@ -1,0 +1,230 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stac-extensions.github.io/card4l/v1.0.0/sar/product.json#",
+  "title": "CARD4L SAR Extension",
+  "description": "STAC CARD4L SAR Extension for STAC Items.",
+  "type": "object",
+  "properties": {
+    "stac_extensions": {
+      "type": "array",
+      "allOf": [
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/card4l/v1.0.0/sar/product.json"
+          }
+        },
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/file/v1.0.0/schema.json"
+          }
+        },
+        {
+          "contains": {
+            "const": "projection"
+          }
+        }
+      ]
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "gsd",
+        "card4l:noise_removal_applied",
+        "card4l:speckle_filtering",
+        "card4l:pixel_coordinate_convention",
+        "card4l:measurement_type",
+        "card4l:conversion_eq",
+        "card4l:relative_rtc_accuracy",
+        "card4l:absolute_rtc_accuracy",
+        "card4l:northern_geometric_accuracy",
+        "card4l:eastern_geometric_accuracy",
+        "card4l:gridding_convention"
+      ],
+      "$comment": "`proj:shape` is required either on the item level or on the asset level for the asset with role `data`. This requirement is not checked by this schema yet.",
+      "oneOf": [
+        {
+          "properties": {
+            "proj:epsg": {
+              "type": "integer"
+            }
+          }
+        },
+        {
+          "properties": {
+            "proj:epsg": {
+              "type": "null"
+            }
+          },
+          "anyOf": [
+            {
+              "required": [
+                "proj:wkt2"
+              ]
+            },
+            {
+              "required": [
+                "proj:projjson"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "card4l:speckle_filtering": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "window_size_col": {
+              "type": "integer"
+            },
+            "window_size_line": {
+              "type": "integer"
+            }
+          }
+        },
+        "card4l:pixel_coordinate_convention": {
+          "type": "string",
+          "enum": [
+            "center",
+            "upper-left",
+            "lower-left"
+          ]
+        },
+        "card4l:measurement_type": {
+          "type": "string",
+          "const": "gamma0"
+        },
+        "card4l:conversion_eq": {
+          "type": "string"
+        },
+        "card4l:relative_rtc_accuracy": {
+          "type": "number"
+        },
+        "card4l:absolute_rtc_accuracy": {
+          "type": "number"
+        },
+        "card4l:northern_geometric_accuracy": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:eastern_geometric_accuracy": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:gridding_convention": {
+          "type": "string",
+          "enum": [
+            "center",
+            "upper-left",
+            "lower-left"
+          ]
+        }
+      }
+    },
+    "links": {
+      "allOf": [
+        {
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "derived_from"
+              }
+            }
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "noise-removal"
+              }
+            }
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "radiometric-terrain-correction"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": {
+        "allOf": [
+          {
+            "$comment": "TODO"
+          }
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "commons.json"
+    }
+  ],
+  "oneOf": [
+    {
+      "$comment": "NRB-only requirements",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "card4l:measurement_convention"
+          ],
+          "properties": {
+            "card4l:specification": {
+              "const": "NRB"
+            },
+            "card4l:measurement_convention": {
+              "type": "string",
+              "enum": [
+                "amplitude",
+                "power"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "POL-only requirements",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "card4l:measurement_convention"
+          ],
+          "properties": {
+            "card4l:specification": {
+              "const": "POL"
+            },
+            "card4l:measurement_convention": {
+              "type": "string",
+              "enum": [
+                "amplitude",
+                "power",
+                "angle"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stac-extensions.github.io/card4l/v1.0.0/sar/source.json#",
+  "title": "CARD4L SAR Extension",
+  "description": "STAC CARD4L SAR Extension for STAC Items.",
+  "type": "object",
+  "properties": {
+    "stac_extensions": {
+      "type": "array",
+      "allOf": [
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/card4l/v1.0.0/sar/source.json"
+          }
+        },
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/sat/v1.0.0/schema.json"
+          }
+        },
+        {
+          "contains": {
+            "const": "view"
+          }
+        }
+      ]
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "instruments",
+        "platform",
+        "card4l:beam_id",
+        "card4l:orbit_data_source",
+        "card4l:incidence_angle_near_range",
+        "card4l:incidence_angle_far_range",
+        "card4l:noise_equivalent_intensity",
+        "card4l:noise_equivalent_intensity_type",
+        "sar:instrument_mode",
+        "sar:frequency_band",
+        "sar:center_frequency",
+        "sar:polarizations",
+        "sar:observation_direction",
+        "sar:looks_azimuth",
+        "sar:looks_range",
+        "sar:pixel_spacing_azimuth",
+        "sar:pixel_spacing_range",
+        "sar:resolution_azimuth",
+        "sar:resolution_range",
+        "sat:orbit_state"
+      ],
+      "properties": {
+        "card4l:beam_id": {
+          "type": "string"
+        },
+        "card4l:orbit_mean_altitude": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:incidence_angle_near_range": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:incidence_angle_far_range": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:noise_equivalent_intensity": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:noise_equivalent_intensity_type": {
+          "type": "string",
+          "enum": [
+            "beta0",
+            "sigma0"
+          ]
+        },
+        "card4l:mean_faraday_rotation_angle": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:ionosphere_indicator": {
+          "type": "boolean"
+        }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": {
+        "allOf": [
+          {
+            "$comment": "TODO"
+          }
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "commons.json"
+    }
+  ]
+}

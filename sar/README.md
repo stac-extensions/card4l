@@ -54,7 +54,11 @@ on the data type or an actual detailed description about the fields.
 **Additional resources:**
 
 - [Examples](examples/) (ToDo)
-- [JSON Schema](json-schema/schema.json) (ToDo)
+- JSON Schemas:
+  - [Source](json-schema/source.json)
+  - [Product](json-schema/product.json)
+  
+  *Please note that assets don't get validated yet.*
 
 ## STAC Collections
 
@@ -79,10 +83,23 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 
 | Field Name      | XML Tag                                                      | Description                                                  | Src     | Prod    |
 | --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | ------- |
-| stac_extensions | *n/a*                                                        | **REQUIRED.** Must contain all extensions used, for the product at least the following values: `https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json`, `https://stac-extensions.github.io/file/v1.0.0/schema.json`, `processing`, `projection`, `sar`, `sat`, `view`. | ✓       | ✓       |
+| stac_extensions | *n/a*                                                        | **REQUIRED.** Must contain all extensions used. See below for details\*. | ✓       | ✓       |
 | id              | `ProductID`                                                  | **REQUIRED.**                                                | ✓ 1.6.6 | ✓       |
-| geometry        | `GeodeticCoordinates`, `Latitude`, `Longitude`, `Height` (Src), `GeographicalExtent` (Prod) | **REQUIRED.**                 | ✓ 1.6.7 | ✓ 1.7.6 |
-| bbox            | derived from `geometry` (Src), `GeographicalBoundingBox` (Prod) | **REQUIRED.**                                             | ✓ 1.6.7 | ✓ 1.7.5 |
+| geometry        | `GeodeticCoordinates`, `Latitude`, `Longitude`, `Height` (Src), `GeographicalExtent` (Prod) | **REQUIRED.**                                                | ✓ 1.6.7 | ✓ 1.7.6 |
+| bbox            | derived from `geometry` (Src), `GeographicalBoundingBox` (Prod) | **REQUIRED.**                                                | ✓ 1.6.7 | ✓ 1.7.5 |
+
+\* The following values for `stac_extensions` apply:
+
+| Value                                                        | Src  | Prod |
+| ------------------------------------------------------------ | ---- | ---- |
+| `https://stac-extensions.github.io/card4l/v1.0.0/optical/source.json` | ✓    | ✗    |
+| `https://stac-extensions.github.io/card4l/v1.0.0/optical/product.json` | ✗    | ✓    |
+| `https://stac-extensions.github.io/file/v1.0.0/schema.json`  | ✗    | ✓    |
+| `https://stac-extensions.github.io/processing/v1.0.0/schema.json` | ✓    | ✓    |
+| `projection`                                                 | (✓)  | ✓    |
+| `https://stac-extensions.github.io/sar/v1.0.0/schema.json`   | ✓    | ✓    |
+| `https://stac-extensions.github.io/sat/v1.0.0/schema.json`   | ✓    | (✓)  |
+| `https://stac-extensions.github.io/view/v1.0.0/schema.json`  | ✓    | ✗    |
 
 ### STAC Item Properties
 
@@ -93,17 +110,16 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:specification                   | string                                                  | `DocumentIdentifier` / `Product`, attribute `type` (Prod)    | **REQUIRED.** The CARD4L specification implemented, either `NRB` (SAR, Normalized Radar Backscatter) or `POL` (SAR, Polarimetric Radar). | ✓ 1.4 / 1.3 | ✓ 1.4 / 1.3 |
 | card4l:specification_version           | string                                                  | `DocumentIdentifier`                                         | **REQUIRED.** The CARD4L specification version. Currently always `5.0` for `NRB` and `3.0` for `POL`. | ✓ 1.4       | ✓ 1.4       |
 | card4l:beam_id                         | string                                                  | `BeamID`                                                     | **REQUIRED.**                                                | ✓ 1.6.4     | ✗           |
-| card4l:orbit_data_source               | string                                                  | `OrbitDataSource`                                            | **REQUIRED.** One of `predicted`, `definitive`, `downlinked`. Applies to *Prod*, if additional orbit correction has been applied. | ✓ 1.6.5     | (✓)         |
+| card4l:orbit_data_source               | string                                                  | `OrbitDataSource`                                            | **REQUIRED for *Src*.** One of `predicted`, `definitive`, `downlinked`. Applies to *Prod*, if additional orbit correction has been applied. | ✓ 1.6.5     | (✓)         |
 | card4l:orbit_mean_altitude             | number                                                  | `OrbitMeanAltitude`                                          | Platform (mean) altitude in kilometers (km).                 | ✓ 1.6.5     | ✗           |
 | card4l:incidence_angle_near_range      | number                                                  | `IncAngleNearRange`                                          | **REQUIRED.** Convert to degree, if required.                | ✓ 1.6.7     | ✗           |
 | card4l:incidence_angle_far_range       | number                                                  | `IncAngleFarRange`                                           | **REQUIRED.** Convert to degree, if required.                | ✓ 1.6.7     | ✗           |
-| card4l:noise_equivalent_intensity      | float                                                   | `NoiseEquivalentIntensity`                                   | **REQUIRED.** Convert to decibel, if required.               | ✓ 1.6.9     | ✗           |
+| card4l:noise_equivalent_intensity      | number                                                  | `NoiseEquivalentIntensity`                                   | **REQUIRED.** Convert to decibel, if required.               | ✓ 1.6.9     | ✗           |
 | card4l:noise_equivalent_intensity_type | string                                                  | `NoiseEquivalentIntensity`, attribute `type`                 | **REQUIRED.** One of `beta0` or `sigma0`                     | ✓ 1.6.9     | ✗           |
-| card4l:noise_removal_applied           | boolean                                                 | `NoiseRemovalApplied`                                        | **REQUIRED.** Specifies whether noise removal has been applied (`true`) or not (`false`). If set to `true`, a [link with relation type](#stac-item-links) `noise-removal` is **required**, too. | (✓)         | ✓ 3.3       |
-| card4l:mean_faraday_rotation_angle     | float                                                   | `MeanFaradayRotationAngle`                                   | Convert to degree, if required.                              | ✓ 1.6.11    | ✗           |
+| card4l:noise_removal_applied           | boolean                                                 | `NoiseRemovalApplied`                                        | **REQUIRED for *Prod*.** Specifies whether noise removal has been applied (`true`) or not (`false`). If set to `true`, a [link with relation type](#stac-item-links) `noise-removal` is **required**, too. | (✓)         | ✓ 3.3       |
+| card4l:mean_faraday_rotation_angle     | number                                                  | `MeanFaradayRotationAngle`                                   | Convert to degree, if required.                              | ✓ 1.6.11    | ✗           |
 | card4l:ionosphere_indicator            | boolean                                                 | `IonosphereIndicator`                                        | Flag indicating whether the imagery is “significantly impacted” by the ionosphere (`false` - no, `true` – yes). | ✓ 1.6.12    | ✗           |
 | card4l:speckle_filtering               | [Speckle Filter Object](#speckle-filter-object) \| null | `Filtering`, `FilterApplied`                                 | **REQUIRED.** Set to `null` if `FilterApplied` would be set to `false`. Otherwise make it an [Speckle Filter Object](#speckle-filter-object). | ✗           | ✓ 1.7.4     |
-| card4l:border_pixels                   | integer                                                 | `NumBorderPixels`                                            | Number of border pixels (**required** if applicable). To be specified either globally for all assets with role `data` or individually [per asset](#stac-item-assets). | ✗           | ✓ 1.7.7     |
 | card4l:pixel_coordinate_convention     | string                                                  | `PixelCoordinateConvention`                                  | **REQUIRED.** One of `center` (pixel center), `upper-left` (pixel ULC) or `lower-left` (pixel LLC) | ✗           | ✓ 1.7.8     |
 | card4l:measurement_type                | string                                                  | `BackscatterMeasurement` (NRB)                               | **REQUIRED.** Must be set to `gamma0`.                       | ✗           | ✓ 3.1       |
 | card4l:measurement_convention          | string                                                  | `BackscatterConvention` (NRB)                                | **REQUIRED.** Must be set to `amplitude`, `power` (both NRB + POL) or `angle` (POL only). | ✗           | ✓ 3.1       |
@@ -134,9 +150,9 @@ It is **required** to add all speckle filter parameters to this object.
 | datetime       | *n/a*                                           | **REQUIRED.** Recommended to set to the central timestamp between `start_datetime` and `end_datetime`. | ✓       | ✓       |
 | start_datetime | `FirstAcquistionDate` (Prod), `StartTime` (Src) | **REQUIRED.** Start time of the first acquisition.           | ✓ 1.6.3 | ✓ 1.5   |
 | end_datetime   | `LastAcquistitionDate` (Prod), `EndTime` (Src)  | **REQUIRED.** End time of the last acquisition.              | ✓ 1.6.3 | ✓ 1.5   |
-| instruments    | `Instrument`                                    | **REQUIRED.** Check STAC for potential values, example: `c-sar` for Sentinel-1 | ✓ 1.6.2 | (✓)     |
+| instruments    | `Instrument`                                    | **REQUIRED for *Src*.** Check STAC for potential values, example: `c-sar` for Sentinel-1 | ✓ 1.6.2 | (✓)     |
 | constellation  | *n/a*                                           | Constellation name in lower-case. Only if part of a constellation, e.g. `sentinel-1` for Sentinel 1A and 1B. Can often be derived from `platform`. | ✓ 1.6.2 | (✓)     |
-| platform       | `Satellite`                                     | **REQUIRED.** Platform name in lower-case. Use a specific name such as `sentinel-1a` if part of constellation. MUST NOT duplicate `constellation`. | ✓ 1.6.2 | (✓)     |
+| platform       | `Satellite`                                     | **REQUIRED for *Src*.** Platform name in lower-case. Use a specific name such as `sentinel-1a` if part of constellation. MUST NOT duplicate `constellation`. | ✓ 1.6.2 | (✓)     |
 | gsd            | `ProductColumnSpacing` / `ProductRowSpacing`    | **REQUIRED.** Convert to meters, if required. Currently, there's no way to express separate ground sample distances for x and y. | ✗       | ✓ 1.7.3 |
 
 #### Processing
@@ -149,42 +165,40 @@ It is **required** to add all speckle filter parameters to this object.
 
 #### Projection
 
-| Field Name                | XML Tag                                         | Description                                                  | Src  | Prod               |
-| ------------------------- | ----------------------------------------------- | ------------------------------------------------------------ | ---- | ------------------ |
-| proj:shape                | `NumberLines`, `NumberPixelsPerLine`            | **REQUIRED.** To be specified either globally for all assets with role `data` or individually [per asset](#stac-item-assets). | ✗    | ✓ 1.7.7            |
-| proj:epsg                 | `CoordinateReferenceSystem` / (`MapProjection`) | **REQUIRED.** See comment below*.                            | (✓)  | ✓ 1.7.9 / (1.7.10) |
-| proj:wkt2 / proj:projjson | `MapProjection` / (`CoordinateReferenceSystem`) | See comment below*.                                          | (✓)  | ✓ 1.7.10 / (1.7.9) |
-| proj:transform            | *n/a*                                           | To be specified either globally for all assets with role `data` or individually [per asset](#stac-item-assets). | ✗    | (✓)                |
+| Field Name                | XML Tag                                         | Description                                  | Src  | Prod               |
+| ------------------------- | ----------------------------------------------- | -------------------------------------------- | ---- | ------------------ |
+| proj:epsg                 | `CoordinateReferenceSystem` / (`MapProjection`) | **REQUIRED for *Prod*.** See comment below*. | (✓)  | ✓ 1.7.9 / (1.7.10) |
+| proj:wkt2 / proj:projjson | `MapProjection` / (`CoordinateReferenceSystem`) | See comment below*.                          | (✓)  | ✓ 1.7.10 / (1.7.9) |
 
-\* The metadata must specify the coordinate reference system (1.7.9) and map projection (1.7.10).
+\* For *Prod* the metadata must specify the coordinate reference system (1.7.9) and map projection (1.7.10).
 `proj:epsg` is **required** by STAC. If there's no suitable EPSG code, set the field to `null`,
 which then requires one of `proj:wkt2` or `proj:projjson` to be specified.
 For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and the Map Projection a human readable code such as WKT.
 
 #### SAR
 
-| Field Name                | XML Tag                                                      | Description                                                  | Src     | Prod    |
-| ------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | ------- |
-| sar:instrument_mode       | `ObservationMode`                                            | **REQUIRED.**                                                | ✓ 1.6.4 | (✓)     |
-| sar:frequency_band        | `RadarBand`                                                  | **REQUIRED.**                                                | ✓ 1.6.4 | (✓)     |
-| sar:center_frequency      | `RadarCenterFrequency`                                       | **REQUIRED.** Convert to GHz if required.                    | ✓ 1.6.4 | (✓)     |
-| sar:polarizations         | `Polarizations`                                              | **REQUIRED.**                                                | ✓ 1.6.4 | (✓)     |
-| sar:product_type          | `ProductLevel` (Src), `Measurements`, attribute `type` (Prod, POL only) | **REQUIRED.** *Src*: Find suitable [product type in the SAR extension](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/sar/README.md#item-fields). *Prod*: `NRB` for Normalized Radar Backscatter products, `COVMAT` for Normalized Radar Covariance Matrix products or `PRD` for Polarimetric Radar Decomposition products. | ✓       | ✓ 3.1   |
-| sar:observation_direction | `AntennaPointing`                                            | **REQUIRED.** Lower-case                                     | ✓ 1.6.4 | (✓)     |
-| sar:looks_azimuth         | `AzimuthNumberOfLooks`                                       | **REQUIRED.**                                                | ✓ 1.6.6 | ✗       |
-| sar:looks_range           | `RangeNumberOfLooks`                                         | **REQUIRED.**                                                | ✓ 1.6.6 | ✗       |
-| sar:pixel_spacing_azimuth | `AzimuthPixelSpacing`                                        | **REQUIRED.** Convert to meters, if required.                | ✓ 1.6.7 | ✗       |
-| sar:pixel_spacing_range   | `RangePixelSpacing`                                          | **REQUIRED.** Convert to meters, if required.                | ✓ 1.6.7 | ✗       |
-| sar:resolution_azimuth    | `AzimuthResolution`                                          | **REQUIRED.** Convert to meters, if required.                | ✓ 1.6.7 | ✗       |
-| sar:resolution_range      | `RangeResolution`                                            | **REQUIRED.** Convert to meters, if required.                | ✓ 1.6.7 | ✗       |
+| Field Name                | XML Tag                                                      | Description                                                  | Src     | Prod  |
+| ------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | ----- |
+| sar:instrument_mode       | `ObservationMode`                                            | **REQUIRED for *Src*.**                                      | ✓ 1.6.4 | (✓)   |
+| sar:frequency_band        | `RadarBand`                                                  | **REQUIRED for *Src*.**                                      | ✓ 1.6.4 | (✓)   |
+| sar:center_frequency      | `RadarCenterFrequency`                                       | **REQUIRED.** Convert to GHz if required.                    | ✓ 1.6.4 | ✗     |
+| sar:polarizations         | `Polarizations`                                              | **REQUIRED for *Src*.**                                      | ✓ 1.6.4 | (✓)   |
+| sar:product_type          | `ProductLevel` (Src), `Measurements`, attribute `type` (Prod, POL only) | **REQUIRED.** *Src*: Find suitable [product type in the SAR extension](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/sar/README.md#item-fields). *Prod*: `NRB` for Normalized Radar Backscatter products, `COVMAT` for Normalized Radar Covariance Matrix products or `PRD` for Polarimetric Radar Decomposition products. | ✓       | ✓ 3.1 |
+| sar:observation_direction | `AntennaPointing`                                            | **REQUIRED.** Lower-case                                     | ✓ 1.6.4 | ✗     |
+| sar:looks_azimuth         | `AzimuthNumberOfLooks`                                       | **REQUIRED.**                                                | ✓ 1.6.6 | ✗     |
+| sar:looks_range           | `RangeNumberOfLooks`                                         | **REQUIRED.**                                                | ✓ 1.6.6 | ✗     |
+| sar:pixel_spacing_azimuth | `AzimuthPixelSpacing`                                        | **REQUIRED.** Convert to meters, if required.                | ✓ 1.6.7 | ✗     |
+| sar:pixel_spacing_range   | `RangePixelSpacing`                                          | **REQUIRED.** Convert to meters, if required.                | ✓ 1.6.7 | ✗     |
+| sar:resolution_azimuth    | `AzimuthResolution`                                          | **REQUIRED.** Convert to meters, if required.                | ✓ 1.6.7 | ✗     |
+| sar:resolution_range      | `RangeResolution`                                            | **REQUIRED.** Convert to meters, if required.                | ✓ 1.6.7 | ✗     |
 
 #### Satellite
 
-| Field Name         | XML Tag         | Description              | Src     | Prod |
-| ------------------ | --------------- | ------------------------ | ------- | ---- |
-| sat:orbit_state    | `PassDirection` | **REQUIRED.** Lower-case | ✓ 1.6.5 | (✓)  |
-| sat:relative_orbit | *n/a*           |                          | ✓       | (✓)  |
-| sat:absolute_orbit | *n/a*           |                          | ✓       | (✓)  |
+| Field Name         | XML Tag         | Description                        | Src     | Prod |
+| ------------------ | --------------- | ---------------------------------- | ------- | ---- |
+| sat:orbit_state    | `PassDirection` | **REQUIRED for *Src*.** Lower-case | ✓ 1.6.5 | (✓)  |
+| sat:relative_orbit | *n/a*           |                                    | ✓       | (✓)  |
+| sat:absolute_orbit | *n/a*           |                                    | ✓       | (✓)  |
 
 #### View
 
@@ -197,7 +211,7 @@ For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and 
 
 | Relation Type                  | XML Tag                    | Description                                                  | Src      | Prod    |
 | ------------------------------ | -------------------------- | ------------------------------------------------------------ | -------- | ------- |
-| card4l-document                | `DocumentIdentifier`       | **REQUIRED.** Instead of the document identifier, provide links to the Word (media type: `application/vnd.openxmlformats-officedocument.wordprocessingml.document`) and PDF (media type: `application/pdf`) document. | (✓)      | ✓ 1.4   |
+| card4l-document                | `DocumentIdentifier`       | **REQUIRED.** Instead of the document identifier, provide links to the Word (media type: `application/vnd.openxmlformats-officedocument.wordprocessingml.document`) and PDF (media type: `application/pdf`) document. | ✓        | ✓ 1.4   |
 | derived_from                   | *n/a*                      | **REQUIRED.** Points back to the source's STAC Item, which must comply to the *Src* requirements. May be multiple items, if the product is derived from multiple acquisitions. The number of acquisitions (`NumberOfAcquisitions`) is the number of links with this relation type. | ✗        | ✓ 1.6   |
 | about                          | *n/a*                      | Link to other algorithms used in the generation process.     | ✗        | (✓)     |
 | related                        | `AncillaryData`            | Link to the sources of ancillary or auxiliary data used in the generation process. Excludes DEMs, which use the relation `elevation-model` instead. | ✗        | ✓ 1.7.2 |
@@ -223,7 +237,7 @@ In the latter case the role names can simply be merged to a set of unique role n
 Roles can also be combined for a single file.
 The *italic* role names could be used as the asset's key.
 
-**All additional properties are required, except the once in *italic*.**
+**All additional properties are required, except the properties in *italic*.**
 
 | Role Name(s)                          | Additional properties                                        | XML Tag                      | Description                                                  | Src  | Prod        |
 | ------------------------------------- | ------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------ | ---- | ----------- |
@@ -235,8 +249,8 @@ The *italic* role names could be used as the asset's key.
 | *noise-power*, card4l, metadata       | `type`, `file:data_type`, `file:byte_order`, *`file:header_size`*, `file:bits_per_sample`, `file:unit` | `NoisePower`                 | `file:unit` is usually NESZ or NEBZ.                         | ✗    | ✓ 2.6       |
 | *gamma-sigma-ratio*, metadata         | `type`, `file:data_type`, `file:byte_order`, *`file:header_size`*, `file:bits_per_sample` | `GammaToSigmaRatio`          |                                                              | ✗    | ✓ 2.7       |
 | *date-offset*, metadata               | `type`, `file:data_type`, `file:byte_order`, *`file:header_size`*, `file:bits_per_sample` | `AcquisitionDate`            | **REQUIRED for multi-source products only.**                 | ✗    | ✓ 2.8       |
-| *backscatter*, data                   | `type`, `created`, `sar:polarizations`, *`file:header_size`*, `file:data_type`, `file:byte_order`, *`file:header_size`*, `file:bits_per_sample` | `BackscatterMeasurementData` | **REQUIRED for *NRB*.** Points to the backscatter measurements for the polarizations specified in `sar:polarizations`. | ✗    | ✓ 3.1 (NRB) |
-| (*covmat* or *prd*), data             | `type`, `created`, `sar:polarizations` (CovMat only), `file:data_type`, `file:byte_order`, *`file:header_size`*, `file:bits_per_sample` | `Measurements`               | **REQUIRED for *POL*.** Points to the Normalized Polarimetric Radar Covariance Matrix (CovMat) *or* the Polarimetric Radar Decomposition (PRD) | ✗    | ✓ 3.1 (POL) |
+| *backscatter*, data                   | `type`, `created`, `sar:polarizations`, *`file:header_size`*, `file:data_type`, `file:byte_order`, *`file:header_size`*, `file:bits_per_sample`, `proj:shape`, *`card4l:border_pixels`* | `BackscatterMeasurementData` | **REQUIRED for *NRB*.** Points to the backscatter measurements for the polarizations specified in `sar:polarizations`. | ✗    | ✓ 3.1 (NRB) |
+| (*covmat* or *prd*), data             | `type`, `created`, `sar:polarizations` (CovMat only), `file:data_type`, `file:byte_order`, *`file:header_size`*, `file:bits_per_sample`, `proj:shape`, *`card4l:border_pixels`* | `Measurements`               | **REQUIRED for *POL*.** Points to the Normalized Polarimetric Radar Covariance Matrix (CovMat) *or* the Polarimetric Radar Decomposition (PRD) | ✗    | ✓ 3.1 (POL) |
 
 #### Additional Asset Properties
 
@@ -244,23 +258,21 @@ The following table lists properties that may occur in the assets.
 The list doesn't specify which fields apply to which asset and it also doesn't specify which fields are required.
 For those details please refer to the ["Additional properties" column in the table above](#stac-item-assets).
 
-| Field Name                | Data Type                                              | XML Tag                                         | Description                                                  | Src     | Prod    |
-| ------------------------- | ------------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------ | ------- | ------- |
-| type                      | string                                                 | `DataFormat`                                    | The media type of the file format.             | (✓)     | ✓       |
-| created                   | string                                                 | `ProcessingDate` (Src), `ProcessingTime` (Prod) | The time of the processing is specified via the `created` property of the asset as specified in the [STAC Common metadata](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/item-spec/common-metadata.md#date-and-time). | ✓ 1.6.6 | ✓ 1.7.1 |
-| sar:polarizations         | \[string\]                                             | *n/a*                                           | The polarization(s) of the asset.              | (✓)     | ✓       |
-| file:header_size          | integer                                                | `HeaderSize`                                    | File header size in bytes (**required** if applicable to the file format). | ✗       | ✓ 1.7.7 |
-| file:data_type            | string                                                 | `DataType`                                      | One of the [Data Types](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md#data-types). | ✗       | ✓       |
-| file:byte_order           | string                                                 | `ByteOrder`                                     | One of `big-endian` or `little-endian`         | ✗       | ✓       |
-| file:bits_per_sample      | integer                                                | `BitsPerSample`                                 | Bits per sample, e.g. 8, 16, 32, ...           | ✗       | ✓       |
-| file:unit                 | string                                                 | `SampleType`                                    | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/). | ✗       | ✓       |
-| file:values               | \[[Mapping Object](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md#mapping-object)\] | `ValidData` and `InvalidData` in `BitValues`    | Specify value(s) for valid and invalid data separately. | ✗       | ✓ 2.2   |
-| file:nodata               | \[any]                                                 | `NoData` in `BitValues`                         | Value(s) for no-data.        | ✗       | ✓ 2.2   |
-| card4l:ellipsoidal_height | number                                                 | `EllipsoidalHeight`                             | Indicate which ellipsoidal height was used, in meters.       | ✗       | ✓       |
-
-For all assets of with the role set to `data`, the following additional properties can be specified globally
-(in [STAC Item Properties](#stac-item-properties)) or individually per asset: `proj:shape`, `proj:transform`, `card4l:num_border_pixels`.
-See the respective field specifications above.
+| Field Name                | Data Type                                                    | XML Tag                                         | Description                                                  | Src     | Prod    |
+| ------------------------- | ------------------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------ | ------- | ------- |
+| type                      | string                                                       | `DataFormat`                                    | The media type of the file format.                           | (✓)     | ✓       |
+| created                   | string                                                       | `ProcessingDate` (Src), `ProcessingTime` (Prod) | The time of the processing is specified via the `created` property of the asset as specified in the [STAC Common metadata](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/item-spec/common-metadata.md#date-and-time). | ✓ 1.6.6 | ✓ 1.7.1 |
+| sar:polarizations         | \[string\]                                                   | *n/a*                                           | The polarization(s) of the asset.                            | (✓)     | ✓       |
+| file:header_size          | integer                                                      | `HeaderSize`                                    | File header size in bytes (**required** if applicable to the file format). | ✗       | ✓ 1.7.7 |
+| file:data_type            | string                                                       | `DataType`                                      | One of the [Data Types](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md#data-types). | ✗       | ✓       |
+| file:byte_order           | string                                                       | `ByteOrder`                                     | One of `big-endian` or `little-endian`                       | ✗       | ✓       |
+| file:bits_per_sample      | integer                                                      | `BitsPerSample`                                 | Bits per sample, e.g. 8, 16, 32, ...                         | ✗       | ✓       |
+| file:unit                 | string                                                       | `SampleType`                                    | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/). | ✗       | ✓       |
+| file:values               | \[[Mapping Object](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md#mapping-object)\] | `ValidData` and `InvalidData` in `BitValues`    | Specify value(s) for valid and invalid data separately.      | ✗       | ✓ 2.2   |
+| file:nodata               | \[any]                                                       | `NoData` in `BitValues`                         | Value(s) for no-data.                                        | ✗       | ✓ 2.2   |
+| card4l:ellipsoidal_height | number                                                       | `EllipsoidalHeight`                             | Indicate which ellipsoidal height was used, in meters.       | ✗       | ✓       |
+| card4l:border_pixels      | integer                                                      | `NumBorderPixels`                               | Number of border pixels (**required** only if applicable).   | ✗       | ✓ 1.7.7 |
+| proj:shape                | \[integer]                                                   | `NumberLines`, `NumberPixelsPerLine`            | The shape of the asset.                                      | ✗       | ✓ 1.7.7 |
 
 ## Notes
 

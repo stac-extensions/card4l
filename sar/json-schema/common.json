@@ -1,11 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json#",
-  "title": "CARD4L Optical Extension",
-  "description": "STAC CARD4L Optical Extension for STAC Items.",
+  "$id": "https://stac-extensions.github.io/card4l/v1.0.0/sar/commons.json#",
+  "title": "CARD4L SAR Commons",
+  "description": "STAC CARD4L SAR Commons for STAC Items.",
   "type": "object",
   "required": [
     "stac_extensions",
+    "id",
     "geometry",
     "bbox",
     "type",
@@ -19,17 +20,7 @@
       "allOf": [
         {
           "contains": {
-            "const": "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json"
-          }
-        },
-        {
-          "contains": {
-            "const": "eo"
-          }
-        },
-        {
-          "contains": {
-            "const": "https://stac-extensions.github.io/file/v1.0.0/schema.json"
+            "const": "https://stac-extensions.github.io/processing/v1.0.0/schema.json"
           }
         },
         {
@@ -39,7 +30,12 @@
         },
         {
           "contains": {
-            "const": "view"
+            "const": "https://stac-extensions.github.io/sar/v1.0.0/schema.json"
+          }
+        },
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/sat/v1.0.0/schema.json"
           }
         }
       ]
@@ -51,49 +47,24 @@
       "type": "object",
       "required": [
         "datetime",
-        "instruments",
-        "proj:epsg",
-        "view:incidence_angle",
-        "view:azimuth",
-        "view:sun_azimuth",
-        "view:sun_elevation"
-      ],
-      "oneOf": [
-        {
-          "properties": {
-            "proj:epsg": {
-              "type": "integer"
-            }
-          }
-        },
-        {
-          "properties": {
-            "proj:epsg": {
-              "type": "null"
-            }
-          },
-          "anyOf": [
-            {
-              "required": [
-                "proj:wkt2"
-              ]
-            },
-            {
-              "required": [
-                "proj:projjson"
-              ]
-            }
-          ]
-        }
+        "start_datetime",
+        "end_datetime",
+        "processing:facility",
+        "processing:software",
+        "sar:product_type"
       ],
       "properties": {
-        "card4l:northern_geometric_accuracy": {
-          "type": "number",
-          "minimum": 0
+        "card4l:orbit_data_source": {
+          "type": "string",
+          "enum": [
+            "predicted",
+            "definitive",
+            "downlinked"
+          ]
         },
-        "card4l:eastern_geometric_accuracy": {
-          "type": "number",
-          "minimum": 0
+        "card4l:noise_removal_applied": {
+          "type": "boolean",
+          "$comment": "The requirement to add a link with rel type `noise-removal` if this value is `true` is not part of the schema yet."
         }
       }
     },
@@ -136,7 +107,7 @@
   },
   "oneOf": [
     {
-      "$comment": "SR-only requirements",
+      "$comment": "NRB-only requirements",
       "type": "object",
       "properties": {
         "properties": {
@@ -147,39 +118,17 @@
           ],
           "properties": {
             "card4l:specification": {
-              "const": "SR"
+              "const": "NRB"
             },
             "card4l:specification_version": {
               "const": "5.0"
             }
           }
-        },
-        "links": {
-          "allOf": [
-            {
-              "contains": {
-                "properties": {
-                  "rel": {
-                    "const": "atmospheric-scattering"
-                  }
-                }
-              }
-            },
-            {
-              "contains": {
-                "properties": {
-                  "rel": {
-                    "const": "water-vapor"
-                  }
-                }
-              }
-            }
-          ]
         }
       }
     },
     {
-      "$comment": "ST-only requirements",
+      "$comment": "POL-only requirements",
       "type": "object",
       "properties": {
         "properties": {
@@ -191,20 +140,11 @@
           "properties": {
             "card4l:specification": {
               "type": "string",
-              "const": "ST"
+              "const": "POL"
             },
             "card4l:specification_version": {
               "type": "string",
-              "const": "5.0"
-            }
-          }
-        },
-        "links": {
-          "contains": {
-            "properties": {
-              "rel": {
-                "const": "atmosphere-emissivity"
-              }
+              "const": "3.0"
             }
           }
         }
