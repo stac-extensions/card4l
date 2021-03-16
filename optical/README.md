@@ -1,13 +1,14 @@
 # STAC CARD4L Optical Extension Specification
 
 - **Title:** CARD4L Optical
-- **Identifier:** https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json
+- **Identifier:** <https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json>
 - **Field Name Prefix:** card4l (shared with the CARD4L SAR Extension)
 - **Scope:** Item
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @m-mohr
 
-This extension specifies how to create [STAC](https://github.com/radiantearth/stac-spec) Items that comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
+This extension specifies how to create [STAC](https://github.com/radiantearth/stac-spec) Items that
+comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
 - *Optical Surface Reflectance* (SR) products in version 5.0
   ([PDF](http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf),
   [Word](http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.docx))
@@ -16,7 +17,9 @@ This extension specifies how to create [STAC](https://github.com/radiantearth/st
   ([PDF](http://ceos.org/ard/files/PFS/ST/v5.0/CARD4L_Product_Family_Specification_Surface_Temperature-v5.0.pdf),
   [Word](http://ceos.org/ard/files/PFS/ST/v5.0/CARD4L_Product_Family_Specification_Surface_Temperature-v5.0.docx)).
 
-**Document structure:** In general, the fields required in this extension are required to either meet the *threshold (minimum) requirements* by the CEOS CARD4L specification *or* are required fields in STAC. Any additional optional field provided may lead to a higher percentage of the CARD4L *target (desired) requirements* met.
+**Document structure:** In general, the fields required in this extension are required to either meet
+the *threshold (minimum) requirements* by the CEOS CARD4L specification *or* are required fields in STAC.
+Any additional optional field provided may lead to a higher percentage for the CARD4L *target (desired) requirements*.
 
 The column *Field Name* refers to the STAC field names. The column *Req.* refers to the requirement number in the CARD4L specification.
 
@@ -28,12 +31,14 @@ The column *Field Name* refers to the STAC field names. The column *Req.* refers
 - [Projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection/README.md)
 - [View](https://github.com/radiantearth/stac-spec/tree/master/extensions/view/README.md)
 
-You have to read the STAC extensions in combination with this extension as this extension just provides the mapping between the STAC fields and the CARD4L requirements, but this extension doesn't give information on the data type or an actual detailed description about the fields.
+You have to read the STAC extensions in combination with this extension as this extension just provides
+the mapping between the STAC fields and the CARD4L requirements, but this extension doesn't give information
+on the data type or an actual detailed description about the fields.
 
 **Additional resources:**
 
-- [Examples](examples/) (ToDo)
-- [JSON Schema](json-schema/) (ToDo)
+- [Examples](examples/)
+- [JSON Schema](json-schema/)
 
 ## STAC Collections
 
@@ -47,11 +52,12 @@ All this is still CARD4L compliant as CARD4L doesn't require all information to 
 
 ## STAC Items
 
-STAC Items must always be valid, but not all STAC Item requirements are covered here, only additional requirements and mappings to fulfill the CARD4L requirements are listed here:
+STAC Items must always be valid, but not all STAC Item requirements are covered here,
+only additional requirements and mappings to fulfill the CARD4L requirements are listed here:
 
 | Field Name      | Description                                                  | Req.  |
 | --------------- | ------------------------------------------------------------ | ----- |
-| stac_extensions | **REQUIRED.** Must contain all extensions used, for the product at least the following values: `https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json`, `eo`, `projection` and  `view`. You may add `processing` and `https://stac-extensions.github.io/file/v1.0.0/schema.json` if used. | *n/a* |
+| stac_extensions | **REQUIRED.** Must contain all extensions used, for the product at least the following values: `https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json`, `eo`, `https://stac-extensions.github.io/file/v1.0.0/schema.json`, `projection` and  `view`. You may add `https://stac-extensions.github.io/processing/v1.0.0/schema.json` if used. | *n/a* |
 | geometry        | **REQUIRED.** The geometry of the acquisition.               | 1.4   |
 | bbox            | **REQUIRED.** The bounding box of the acquisition.           | 1.4   |
 
@@ -141,9 +147,17 @@ See also the [notes](#notes) regarding the requirements 1.13 and 1.15 for a bett
 
 ### STAC Item Assets
 
-Whether the metadata are provided in a single record relevant to all pixels, or separately for each pixel, is at the discretion of the data provider. 
+Whether the metadata are provided in a single record relevant to all pixels, or separately for each pixel,
+is at the discretion of the data provider. 
 
-The role names specify the values to be used in the Asset's `roles`. Each of the assets can either be exposed individually or grouped together in any form. In the latter case the role names can simply be merged to a set of unique role names. Roles can also be combined for a single file. For example, a cloud mask which is also including cloud shadows can use the roles `cloud` and `cloud-shadow` for a single file. The `file:values` property can the contain which value(s) correspond to clouds and which value(s) correspond to cloud shadows respectively. The *italic* role names could be used as the asset's key.
+The role names specify the values to be used in the Asset's `roles`.
+Each of the assets can either be exposed individually or grouped together in any form.
+In the latter case the role names can simply be merged to a set of unique role names.
+Roles can also be combined for a single file.
+For example, a cloud mask which is also including cloud shadows 
+can use the roles `cloud` and `cloud-shadow` for a single file.
+The `file:values` property can the specify which value(s) correspond to clouds and which value(s) correspond to cloud shadows respectively.
+The *italic* role names could be used as the asset's key.
 
  The **bold** additional properties are required.
 
@@ -167,7 +181,9 @@ The role names specify the values to be used in the Asset's `roles`. Each of the
 
 #### Additional Asset Properties
 
-The following table lists properties that may occur in the assets. The list doesn't specify which fields apply to which asset and it also doesn't specify which fields are required. For those details please refer to the ["Additional properties" column in the table above](#stac-item-assets).
+The following table lists properties that may occur in the assets.
+The list doesn't specify which fields apply to which asset and it also doesn't specify which fields are required.
+For those details please refer to the ["Additional properties" column in the table above](#stac-item-assets).
 
 | Field Name           | Data Type                                              | Description                                                  | Req.  |
 | -------------------- | ------------------------------------------------------ | ------------------------------------------------------------ | ----- |
@@ -183,16 +199,21 @@ The following table lists properties that may occur in the assets. The list does
 
 ## Notes
 
-1.13: The algorithms can be given either in `processing:software` or as link with relation type `about`. One of them is **required** by CARD4L.
-
-1.15: STAC only mandates to use `processing:lineage` to describe processing chains, but you may also include or link to a more machine-readable processing chain description such as a Dask graph, an openEO process or a SNAP graph. It is recommended to use the field name `card4l:processing_chain`.
-
-1.17: Other data quality flags than `eo:cloud_cover` should be set.
-
-2.13 (SR): CARD4L lists no specific requirements thus it's missing in this document, too.
-
-3.2 (SR) / 3.3 (ST): Measurement Uncertainty is not required and it was not clear in which form this should be provided. Also the CARD4L specification states for SR that "\[i]n current practice, users determine fitness for purpose based on knowledge of the lineage of the data, rather than on a specific estimate of measurement uncertainty." Thus this requirement is not captured in this document.
-
-3.3 (SR): Measurement Normalisation is not required and it was not clear in which form this should be provided. Thus this requirement is not captured in this document, but we have added a link relation type to link to information on measurement normalisation.
-
-4.1 (SR): This requirement doesn't list any direct requirements for the metadata.
+- 1.13: The algorithms can be given either in `processing:software` or as link with relation type `about`.
+  One of them is **required** by CARD4L.
+- 1.15: STAC only mandates to use `processing:lineage` to describe processing chains,
+  but you may also include or link to a more machine-readable processing chain description such as
+  a Dask graph, an openEO process or a SNAP graph.
+  It is recommended to use the field name `card4l:processing_chain`.
+- 1.17: Other data quality flags than `eo:cloud_cover` should be set.
+- 2.13 (SR): CARD4L lists no specific requirements thus it's missing in this document, too.
+- 3.2 (SR) / 3.3 (ST): Measurement Uncertainty is not required and it was not clear in which form this should be provided.
+  Also the CARD4L specification states for SR that
+  
+  > "\[i]n current practice, users determine fitness for purpose based on knowledge of the lineage of the data,
+  > rather than on a specific estimate of measurement uncertainty."
+  
+  Thus this requirement is not captured in this document.
+- 3.3 (SR): Measurement Normalisation is not required and it was not clear in which form this should be provided.
+  Thus this requirement is not captured in this document, but we have added a link relation type to link to information on measurement normalisation.
+- 4.1 (SR): This requirement doesn't list any direct requirements for the metadata.

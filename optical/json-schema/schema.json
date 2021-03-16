@@ -1,51 +1,16 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://schemas.stacspec.org/extensions/card4l/optical/json-schema/schema.json#",
+  "$id": "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json#",
   "title": "CARD4L Optical Extension",
-  "description": "STAC CARD4L Optical Extension to a STAC Item",
+  "description": "STAC CARD4L Optical Extension for STAC Items.",
   "allOf": [
     {
-      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/item-spec/json-schema/item.json"
-    },
-    {
-      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/eo/json-schema/schema.json"
-    },
-    {
-      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/file/json-schema/schema.json"
-    },
-    {
-      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/projection/json-schema/schema.json"
-    },
-    {
-      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/view/json-schema/schema.json"
-    },
-    {
-      "$ref": "../../commons.json"
-    },
-    {
-      "$ref": "#/definitions/card4l-eo"
-    }
-  ],
-  "oneOf": [
-    {
-      "$ref": "#/definitions/card4l-sr"
-    },
-    {
-      "$ref": "#/definitions/card4l-st"
-    }
-  ],
-  "anyOf": [
-    {
-      "$ref": "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/processing/json-schema/schema.json"
-    }
-  ],
-  "definitions": {
-    "card4l-eo": {
       "type": "object",
       "required": [
         "stac_extensions",
         "geometry",
         "bbox",
+        "type",
         "properties",
         "links",
         "assets"
@@ -53,16 +18,44 @@
       "properties": {
         "stac_extensions": {
           "type": "array",
-          "contains": {
-            "const": "https://schemas.stacspec.org/extensions/card4l/optical/json-schema/schema.json"
-          }
+          "allOf": [
+            {
+              "contains": {
+                "const": "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json"
+              }
+            },
+            {
+              "contains": {
+                "const": "eo"
+              }
+            },
+            {
+              "contains": {
+                "const": "https://stac-extensions.github.io/file/v1.0.0/schema.json"
+              }
+            },
+            {
+              "contains": {
+                "const": "projection"
+              }
+            },
+            {
+              "contains": {
+                "enum": [
+                  "view",
+                  "https://schemas.stacspec.org/v1.0.0-rc.1/extensions/view/json-schema/schema.json"
+                ]
+              }
+            }
+          ]
+        },
+        "type": {
+          "const": "Feature"
         },
         "properties": {
-          "type": "object",
           "required": [
             "datetime",
             "instruments",
-            "view:off_nadir",
             "view:incidence_angle",
             "view:azimuth",
             "view:sun_azimuth",
@@ -87,23 +80,13 @@
           ]
         },
         "links": {
-          "type": "array",
-          "allOf": [
-            {
-              "contains": {
-                "type": "object",
-                "required": [
-                  "href",
-                  "rel"
-                ],
-                "properties": {
-                  "rel": {
-                    "const": "related"
-                  }
-                }
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "related"
               }
             }
-          ]
+          }
         },
         "assets": {
           "type": "object",
@@ -117,27 +100,81 @@
         }
       }
     },
-    "card4l-sr": {
+    {
+      "$ref": "../../commons.json"
+    }
+  ],
+  "oneOf": [
+    {
+      "$comment": "SR-only requirements",
       "type": "object",
       "properties": {
-        "card4l:specification": {
-          "const": "SR"
+        "properties": {
+          "type": "object",
+          "required": [
+
+          ],
+          "properties": {
+            "card4l:specification": {
+              "const": "SR"
+            },
+            "card4l:specification_version": {
+              "const": "5.0"
+            }
+          }
         },
-        "card4l:specification_version": {
-          "const": "5.0"
+        "links": {
+          "allOf": [
+            {
+              "contains": {
+                "properties": {
+                  "rel": {
+                    "const": "atmospheric-scattering"
+                  }
+                }
+              }
+            },
+            {
+              "contains": {
+                "properties": {
+                  "rel": {
+                    "const": "water-vapor"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     },
-    "card4l-st": {
+    {
+      "$comment": "ST-only requirements",
       "type": "object",
       "properties": {
-        "card4l:specification": {
-          "const": "ST"
+        "properties": {
+          "type": "object",
+          "required": [
+
+          ],
+          "properties": {
+            "card4l:specification": {
+              "const": "ST"
+            },
+            "card4l:specification_version": {
+              "const": "5.0"
+            }
+          }
         },
-        "card4l:specification_version": {
-          "const": "5.0"
+        "links": {
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "atmosphere-emissivity"
+              }
+            }
+          }
         }
       }
     }
-  }
-} 
+  ]
+}

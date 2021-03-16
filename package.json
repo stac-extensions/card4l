@@ -1,0 +1,20 @@
+{
+  "name": "stac-extensions",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npm run check-markdown && npm run check-examples",
+    "check-markdown": "remark . -f -r .github/remark.yaml",
+    "check-examples": "npm run check-eo-examples && npm run check-sar-examples",
+    "check-eo-examples": "stac-node-validator . --lint --format --verbose --schemaMap https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json=./optical/json-schema/schema.json",
+    "check-sar-examples": "stac-node-validator . --lint --format --verbose --schemaMap https://stac-extensions.github.io/card4l/v1.0.0/sar/schema.json=./sar/json-schema/schema.json"
+  },
+  "dependencies": {
+    "remark-cli": "^8.0.0",
+    "remark-lint": "^7.0.0",
+    "remark-lint-no-html": "^2.0.0",
+    "remark-preset-lint-consistent": "^3.0.0",
+    "remark-preset-lint-markdown-style-guide": "^3.0.0",
+    "remark-preset-lint-recommended": "^4.0.0",
+    "remark-validate-links": "^10.0.0"
+  }
+}

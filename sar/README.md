@@ -1,13 +1,14 @@
 # STAC CARD4L SAR Extension Specification
 
 - **Title:** CARD4L SAR
-- **Identifier:** https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json
+- **Identifier:** <https://stac-extensions.github.io/card4l/v1.0.0/sar/schema.json>
 - **Field Name Prefix:** card4l (shared with the CARD4L Optical Extension)
 - **Scope:** Item
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @m-mohr
 
-This extension specifies how to create [STAC](https://github.com/radiantearth/stac-spec) Items that comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
+This extension specifies how to create [STAC](https://github.com/radiantearth/stac-spec) Items that
+comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
 - *SAR Normalized Radar Backscatter* (NRB) products in version 5.0
   ([PDF](http://ceos.org/ard/files/PFS/NRB/v5.0/CARD4L-PFS_Normalised_Radar_Backscatter-v5.0.pdf),
   [Word](http://ceos.org/ard/files/PFS/NRB/v5.0/CARD4L-PFS_Normalised_Radar_Backscatter-v5.0.docx))
@@ -24,10 +25,14 @@ We will refer to the included XML Tags throughout this document:
 - *SAR Polarimetric Radar* (POL) metadata specification
   ([XLSX](http://ceos.org/ard/files/PFS/POL/v3.0/CARD4L_METADATA-spec_POL-v3.0.xlsx)).
 
-**Document structure:** In general, the fields required in this extension are required to either meet the *threshold (minimum) requirements* by the CEOS CARD4L metadata specification *or* are required fields in STAC. Any additional optional field provided will lead to a higher percentage for the CARD4L *target (desired) requirements*.
+**Document structure:** In general, the fields required in this extension are required to either meet
+the *threshold (minimum) requirements* by the CEOS CARD4L metadata specification *or* are required fields in STAC.
+Any additional optional field provided may lead to a higher percentage for the CARD4L *target (desired) requirements*.
 
 The column *Field Name* refers to the STAC field names.
-The column *XML Tag* refers to the XML tag proposed in the CARD4L metadata specification documents. *Src* and *Prod* define whether they apply for the STAC Item of the Source and Product respectively and give the requirement number in the CARD4L documents.
+The column *XML Tag* refers to the XML tag proposed in the CARD4L metadata specification documents.
+*Src* and *Prod* define whether they apply for the STAC Item of the Source and Product respectively
+and give the requirement number in the CARD4L documents.
 
 - ✓ = Applies
 - (✓) = Not mentioned in CEOS CARD4L requirements, but recommended to be added, for example for better data discovery through STAC.
@@ -42,7 +47,9 @@ The column *XML Tag* refers to the XML tag proposed in the CARD4L metadata speci
 - [Satellite](https://github.com/stac-extensions/sat)
 - [View](https://github.com/radiantearth/stac-spec/tree/master/extensions/view/README.md) (optional)
 
-You have to read the STAC extensions in combination with this extension as this extension just provides the mapping between the STAC fields and the CARD4L requirements, but this extension doesn't give information on the data type or an actual detailed description about the fields.
+You have to read the STAC extensions in combination with this extension as this extension just provides
+the mapping between the STAC fields and the CARD4L requirements, but this extension doesn't give information
+on the data type or an actual detailed description about the fields.
 
 **Additional resources:**
 
@@ -61,9 +68,14 @@ All this is still CARD4L compliant as CARD4L doesn't require all information to 
 
 ## STAC Items
 
-CARD4L requires metadata for both source data (*Src*) and the product (*Prod*) which STAC can better deliver in two separate files. This extension assumes that a STAC Item for the source is available and follows this extension or a new STAC Item for the source data will be created following this extension. In principle, all metadata for the source data could also be provided in a (proprietary) format like XML and linked to from the product STAC Item, but this case will not be explained in-depth in this extension.
+CARD4L requires metadata for both source data (*Src*) and the product (*Prod*) which STAC can better deliver in two separate files.
+This extension assumes that a STAC Item for the source is available and follows this extension or
+a new STAC Item for the source data will be created following this extension.
+In principle, all metadata for the source data could also be provided in a (proprietary) format like XML and linked to from the product STAC Item,
+but this case will not be explained in-depth in this extension.
 
-STAC Items must always be valid, but not all STAC Item requirements are covered here, only additional requirements and mappings to fulfill the CARD4L requirements are listed here:
+STAC Items must always be valid, but not all STAC Item requirements are covered here,
+only additional requirements and mappings to fulfill the CARD4L requirements are listed here:
 
 | Field Name      | XML Tag                                                      | Description                                                  | Src     | Prod    |
 | --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------- | ------- |
@@ -104,7 +116,8 @@ STAC Items must always be valid, but not all STAC Item requirements are covered 
 
 ##### Speckle Filter Object
 
-The following fields are all specified in CARD4L requirement 1.7.4. It is **required** to add all speckle filter parameters to this object.
+The following fields are all specified in CARD4L requirement 1.7.4.
+It is **required** to add all speckle filter parameters to this object.
 
 | Field Name       | Data Type | XML Tag           | Description                        |
 | ---------------- | --------- | ----------------- | ---------------------------------- |
@@ -143,7 +156,9 @@ The following fields are all specified in CARD4L requirement 1.7.4. It is **requ
 | proj:wkt2      | `MapProjection`                      | See comment below*.                                          | (✓)  | ✓ 1.7.10 |
 | proj:transform | *n/a*                                | To be specified either globally for all assets with role `data` or individually [per asset](#stac-item-assets). | ✗    | (✓)      |
 
-\* At least one of the three properties `proj:epsg`, `proj:wkt2` or `proj:projjson` is **required**. It must specify the coordinate reference system (1.7.9) and map projection (1.7.10). For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and the Map Projection a human readable code such as WKT.
+\* At least one of the three properties `proj:epsg`, `proj:wkt2` or `proj:projjson` is **required**.
+It must specify the coordinate reference system (1.7.9) and map projection (1.7.10).
+For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and the Map Projection a human readable code such as WKT.
 
 #### SAR
 
@@ -201,7 +216,11 @@ The following fields are all specified in CARD4L requirement 1.7.4. It is **requ
 
 Whether the metadata are provided in a single record relevant to all pixels, or separately for each pixel, is at the discretion of the data provider. 
 
-The role names specify the values to be used in the Asset's `roles`. Each of the assets can either be exposed individually or grouped together in any form. In the latter case the role names can simply be merged to a set of unique role names. The *italic* role names could be used as the asset's key.
+The role names specify the values to be used in the Asset's `roles`.
+Each of the assets can either be exposed individually or grouped together in any form.
+In the latter case the role names can simply be merged to a set of unique role names.
+Roles can also be combined for a single file.
+The *italic* role names could be used as the asset's key.
 
 **All additional properties are required, except the once in *italic*.**
 
@@ -220,7 +239,9 @@ The role names specify the values to be used in the Asset's `roles`. Each of the
 
 #### Additional Asset Properties
 
-The following table lists properties that may occur in the assets. The list doesn't specify which fields apply to which asset and it also doesn't specify which fields are required. For those details please refer to the ["Additional properties" column in the table above](#stac-item-assets).
+The following table lists properties that may occur in the assets.
+The list doesn't specify which fields apply to which asset and it also doesn't specify which fields are required.
+For those details please refer to the ["Additional properties" column in the table above](#stac-item-assets).
 
 | Field Name                | Data Type                                              | XML Tag                                         | Description                                                  | Src     | Prod    |
 | ------------------------- | ------------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------ | ------- | ------- |
@@ -236,20 +257,25 @@ The following table lists properties that may occur in the assets. The list does
 | file:nodata               | \[any]                                                 | `NoData` in `BitValues`                         | Value(s) for no-data.        | ✗       | ✓ 2.2   |
 | card4l:ellipsoidal_height | number                                                 | `EllipsoidalHeight`                             | Indicate which ellipsoidal height was used, in meters.       | ✗       | ✓       |
 
-For all assets of with the role set to `data`, the following additional properties can be specified globally (in [STAC Item Properties](#stac-item-properties)) or individually per asset: `proj:shape`, `proj:transform`, `card4l:num_border_pixels`. See the respective field specifications above.
+For all assets of with the role set to `data`, the following additional properties can be specified globally
+(in [STAC Item Properties](#stac-item-properties)) or individually per asset: `proj:shape`, `proj:transform`, `card4l:num_border_pixels`.
+See the respective field specifications above.
 
 ## Notes
 
-1.6.1 / 1.7.1: `SourceDataRepository` and `RepositoryURL` are covered by STAC link structures. All CARD4L compliant STAC Catalog are **required** to make intensive use of STAC link relation types such as `root`, `parent`, `child`, `item` and `collection`.
-
-1.6.6 / 1.7.1 / 4.1: STAC only mandates to use `processing:lineage` to describe processing chains, but you may also include or link to a more machine-readable processing chain description such as a Dask graph, an openEO process or a SNAP graph. It is recommended to use the field name `card4l:processing_chain`.
-
-1.6.9: `SideLobeLevel`, `IntegratedSideLobeRatio`, `CrossCorrelationWidth`, `CrossCorelationPeakLoc` are *recommended* to be included in the resource linked to with the relation type [`performance-indicators`](#stac-item-links).
-
-2.3: From the metadata specification it seems the sample type unit should be square meters (m²) although it is per-pixel data, which we think should be unitless itself.
-
-2.3 / 2.4: These fields may not be required in a future iteration of the specification as several tools don't generate such metadata, e.g. SNAP.
-
-4.3: A revision of the CEOS specification is planned and may change or relax the requirement.
-
-4.4: There's an inconsistency in the CEOS specification and the CEOS metadata specification. The metadata specification asks for the gridding convention as specified here, but the text in the specification doesn't mention it. We think the description really means you just need to use a consistent grid for the data, across tiles/scenes.
+- 1.6.1 / 1.7.1: `SourceDataRepository` and `RepositoryURL` are covered by STAC link structures.
+  All CARD4L compliant STAC Catalog are **required** to make intensive use of STAC link relation types such as
+  `root`, `parent`, `child`, `item` and `collection`.
+- 1.6.6 / 1.7.1 / 4.1: STAC only mandates to use `processing:lineage` to describe processing chains,
+  but you may also include or link to a more machine-readable processing chain description such as
+  a Dask graph, an openEO process or a SNAP graph.
+  It is recommended to use the field name `card4l:processing_chain`.
+- 1.6.9: `SideLobeLevel`, `IntegratedSideLobeRatio`, `CrossCorrelationWidth`, `CrossCorelationPeakLoc` are *recommended*
+  to be included in the resource linked to with the relation type [`performance-indicators`](#stac-item-links).
+- 2.3: From the metadata specification it seems the sample type unit should be square meters (m²) although it is per-pixel data,
+  which we think should be unitless itself.
+- 2.3 / 2.4: These fields may not be required in a future iteration of the specification as several tools don't generate such metadata, e.g. SNAP.
+- 4.3: A revision of the CEOS specification is planned and may change or relax the requirement.
+- 4.4: There's an inconsistency in the CEOS specification and the CEOS metadata specification.
+  The metadata specification asks for the gridding convention as specified here, but the text in the specification doesn't mention it.
+  We think the description really means you just need to use a consistent grid for the data, across tiles/scenes.
