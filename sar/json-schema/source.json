@@ -20,7 +20,7 @@
         },
         {
           "contains": {
-            "const": "view"
+            "const": "https://stac-extensions.github.io/view/v1.0.0/schema.json"
           }
         }
       ]

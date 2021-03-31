@@ -20,7 +20,7 @@
         },
         {
           "contains": {
-            "const": "projection"
+            "const": "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
           }
         }
       ]

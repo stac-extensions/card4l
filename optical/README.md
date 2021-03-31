@@ -25,11 +25,11 @@ The column *Field Name* refers to the STAC field names. The column *Req.* refers
 
 **STAC Extensions:** This extension makes use of a number of existing STAC extensions:
 
-- [EO](https://github.com/radiantearth/stac-spec/tree/master/extensions/eo/README.md)
+- [EO](https://github.com/stac-extensions/eo)
 - [File](https://github.com/stac-extensions/file)
 - [Processing](https://github.com/stac-extensions/processing) (optional)
-- [Projection](https://github.com/radiantearth/stac-spec/tree/master/extensions/projection/README.md)
-- [View](https://github.com/radiantearth/stac-spec/tree/master/extensions/view/README.md)
+- [Projection](https://github.com/stac-extensions/projection)
+- [View](https://github.com/stac-extensions/view)
 
 You have to read the STAC extensions in combination with this extension as this extension just provides
 the mapping between the STAC fields and the CARD4L requirements, but this extension doesn't give information
@@ -46,10 +46,10 @@ on the data type or an actual detailed description about the fields.
 
 CARD4L lists a lot of requirements (and fields) that have common values across all generated STAC Items and assets.
 Thus, it is **recommended** to provide a STAC Collection for the Items and put common fields (in the STAC Item `properties`)
-into [Collection `summaries`](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/collection-spec/collection-spec.md#collection-fields).
+into [Collection `summaries`](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.2/collection-spec/collection-spec.md#collection-fields).
 While the STAC Item fields still need to be in the Item, too, you can de-duplicate links and assets by putting common
 links once into the STAC Collection links. Also, common assets can be just put once into the STAC Collection using the
-STAC extension [Collection Assets](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/collection-assets/README.md).
+STAC extension [Collection Assets](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.2/collection-spec/collection-spec.md#assets).
 All this is still CARD4L compliant as CARD4L doesn't require all information to be in a single file.
 
 ## STAC Items
@@ -59,9 +59,20 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 
 | Field Name      | Description                                                  | Req.  |
 | --------------- | ------------------------------------------------------------ | ----- |
-| stac_extensions | **REQUIRED.** Must contain all extensions used, for the product at least the following values: `https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json`, `eo`, `https://stac-extensions.github.io/file/v1.0.0/schema.json`, `projection` and  `view`. You may add `https://stac-extensions.github.io/processing/v1.0.0/schema.json` if used. | *n/a* |
+| stac_extensions | **REQUIRED.** Must contain all extensions used.  See below for details\*. | *n/a* |
 | geometry        | **REQUIRED.** The geometry of the acquisition.               | 1.4   |
 | bbox            | **REQUIRED.** The bounding box of the acquisition.           | 1.4   |
+
+\* The following values for `stac_extensions` apply:
+
+| Value                                                        | Required  |
+| ------------------------------------------------------------ | ---- |
+| `https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json` | ✓    |
+| `https://stac-extensions.github.io/eo/v1.0.0/schema.json` | ✓ |
+| `https://stac-extensions.github.io/file/v1.0.0/schema.json`  | ✓   |
+| `https://stac-extensions.github.io/processing/v1.0.0/schema.json` | ✗   |
+| `https://stac-extensions.github.io/projection/v1.0.0/schema.json` | ✓  |
+| `https://stac-extensions.github.io/view/v1.0.0/schema.json`  | ✓    |
 
 ### STAC Item Properties
 
@@ -194,14 +205,14 @@ For those details please refer to the ["Additional properties" column in the tab
 | Field Name           | Data Type                                              | Description                                                  | Req.  |
 | -------------------- | ------------------------------------------------------ | ------------------------------------------------------------ | ----- |
 | type                 | string                                                 | STRONGLY RECOMMENDED. The media type of the file format.     | *n/a* |
-| created              | string                                                 | The time of the processing is specified via the `created` property of the asset as specified in the [STAC Common metadata](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/item-spec/common-metadata.md#date-and-time). | *n/a* |
-| eo:bands             | \[[Band Object](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/eo/README.md#band-object)\]         | Bands with at least the following fields included: `name` and `center_wavelength`. Add additional fields such as `full_width_half_max` to better meet the *target (desired) requirements*. See the CARD4L requirement 1.10 for further details. | 1.10  |
-| file:data_type       | string                                                 | One of the [Data Types](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md#data-types).       | *n/a* |
+| created              | string                                                 | The time of the processing is specified via the `created` property of the asset as specified in the [STAC Common metadata](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.2/item-spec/common-metadata.md#date-and-time). | *n/a* |
+| eo:bands             | \[[Band Object](https://github.com/stac-extensions/eo/blob/v1.0.0/README.md#band-object)\]         | Bands with at least the following fields included: `name` and `center_wavelength`. Add additional fields such as `full_width_half_max` to better meet the *target (desired) requirements*. See the CARD4L requirement 1.10 for further details. | 1.10  |
+| file:data_type       | string                                                 | One of the [Data Types](https://github.com/stac-extensions/file/blob/v1.0.0/README.md#data-types).       | *n/a* |
 | file:byte_order      | string                                                 | One of `big-endian` or `little-endian`.                      | *n/a* |
 | file:unit            | string                                                 | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/). | *n/a* |
 | file:bits_per_sample | integer                                                | Bits per sample                                              | *n/a* |
 | file:nodata          | \[any]                                                 | for data. Value(s) for no-data.                 | 2.2   |
-| file:values          | \[[Mapping Object](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md#mapping-object)\] | Lists the value that are in the file and describes their meaning. | n/a   |
+| file:values          | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v1.0.0/README.md#mapping-object)\] | Lists the value that are in the file and describes their meaning. | n/a   |
 
 ## Notes
 

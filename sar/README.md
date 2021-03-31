@@ -64,10 +64,10 @@ on the data type or an actual detailed description about the fields.
 
 CARD4L lists a lot of requirements (and fields) that have common values across all generated STAC Items and assets.
 Thus, it is **recommended** to provide a STAC Collection for the Items and put common fields (in the STAC Item `properties`)
-into [Collection `summaries`](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/collection-spec/collection-spec.md#collection-fields).
+into [Collection `summaries`](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.2/collection-spec/collection-spec.md#collection-fields).
 While the STAC Item fields still need to be in the Item, too, you can de-duplicate links and assets by putting common
 links once into the STAC Collection links. Also, common assets can be just put once into the STAC Collection using the
-STAC extension [Collection Assets](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/collection-assets/README.md).
+STAC extension [Collection Assets](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.2/collection-spec/collection-spec.md#assets).
 All this is still CARD4L compliant as CARD4L doesn't require all information to be in a single file.
 
 ## STAC Items
@@ -90,16 +90,16 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 
 \* The following values for `stac_extensions` apply:
 
-| Value                                                        | Src  | Prod |
-| ------------------------------------------------------------ | ---- | ---- |
-| `https://stac-extensions.github.io/card4l/v1.0.0/optical/source.json` | ✓    | ✗    |
-| `https://stac-extensions.github.io/card4l/v1.0.0/optical/product.json` | ✗    | ✓    |
-| `https://stac-extensions.github.io/file/v1.0.0/schema.json`  | ✗    | ✓    |
-| `https://stac-extensions.github.io/processing/v1.0.0/schema.json` | ✓    | ✓    |
-| `projection`                                                 | (✓)  | ✓    |
-| `https://stac-extensions.github.io/sar/v1.0.0/schema.json`   | ✓    | ✓    |
-| `https://stac-extensions.github.io/sat/v1.0.0/schema.json`   | ✓    | (✓)  |
-| `https://stac-extensions.github.io/view/v1.0.0/schema.json`  | ✓    | ✗    |
+| Value                                                              | Src  | Prod |
+| ------------------------------------------------------------------ | ---- | ---- |
+| `https://stac-extensions.github.io/card4l/v1.0.0/sar/source.json`  | ✓    | ✗   |
+| `https://stac-extensions.github.io/card4l/v1.0.0/sar/product.json` | ✗    | ✓   |
+| `https://stac-extensions.github.io/file/v1.0.0/schema.json`        | ✗    | ✓   |
+| `https://stac-extensions.github.io/processing/v1.0.0/schema.json`  | ✓    | ✓   |
+| `https://stac-extensions.github.io/projection/v1.0.0/schema.json`  | (✓)  | ✓   |
+| `https://stac-extensions.github.io/sar/v1.0.0/schema.json`         | ✓    | ✓   |
+| `https://stac-extensions.github.io/sat/v1.0.0/schema.json`         | ✓    | (✓) |
+| `https://stac-extensions.github.io/view/v1.0.0/schema.json`        | ✓    | ✗   |
 
 ### STAC Item Properties
 
@@ -183,7 +183,7 @@ For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and 
 | sar:frequency_band        | `RadarBand`                                                  | **REQUIRED for *Src*.**                                      | ✓ 1.6.4 | (✓)   |
 | sar:center_frequency      | `RadarCenterFrequency`                                       | **REQUIRED.** Convert to GHz if required.                    | ✓ 1.6.4 | ✗     |
 | sar:polarizations         | `Polarizations`                                              | **REQUIRED for *Src*.**                                      | ✓ 1.6.4 | (✓)   |
-| sar:product_type          | `ProductLevel` (Src), `Measurements`, attribute `type` (Prod, POL only) | **REQUIRED.** *Src*: Find suitable [product type in the SAR extension](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/sar/README.md#item-fields). *Prod*: `NRB` for Normalized Radar Backscatter products, `COVMAT` for Normalized Radar Covariance Matrix products or `PRD` for Polarimetric Radar Decomposition products. | ✓       | ✓ 3.1 |
+| sar:product_type          | `ProductLevel` (Src), `Measurements`, attribute `type` (Prod, POL only) | **REQUIRED.** *Src*: Find suitable [product type in the SAR extension](https://github.com/stac-extensions/sar/blob/v1.0.0/README.md#item-properties). *Prod*: `NRB` for Normalized Radar Backscatter products, `COVMAT` for Normalized Radar Covariance Matrix products or `PRD` for Polarimetric Radar Decomposition products. | ✓       | ✓ 3.1 |
 | sar:observation_direction | `AntennaPointing`                                            | **REQUIRED.** Lower-case                                     | ✓ 1.6.4 | ✗     |
 | sar:looks_azimuth         | `AzimuthNumberOfLooks`                                       | **REQUIRED.**                                                | ✓ 1.6.6 | ✗     |
 | sar:looks_range           | `RangeNumberOfLooks`                                         | **REQUIRED.**                                                | ✓ 1.6.6 | ✗     |
@@ -261,14 +261,14 @@ For those details please refer to the ["Additional properties" column in the tab
 | Field Name                | Data Type                                                    | XML Tag                                         | Description                                                  | Src     | Prod    |
 | ------------------------- | ------------------------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------ | ------- | ------- |
 | type                      | string                                                       | `DataFormat`                                    | The media type of the file format.                           | (✓)     | ✓       |
-| created                   | string                                                       | `ProcessingDate` (Src), `ProcessingTime` (Prod) | The time of the processing is specified via the `created` property of the asset as specified in the [STAC Common metadata](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/item-spec/common-metadata.md#date-and-time). | ✓ 1.6.6 | ✓ 1.7.1 |
+| created                   | string                                                       | `ProcessingDate` (Src), `ProcessingTime` (Prod) | The time of the processing is specified via the `created` property of the asset as specified in the [STAC Common metadata](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.2/item-spec/common-metadata.md#date-and-time). | ✓ 1.6.6 | ✓ 1.7.1 |
 | sar:polarizations         | \[string\]                                                   | *n/a*                                           | The polarization(s) of the asset.                            | (✓)     | ✓       |
 | file:header_size          | integer                                                      | `HeaderSize`                                    | File header size in bytes (**required** if applicable to the file format). | ✗       | ✓ 1.7.7 |
-| file:data_type            | string                                                       | `DataType`                                      | One of the [Data Types](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md#data-types). | ✗       | ✓       |
+| file:data_type            | string                                                       | `DataType`                                      | One of the [Data Types](https://github.com/stac-extensions/file/blob/v1.0.0/README.md#data-types). | ✗       | ✓       |
 | file:byte_order           | string                                                       | `ByteOrder`                                     | One of `big-endian` or `little-endian`                       | ✗       | ✓       |
 | file:bits_per_sample      | integer                                                      | `BitsPerSample`                                 | Bits per sample, e.g. 8, 16, 32, ...                         | ✗       | ✓       |
 | file:unit                 | string                                                       | `SampleType`                                    | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/). | ✗       | ✓       |
-| file:values               | \[[Mapping Object](https://github.com/radiantearth/stac-spec/tree/v1.0.0-rc.1/extensions/file/README.md#mapping-object)\] | `ValidData` and `InvalidData` in `BitValues`    | Specify value(s) for valid and invalid data separately.      | ✗       | ✓ 2.2   |
+| file:values               | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v1.0.0/README.md#mapping-object)\] | `ValidData` and `InvalidData` in `BitValues`    | Specify value(s) for valid and invalid data separately.      | ✗       | ✓ 2.2   |
 | file:nodata               | \[any]                                                       | `NoData` in `BitValues`                         | Value(s) for no-data.                                        | ✗       | ✓ 2.2   |
 | card4l:ellipsoidal_height | number                                                       | `EllipsoidalHeight`                             | Indicate which ellipsoidal height was used, in meters.       | ✗       | ✓       |
 | card4l:border_pixels      | integer                                                      | `NumBorderPixels`                               | Number of border pixels (**required** only if applicable).   | ✗       | ✓ 1.7.7 |

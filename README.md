@@ -45,4 +45,3 @@ Then to check markdown formatting and test the examples against the JSON schema,
 ```bash
 npm test
 ```
-

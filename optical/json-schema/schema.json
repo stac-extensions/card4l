@@ -24,7 +24,7 @@
         },
         {
           "contains": {
-            "const": "eo"
+            "const": "https://stac-extensions.github.io/eo/v1.0.0/schema.json"
           }
         },
         {
@@ -34,12 +34,12 @@
         },
         {
           "contains": {
-            "const": "projection"
+            "const": "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
           }
         },
         {
           "contains": {
-            "const": "view"
+            "const": "https://stac-extensions.github.io/view/v1.0.0/schema.json"
           }
         }
       ]

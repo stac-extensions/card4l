@@ -1,12 +1,12 @@
 {
-  "stac_version": "1.0.0-rc.1",
+  "stac_version": "1.0.0-rc.2",
   "stac_extensions": [
-    "eo",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
     "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json",
     "https://stac-extensions.github.io/file/v1.0.0/schema.json",
     "https://stac-extensions.github.io/processing/v1.0.0/schema.json",
-    "projection",
-    "view"
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json"
   ],
   "id": "33815fdb-8b43-441a-9926-758a73072dcd",
   "type": "Feature",
