@@ -15,7 +15,7 @@
         },
         {
           "contains": {
-            "const": "https://stac-extensions.github.io/file/v1.0.0/schema.json"
+            "const": "https://stac-extensions.github.io/file/v2.0.0/schema.json"
           }
         },
         {

@@ -1,11 +1,11 @@
 {
-  "stac_version": "1.0.0-rc.2",
+  "stac_version": "1.0.0",
   "stac_extensions": [
     "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
     "https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json",
-    "https://stac-extensions.github.io/file/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/processing/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.1.0/schema.json",
     "https://stac-extensions.github.io/view/v1.0.0/schema.json"
   ],
   "id": "51e1f769-f6b1-4f4a-91be-55451b6990e3",
@@ -44,18 +44,18 @@
     ]
   },
   "properties": {
+    "card4l:specification": "SR",
+    "card4l:specification_version": "5.0",
+    "datetime": "2016-12-08T12:00:00+00:00",
+    "instruments": [
+      "oli"
+    ],
+    "platform": "landsat-8",
     "processing:lineage": "FORCE Level 2 Processing System",
     "processing:software": {
       "FORCE": "3.6.2"
     },
-    "datetime": "2016-12-08T12:00:00+00:00",
-    "card4l:specification_version": "5.0",
     "processing:level": "L2",
-    "platform": "landsat-8",
-    "card4l:specification": "SR",
-    "instruments": [
-      "oli"
-    ],
     "proj:epsg": null,
     "proj:wkt2": "PROJCS[\"Azimuthal_Equidistant\",GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433]],PROJECTION[\"Azimuthal_Equidistant\"],PARAMETER[\"latitude_of_center\",53],PARAMETER[\"longitude_of_center\",24],PARAMETER[\"false_easting\",5837287.81977],PARAMETER[\"false_northing\",2121415.69617],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]]]",
     "view:incidence_angle": 45.6789,
@@ -104,76 +104,73 @@
       "href": "https://example.com/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
       "roles": [
         "cloud",
-        "metadata"
-      ],
-      "file:values": [
-        {
-          "values": [
-            0
-          ],
-          "summary": "clear"
-        },
-        {
-          "values": [
-            1
-          ],
-          "summary": "less confident cloud (i.e., buffered cloud)"
-        },
-        {
-          "values": [
-            2
-          ],
-          "summary": "confident, opaque cloud"
-        },
-        {
-          "values": [
-            3
-          ],
-          "summary": "cirrus"
-        }
-      ],
-      "type": "image/tiff; application=geotiff"
-    },
-    "saturation": {
-      "href": "https://example.com/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
-      "roles": [
+        "cloud-shadow",
         "saturation",
         "metadata"
       ],
-      "file:values": [
+      "raster:bands": [
         {
+          "description": "Clouds",
           "values": [
-            0
-          ],
-          "summary": "no - pixel is NOT saturated"
+            {
+              "values": [
+                0
+              ],
+              "summary": "clear"
+            },
+            {
+              "values": [
+                1
+              ],
+              "summary": "less confident cloud (i.e., buffered cloud)"
+            },
+            {
+              "values": [
+                2
+              ],
+              "summary": "confident, opaque cloud"
+            },
+            {
+              "values": [
+                3
+              ],
+              "summary": "cirrus"
+            }
+          ]
         },
         {
+          "description": "Cloud Shadows",
           "values": [
-            1
-          ],
-          "summary": "yes - pixel is saturated"
-        }
-      ],
-      "type": "image/tiff; application=geotiff"
-    },
-    "cloud_shadow": {
-      "href": "https://example.com/EU010M/E053N015T1/20161208_LEVEL2_LND08_QAI.tif",
-      "roles": [
-        "cloud-shadow",
-        "metadata"
-      ],
-      "file:values": [
-        {
-          "values": [
-            0
-          ],
-          "summary": "no - no cloud-shadow on pixel"
+            {
+              "values": [
+                0
+              ],
+              "summary": "no - no cloud-shadow on pixel"
+            },
+            {
+              "values": [
+                1
+              ],
+              "summary": "yes - cloud-shadow on pixel"
+            }
+          ]
         },
         {
+          "description": "Saturation",
           "values": [
-            1
-          ],
-          "summary": "yes - cloud-shadow on pixel"
+            {
+              "values": [
+                0
+              ],
+              "summary": "no - pixel is NOT saturated"
+            },
+            {
+              "values": [
+                1
+              ],
+              "summary": "yes - pixel is saturated"
+            }
+          ]
         }
       ],
       "type": "image/tiff; application=geotiff"
@@ -181,28 +178,31 @@
     "incomplete_testing": {
       "href": "https://example.com/EU010M/E053N015T1/20180616_LEVEL2_SEN2B_QAI_it.tif",
       "roles": [
-        "cloud-shadow",
+        "incomplete-testing",
         "metadata"
       ],
-      "file:values": [
+      "raster:bands": [
         {
           "values": [
-            0
-          ],
-          "summary": "tests have NOT been successfully completed"
-        },
-        {
-          "values": [
-            1
-          ],
-          "summary": "tests have been successfully completed"
+            {
+              "values": [
+                0
+              ],
+              "summary": "tests have NOT been successfully completed"
+            },
+            {
+              "values": [
+                1
+              ],
+              "summary": "tests have been successfully completed"
+            }
+          ]
         }
       ],
       "type": "image/tiff; application=geotiff"
     },
     "data": {
       "href": "https://example.com/EU010M/E053N015T1/20161208_LEVEL2_LND08_BOA.tif",
-      "file:unit": "fraction",
       "eo:bands": [
         {
           "name": "band_1",
@@ -235,16 +235,44 @@
           "common_name": "swir22"
         }
       ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "unit": "fraction"
+        },
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "unit": "fraction"
+        },
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "unit": "fraction"
+        },
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "unit": "fraction"
+        },
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "unit": "fraction"
+        },
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "unit": "fraction"
+        }
+      ],
       "roles": [
         "data",
         "reflectance"
       ],
       "created": "2021-02-09T12:46:11Z",
-      "file:nodata": [
-        -9999
-      ],
-      "type": "image/tiff; application=geotiff",
-      "file:data_type": "int16"
+      "type": "image/tiff; application=geotiff"
     }
   }
 }

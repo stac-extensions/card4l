@@ -20,7 +20,7 @@
       "allOf": [
         {
           "contains": {
-            "const": "https://stac-extensions.github.io/processing/v1.0.0/schema.json"
+            "const": "https://stac-extensions.github.io/processing/v1.1.0/schema.json"
           }
         },
         {
