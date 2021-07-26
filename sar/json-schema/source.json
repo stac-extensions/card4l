@@ -82,6 +82,26 @@
         },
         "card4l:ionosphere_indicator": {
           "type": "boolean"
+        },
+        "card4l:source_processing_parameters": {
+          "type": "object",
+          "properties": {
+            "lut_applied": {
+              "type": "string"
+            },
+            "range_look_bandwidth": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "azimuth_look_bandwidth": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          }
         }
       }
     },

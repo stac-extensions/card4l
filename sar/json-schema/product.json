@@ -126,6 +126,9 @@
             "upper-left",
             "lower-left"
           ]
+        },
+        "card4l:resampling_method": {
+          "type": "string"
         }
       }
     },

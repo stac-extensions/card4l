@@ -114,6 +114,7 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:beam_id                         | ✓ 1.6.4     | ✗           | `BeamID`                                                     | string                                                  | **REQUIRED.**                                                |
 | card4l:orbit_data_source               | ✓ 1.6.5     | (✓)         | `OrbitDataSource`                                            | string                                                  | **REQUIRED for *Src*.** One of `predicted`, `definitive`, `downlinked`. Applies to *Prod*, if additional orbit correction has been applied. |
 | card4l:orbit_mean_altitude             | ✓ 1.6.5     | ✗           | `OrbitMeanAltitude`                                          | number                                                  | Platform (mean) altitude in kilometers (km).                 |
+| card4l:source_processing_parameters    | ✓ 1.6.6     | ✗           | *various, see below*                                         | [Source Processing Object](#source-processing-object)   | Additional relevant processing parameters, e.g., Range- and Azimuth Look Bandwidth and LUT applied. If not available in machine-readable form, can also be specified in `processing:lineage`. |
 | card4l:incidence_angle_near_range      | ✓ 1.6.7     | ✗           | `IncAngleNearRange`                                          | number                                                  | **REQUIRED.** Convert to degree, if required.                |
 | card4l:incidence_angle_far_range       | ✓ 1.6.7     | ✗           | `IncAngleFarRange`                                           | number                                                  | **REQUIRED.** Convert to degree, if required.                |
 | card4l:noise_equivalent_intensity      | ✓ 1.6.9     | ✗           | `NoiseEquivalentIntensity`                                   | number                                                  | **REQUIRED.** Convert to decibel, if required.               |
@@ -128,13 +129,14 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:conversion_eq                   | ✗           | ✓ 3.2       | `BackscatterConversionEq` (NRB), `ScalingConversionEq` (POL) | string                                                  | **REQUIRED.** Indicate equation to convert from digital numbers (`DN`) to logarithmic decibel scale, see the CARD4L specification (3.2) for details. |
 | card4l:relative_rtc_accuracy           | ✗           | ✓ 3.5       | `Relative` in `RTCAccuracy`                                  | number                                                  | Relative accuracy of the Radiometric Terrain Correction in decibel. |
 | card4l:absolute_rtc_accuracy           | ✗           | ✓ 3.5       | `Absolute` in `RTCAccuracy`                                  | number                                                  | Absolute accuracy of the Radiometric Terrain Correction in decibel. |
+| card4l:resampling_method               | x           | ✓ 4.1       | `ResamplingMethod`                                           | string                                                  | The resampling method used, e.g. `near`, `bilinear`, `cubic`, etc. (see [GDAL](https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r) for more) |
 | card4l:northern_geometric_accuracy     | ✗           | ✓ 4.3       | `NorthernRMSE` in `GeoCorrAccuracy`                          | number                                                  | **REQUIRED.** An estimate of the northern geometric accuracy in meters. |
 | card4l:eastern_geometric_accuracy      | ✗           | ✓ 4.3       | `EasternRMSE` in `GeoCorrAccuracy`                           | number                                                  | **REQUIRED.** An estimate of the eastern geometric accuracy in meters. |
 | card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED.** One of `center` (center), `upper-left` (UL) or `lower-right` (LR) |
 
 ##### Speckle Filter Object
 
-The following fields are all specified in CARD4L requirement 1.7.4.
+The following fields are all specified in CARD4L requirement 1.7.4. 
 It is **required** to add all speckle filter parameters to this object.
 
 | Field Name       | Data Type | XML Tag           | Description                        |
@@ -143,6 +145,21 @@ It is **required** to add all speckle filter parameters to this object.
 | window_size_col  | integer   | `WindowSizeCol`   |                                    |
 | window_size_line | integer   | `WindowSizeLine`  |                                    |
 | ...              | ...       | `OtherParameters` | Add all speckle filter parameters. |
+
+##### Source Processing Object
+
+Additional relevant processing parameters, 
+e.g., Range- and Azimuth Look Bandwidth and LUT applied. 
+If not available in machine-readable form, can also be specified in `processing:lineage`. 
+The following fields are all suggested in CARD4L requirement 1.6.6. 
+None of the fields is required.
+
+| Field Name             | Data Type | XML Tag                | Description                                                  |
+| ---------------------- | --------- | ---------------------- | ------------------------------------------------------------ |
+| lut_applied            | string    | `lutApplied`           |                                                              |
+| range_look_bandwidth   | \[number] | `RangeLookBandwidth`   | Range Look Bandwidth per swath, convert to GHz if required.  |
+| azimuth_look_bandwidth | \[number] | `AzimuthLookBandwidth` | Azimuth Look Bandwidth per swath, convert to GHz if required. |
+| ...                    | ...       | *n/a*                  | Add all source data processing parameters.                   |
 
 #### Common Metadata
 
@@ -159,12 +176,12 @@ It is **required** to add all speckle filter parameters to this object.
 
 #### Processing
 
-| Field Name            | Src     | Prod                | XML Tag                                                      | Description                                                  |
-| --------------------- | ------- | ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| processing:facility   | ✓ 1.6.6 | ✓ 1.7.1             | `ProcessingFacility`                                         | **REQUIRED.**                                                |
-| processing:software   | ✓ 1.6.6 | ✓ 1.7.1             | `SoftwareVersion`                                            | **REQUIRED.** String likely needs to be split into software name and version number. |
-| processing:lineage    | ✓ 1.6.6 | ✓ 4.1               | `RangeLookBandwidth`,  `AzimuthLookBandwidth`, `lutApplied` (1.6.6), `ResamplingMethod` (4.1) | Additional processing information and parameters, e.g. Range- and Azimuth Look Bandwidth and LUT applied (Src only) or the resampling method for geometric correction. |
-| processing:expression | ✓ 1.6.6 | ✓ 1.7.1 / 4.1 / ... | *n/a*                                                        | A machine-readable processing chain description such as a Dask graph, an openEO process or a SNAP graph. Alternatively, you can also link to a processing chain with the relation type `processing-expression` (see below). |
+| Field Name            | Src     | Prod    | XML Tag              | Description                                                  |
+| --------------------- | ------- | ------- | -------------------- | ------------------------------------------------------------ |
+| processing:facility   | ✓ 1.6.6 | ✓ 1.7.1 | `ProcessingFacility` | **REQUIRED.**                                                |
+| processing:software   | ✓ 1.6.6 | ✓ 1.7.1 | `SoftwareVersion`    | **REQUIRED.** String likely needs to be split into software name and version number. |
+| processing:lineage    | ✓       | ✓       | *n/a*                | A human-readable description of the full processing workflow and parameters, e.g. algorithms and corrections applied. |
+| processing:expression | ✓       | ✓       | *n/a*                | A machine-readable description of the full processing workflow and parameters, e.g. a Dask graph, an openEO process or a SNAP graph. Alternatively, you can also link to a processing chain with the relation type `processing-expression` (see below). |
 
 #### Projection
 
