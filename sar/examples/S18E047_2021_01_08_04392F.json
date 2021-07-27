@@ -1,0 +1,337 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/card4l/v1.0.0/sar/product.json",
+    "https://stac-extensions.github.io/file/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/sar/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/sat/v1.0.0/schema.json"
+  ],
+  "id": "S18E047_2021_01_08_04392F",
+  "type": "Feature",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          47,
+          -17.39862772348652
+        ],
+        [
+          47,
+          -18
+        ],
+        [
+          48,
+          -18
+        ],
+        [
+          48,
+          -17
+        ],
+        [
+          47.10548760203437,
+          -17
+        ],
+        [
+          47.09466626697524,
+          -17.0422161421279
+        ],
+        [
+          47.04739331074532,
+          -17.221804597249964
+        ],
+        [
+          47,
+          -17.39862772348652
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    47,
+    -18,
+    48,
+    -17
+  ],
+  "properties": {
+    "card4l:specification": "NRB",
+    "card4l:specification_version": "5.0",
+    "card4l:noise_removal_applied": true,
+    "card4l:speckle_filtering": {
+      "type": "block average",
+      "window_size_col": 2,
+      "window_size_line": 2
+    },
+    "card4l:pixel_coordinate_convention": "center",
+    "card4l:measurement_type": "gamma0",
+    "card4l:measurement_convention": "power",
+    "card4l:conversion_eq": "10*log10(DN)",
+    "card4l:resampling_method": "bilinear",
+    "card4l:northern_geometric_accuracy": 0.6,
+    "card4l:eastern_geometric_accuracy": 4.4,
+    "card4l:gridding_convention": "center",
+    "datetime": "2021-01-08T02:19:04.286944Z",
+    "start_datetime": "2021-01-08T02:19:04.286944Z",
+    "end_datetime": "2021-01-08T02:19:54.285659Z",
+    "constellation": "sentinel-1",
+    "gsd": 22.24,
+    "instruments": [
+      "c-sar"
+    ],
+    "platform": "sentinel-1a",
+    "processing:facility": "Sentinel Hub, Sinergise",
+    "processing:software": {
+      "Batch API": "v4.34.0"
+    },
+    "proj:epsg": 4326,
+    "proj:wkt2": "GEOGCRS[\"WGS 84\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],CS[ellipsoidal,2],AXIS[\"geodetic latitude (Lat)\",north,ORDER[1],ANGLEUNIT[\"degree\",0.0174532925199433]],AXIS[\"geodetic longitude (Lon)\",east,ORDER[2],ANGLEUNIT[\"degree\",0.0174532925199433]],ID[\"EPSG\",4326]]",
+    "sar:frequency_band": "C",
+    "sar:instrument_mode": "IW",
+    "sar:polarizations": [
+      "VV",
+      "VH"
+    ],
+    "sar:product_type": "NRB",
+    "sat:orbit_state": "descending",
+    "sat:relative_orbit": 93,
+    "sat:absolute_orbit": 36040
+  },
+  "links": [
+    {
+      "href": "s3://deafrica-sentinel-1/s1_rtc/S18E047/2021/01/08/04392F/s1_rtc_04392F_S18E047_2021_01_08_metadata.json",
+      "rel": "self",
+      "type": "application/json"
+    },
+    {
+      "rel": "card4l-document",
+      "href": "https://ceos.org/ard/files/PFS/NRB/v5.0/CARD4L-PFS_Normalised_Radar_Backscatter-v5.0.pdf",
+      "type": "application/pdf"
+    },
+    {
+      "href": "./source-S1A_IW_GRDH_1SDV_20210108T021904_20210108T021929_036040_04392F_3709.json",
+      "rel": "derived_from",
+      "type": "application/json"
+    },
+    {
+      "href": "./source-S1A_IW_GRDH_1SDV_20210108T021929_20210108T021954_036040_04392F_EF8A.json",
+      "rel": "derived_from",
+      "type": "application/json"
+    },
+    {
+      "href": "https://sentinel.esa.int/web/sentinel/radiometric-calibration-of-level-1-products",
+      "rel": "noise-removal",
+      "type": "text/html"
+    },
+    {
+      "href": "https://www.geo.uzh.ch/microsite/rsl-documents/research/publications/peer-reviewed-articles/201108-TGRS-Small-tcGamma-3809999360/201108-TGRS-Small-tcGamma.pdf",
+      "rel": "radiometric-terrain-correction",
+      "type": "application/pdf"
+    },
+    {
+      "href": "https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198",
+      "rel": "elevation-model",
+      "type": "text/html",
+      "card4l:surface": true
+    },
+    {
+      "href": "https://sentinel.esa.int/documents/247904/1653442/Guide-to-Sentinel-1-Geocoding.pdf",
+      "rel": "geometric-correction",
+      "type": "application/pdf"
+    },
+    {
+      "href": "https://www.mdpi.com/2072-4292/9/6/607",
+      "rel": "geometric-accuracy",
+      "type": "text/html"
+    }
+  ],
+  "assets": {
+    "card4l": {
+      "title": "CARD4L XML Metadata File",
+      "href": "./S18E047_2021_01_08_04392F.xml",
+      "type": "application/xml",
+      "roles": [
+        "metadata",
+        "card4l"
+      ]
+    },
+    "vv": {
+      "title": "Polarization VV",
+      "href": "s3://deafrica-sentinel-1/s1_rtc/S18E047/2021/01/08/04392F/s1_rtc_04392F_S18E047_2021_01_08_VV.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data",
+        "backscatter"
+      ],
+      "created": "2021-06-16T14:50:38.958065Z",
+      "card4l:border_pixels": 0,
+      "file:header_size": 0,
+      "file:byte_order": "little-endian",
+      "proj:shape": [
+        5000,
+        5000
+      ],
+      "proj:transform": [
+        47,
+        0.0002,
+        0,
+        -17,
+        0,
+        -0.0002
+      ],
+      "raster:bands": [
+        {
+          "data_type": "float32",
+          "bits_per_sample": 32
+        }
+      ],
+      "sar:polarizations": [
+        "VV"
+      ]
+    },
+    "vh": {
+      "title": "Polarization VH",
+      "href": "s3://deafrica-sentinel-1/s1_rtc/S18E047/2021/01/08/04392F/s1_rtc_04392F_S18E047_2021_01_08_VH.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "data",
+        "backscatter"
+      ],
+      "created": "2021-06-16T14:50:38.958065Z",
+      "card4l:border_pixels": 0,
+      "file:header_size": 0,
+      "file:byte_order": "little-endian",
+      "proj:shape": [
+        5000,
+        5000
+      ],
+      "proj:transform": [
+        47,
+        0.0002,
+        0,
+        -17,
+        0,
+        -0.0002
+      ],
+      "raster:bands": [
+        {
+          "data_type": "float32",
+          "bits_per_sample": 32
+        }
+      ],
+      "sar:polarizations": [
+        "VH"
+      ]
+    },
+    "local-incidence-angle": {
+      "title": "Local Incidence Angle",
+      "href": "s3://deafrica-sentinel-1/s1_rtc/S18E047/2021/01/08/04392F/s1_rtc_04392F_S18E047_2021_01_08_ANGLE.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "metadata",
+        "local-incidence-angle"
+      ],
+      "proj:shape": [
+        5000,
+        5000
+      ],
+      "proj:transform": [
+        47,
+        0.0002,
+        0,
+        -17,
+        0,
+        -0.0002
+      ],
+      "file:byte_order": "little-endian",
+      "raster:bands": [
+        {
+          "unit": "degree",
+          "nodata": 255,
+          "data_type": "uint8",
+          "bits_per_sample": 8
+        }
+      ]
+    },
+    "contributing-area": {
+      "title": "Normalized Scattering Area",
+      "href": "s3://deafrica-sentinel-1/s1_rtc/S18E047/2021/01/08/04392F/s1_rtc_04392F_S18E047_2021_01_08_AREA.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "metadata",
+        "contributing-area"
+      ],
+      "proj:shape": [
+        5000,
+        5000
+      ],
+      "proj:transform": [
+        47,
+        0.0002,
+        0,
+        -17,
+        0,
+        -0.0002
+      ],
+      "file:byte_order": "little-endian",
+      "raster:bands": [
+        {
+          "nodata": "nan",
+          "data_type": "float32",
+          "bits_per_sample": 32
+        }
+      ]
+    },
+    "data-mask": {
+      "title": "Data Mask",
+      "href": "s3://deafrica-sentinel-1/s1_rtc/S18E047/2021/01/08/04392F/s1_rtc_04392F_S18E047_2021_01_08_MASK.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "roles": [
+        "metadata",
+        "data-mask"
+      ],
+      "proj:shape": [
+        5000,
+        5000
+      ],
+      "proj:transform": [
+        47,
+        0.0002,
+        0,
+        -17,
+        0,
+        -0.0002
+      ],
+      "file:byte_order": "little-endian",
+      "raster:bands": [
+        {
+          "values": [
+            {
+              "value": [
+                0
+              ],
+              "summary": "No data"
+            },
+            {
+              "value": [
+                1
+              ],
+              "summary": "Valid Data"
+            },
+            {
+              "value": [
+                2
+              ],
+              "summary": "Invalid Data"
+            }
+          ],
+          "nodata": 0,
+          "data_type": "uint8",
+          "bits_per_sample": 8
+        }
+      ]
+    }
+  }
+}

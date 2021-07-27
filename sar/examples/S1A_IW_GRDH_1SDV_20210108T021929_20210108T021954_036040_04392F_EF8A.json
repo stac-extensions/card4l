@@ -1,0 +1,139 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/card4l/v1.0.0/sar/source.json",
+    "https://stac-extensions.github.io/processing/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/sar/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/sat/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/view/v1.0.0/schema.json"
+  ],
+  "id": "S1A_IW_GRDH_1SDV_20210108T021929_20210108T021954_036040_04392F_EF8A",
+  "type": "Feature",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": []
+  },
+  "bbox": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "properties": {
+    "card4l:specification": "NRB",
+    "card4l:specification_version": "5.0",
+    "card4l:beam_id": "TOPS",
+    "card4l:orbit_data_source": "???",
+    "card4l:orbit_mean_altitude": 693,
+    "card4l:source_processing_parameters": {
+      "range_look_bandwidth": [
+        0.0141,
+        0.0121,
+        0.0107
+      ],
+      "azimuth_look_bandwidth": [
+        0.00000327,
+        0.00000313,
+        0.00000314
+      ]
+    },
+    "card4l:incidence_angle_near_range": 30.22052269653568,
+    "card4l:incidence_angle_far_range": 45.9873797960658,
+    "card4l:noise_equivalent_intensity": -26,
+    "card4l:noise_equivalent_intensity_type": "sigma0",
+    "datetime": "2021-01-08T02:19:29.286300Z",
+    "start_datetime": "2021-01-08T02:19:29.286300Z",
+    "end_datetime": "2021-01-08T02:19:54.285659Z",
+    "constellation": "sentinel-1",
+    "instruments": [
+      "c-sar"
+    ],
+    "platform": "sentinel-1a",
+    "sar:frequency_band": "C",
+    "sar:center_frequency": 5.405,
+    "sar:instrument_mode": "IW",
+    "sar:polarizations": [
+      "VV",
+      "VH"
+    ],
+    "sar:observation_direction": "right",
+    "sar:product_type": "GRD",
+    "sar:looks_azimuth": 1,
+    "sar:looks_range": 5,
+    "sar:pixel_spacing_azimuth": 10,
+    "sar:pixel_spacing_range": 10,
+    "sar:resolution_azimuth": 22.6,
+    "sar:resolution_range": 20.4,
+    "sat:orbit_state": "descending",
+    "sat:relative_orbit": 93,
+    "sat:absolute_orbit": 36040,
+    "view:azimuth": 167.7482429286898,
+    "processing:facility": "Copernicus S1 Core Ground Segment - DPA",
+    "processing:software": {
+      "Sentinel-1 IPF": "003.31"
+    }
+  },
+  "links": [
+    {
+      "href": "https://.../source-S1A_IW_GRDH_1SDV_20210108T021929_20210108T021954_036040_04392F_EF8A.json",
+      "rel": "self",
+      "type": "application/json"
+    },
+    {
+      "rel": "card4l-document",
+      "href": "https://ceos.org/ard/files/PFS/NRB/v5.0/CARD4L-PFS_Normalised_Radar_Backscatter-v5.0.pdf",
+      "type": "application/pdf"
+    },
+    {
+      "href": "s3://sentinel-s1-l1c/GRD/2021/1/8/IW/DV/S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF",
+      "rel": "orbit-data-file",
+      "title": "Orbit Data File with state vectors"
+    },
+    {
+      "href": "http://database.eohandbook.com/database/missionsummary.aspx?missionID=575",
+      "rel": "about",
+      "title": "Satellite Reference"
+    },
+    {
+      "href": "https://sentinel.esa.int/documents/247904/1877131/Sentinel-1-Product-Definition",
+      "rel": "about",
+      "title": "Product Defintion Reference"
+    },
+    {
+      "href": "https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-1-sar/sar-instrument/calibration",
+      "rel": "sensor-calibration",
+      "title": "Sensor Calibration Parameters"
+    },
+    {
+      "href": "https://sentinel.esa.int/documents/247904/2142675/Thermal-Denoising-of-Products-Generated-by-Sentinel-1-IPF",
+      "rel": "performance-indicators",
+      "title": "Thermal Denoising Details"
+    }
+  ],
+  "assets": {
+    "vv": {
+      "href": "s3://sentinel-s1-l1c/GRD/2021/1/8/IW/DV/S1A_IW_GRDH_1SDV_20210108T021929_20210108T021954_036040_04392F_EF8A_vv.tif",
+      "type": "image/tiff; application=geotiff",
+      "title": "Polarization VV",
+      "created": "2021-01-08T14:09:39.897128Z",
+      "roles": [
+        "data"
+      ],
+      "sar:polarizations": [
+        "VV"
+      ]
+    },
+    "vh": {
+      "href": "s3://sentinel-s1-l1c/GRD/2021/1/8/IW/DV/S1A_IW_GRDH_1SDV_20210108T021929_20210108T021954_036040_04392F_EF8A_vh.tif",
+      "type": "image/tiff; application=geotiff",
+      "title": "Polarization VH",
+      "created": "2021-01-08T14:09:39.897128Z",
+      "roles": [
+        "data"
+      ],
+      "sar:polarizations": [
+        "VH"
+      ]
+    }
+  }
+}
