@@ -66,8 +66,7 @@
           "minimum": 0
         },
         "card4l:noise_equivalent_intensity": {
-          "type": "number",
-          "minimum": 0
+          "type": "number"
         },
         "card4l:noise_equivalent_intensity_type": {
           "type": "string",
@@ -118,7 +117,7 @@
   },
   "allOf": [
     {
-      "$ref": "commons.json"
+      "$ref": "common.json"
     }
   ]
 }

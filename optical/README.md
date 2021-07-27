@@ -155,7 +155,7 @@ either `proj:epsg` or one of the alternatives.
 | sensor-calibration        | 1.11                | Link to the sensor calibration parameters.                   |
 | radiometric-accuracy      | 1.12                | Link describing the assessed absolute radiometric uncertainty of the version of the data or product. |
 | geometric-correction      | 1.7                 | Link to the Geometric Correction algorithm details.          |
-| elevation-model           | 1.14                | Links to the Digital Elevation Models. Preferably links to a STAC Item with additional metadata for the DEMs. |
+| elevation-model           | 1.14                | Links to the Digital Elevation Models. Preferably links to a STAC Item with additional metadata for the DEMs. Set property `card4l:surface` to `true` to indicate surface information instead of elevation information (`false`, default). |
 | geometric-accuracy        | 1.8                 | Link to documentation of estimate of absolute localization error. |
 | cloud                     | 2.5                 | Link to documentation about the cloud detection.             |
 | cloud-shadow              | 2.6                 | Link to documentation about the cloud shadow detection.      |
@@ -167,6 +167,8 @@ either `proj:epsg` or one of the alternatives.
 | water-vapor               | 3.5 (SR)            | **REQUIRED.** Link to documentation about the water vapour corrections (SR only). |
 | ozone                     | 3.6 (SR)            | Link to documentation about the ozone corrections (SR only). |
 | processing-expression     | 1.15                | A processing chain (or script) that describes how the data has been processed. |
+
+Note: CARD4L XML files also allow DOIs to be given instead of URLs. DOIs must be converted to URLs for STAC!
 
 ### STAC Item Assets
 

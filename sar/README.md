@@ -73,9 +73,11 @@ All this is still CARD4L compliant as CARD4L doesn't require all information to 
 
 ## STAC Items
 
-CARD4L requires metadata for both source data (*Src*) and the product (*Prod*) which STAC can better deliver in two separate files.
-This extension assumes that a STAC Item for the source is available and follows this extension or
-a new STAC Item for the source data will be created following this extension.
+CARD4L requires metadata for both source data (*Src*) and the product (*Prod*) which STAC can better deliver in two (or more) separate files.
+This extension assumes that at least one STAC Item for the source is available and follows this extension or
+at least one new STAC Item for the source data will be created following this extension.
+The number of source files (i.e. the number in `NumberOfAcquisitions` / the number of `SourceAttributes` tags in XML)
+indicate the number of source STAC Items required. See also the [`derived_from` link relation type](#stac-item-links) below.
 In principle, all metadata for the source data could also be provided in a (proprietary) format like XML and linked to from the product STAC Item,
 but this case will not be explained in-depth in this extension.
 
@@ -112,7 +114,7 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:specification                   | ✓ 1.4 / 1.3 | ✓ 1.4 / 1.3 | `DocumentIdentifier` / `Product`, attribute `type` (Prod)    | string                                                  | **REQUIRED.** The CARD4L specification implemented, either `NRB` (SAR, Normalized Radar Backscatter) or `POL` (SAR, Polarimetric Radar). |
 | card4l:specification_version           | ✓ 1.4       | ✓ 1.4       | `DocumentIdentifier`                                         | string                                                  | **REQUIRED.** The CARD4L specification version. Currently always `5.0` for `NRB` and `3.0` for `POL`. |
 | card4l:beam_id                         | ✓ 1.6.4     | ✗           | `BeamID`                                                     | string                                                  | **REQUIRED.**                                                |
-| card4l:orbit_data_source               | ✓ 1.6.5     | (✓)         | `OrbitDataSource`                                            | string                                                  | **REQUIRED for *Src*.** One of `predicted`, `definitive`, `downlinked`. Applies to *Prod*, if additional orbit correction has been applied. |
+| card4l:orbit_data_source               | ✓ 1.6.5     | (✓)         | `OrbitDataSource`                                            | string                                                  | **REQUIRED for *Src*.** For example `predicted`, `definitive`, `precise` or `downlinked`. Applies to *Prod*, if additional orbit correction has been applied. |
 | card4l:orbit_mean_altitude             | ✓ 1.6.5     | ✗           | `OrbitMeanAltitude`                                          | number                                                  | Platform (mean) altitude in kilometers (km).                 |
 | card4l:source_processing_parameters    | ✓ 1.6.6     | ✗           | *various, see below*                                         | [Source Processing Object](#source-processing-object)   | Additional relevant processing parameters, e.g., Range- and Azimuth Look Bandwidth and LUT applied. If not available in machine-readable form, can also be specified in `processing:lineage`. |
 | card4l:incidence_angle_near_range      | ✓ 1.6.7     | ✗           | `IncAngleNearRange`                                          | number                                                  | **REQUIRED.** Convert to degree, if required.                |
@@ -233,7 +235,7 @@ For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and 
 | ------------------------------ | -------- | ------------------- | -------------------------- | ------------------------------------------------------------ |
 | card4l-document                | ✓        | ✓ 1.4               | `DocumentIdentifier`       | **REQUIRED.** Instead of the document identifier, provide links to the Word (media type: `application/vnd.openxmlformats-officedocument.wordprocessingml.document`) and PDF (media type: `application/pdf`) document. |
 | derived_from                   | ✗        | ✓ 1.6               | *n/a*                      | **REQUIRED.** Points back to the source's STAC Item, which must comply to the *Src* requirements. May be multiple items, if the product is derived from multiple acquisitions. The number of acquisitions (`NumberOfAcquisitions`) is the number of links with this relation type. |
-| about                          | ✗        | (✓)                 | *n/a*                      | Link to other algorithms used in the generation process.     |
+| about                          | (✓)      | (✓)                 | *n/a*                      | Link to other documentation, e.g. algorithms used in the generation process. |
 | related                        | ✗        | ✓ 1.7.2             | `AncillaryData`            | Link to the sources of ancillary or auxiliary data used in the generation process. Excludes DEMs, which use the relation `elevation-model` instead. |
 | access                         | ✓ 1.6.1  | ✓ 1.7.1             | *n/a*                      | Link to data access information.                             |
 | performance-indicators         | ✓ 1.6.9  | ✗                   | `PerformanceIndicators`    | Link to performance indicators on data intensity mean noise level. |
@@ -244,9 +246,11 @@ For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and 
 | noise-removal                  | ✗        | ✓ 3.3               | `NRAlgorithm`              | **REQUIRED,** if noise removal has been applied. Link to the noise removal algorithm details. |
 | radiometric-terrain-correction | ✗        | ✓ 3.4               | `RTCAlgorithm`             | **REQUIRED.** Link to the Radiometric Terrain Correction algorithm details. |
 | geometric-correction           | ✗        | ✓ 4.1               | `GeoCorrAlgorithm`         | Link to the Geometric Correction algorithm details.          |
-| elevation-model                | ✗        | ✓ 4.2               | `DigitalElevationModel`    | Links to the Digital Elevation Models, both for elevation and surface. Preferably links to a STAC Item with additional metadata for the DEMs such as the line-spacing, column-spacing, horizontal and vertical accuracy. |
+| elevation-model                | ✗        | ✓ 4.2               | `DigitalElevationModel`    | Links to the Digital Elevation Models, both for elevation and surface. Preferably links to a STAC Item with additional metadata for the DEMs such as the line-spacing, column-spacing, horizontal and vertical accuracy. Set property `card4l:surface` to `true` to indicate surface information instead of elevation information (`false`, default). |
 | geometric-accuracy             | ✗        | ✓ 4.3               | `GeometricCorrAccuracy`    | Link to documentation of estimate of absolute localization error. |
 | processing-expression          | ✓ 1.6.6  | ✓ 1.7.1 / 4.1 / ... | *n/a*                      | A processing chain (or script) that describes how the data has been processed. |
+
+Note: CARD4L XML files also allow DOIs to be given instead of URLs. DOIs must be converted to URLs for STAC!
 
 ### STAC Item Assets
 
@@ -295,7 +299,7 @@ For those details please refer to the ["Additional properties" column in the tab
 
 | Field Name      | Src  | Prod  | XML Tag                                      | Data Type                                                    | Description                                                  |
 | --------------- | ---- | ----- | -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| data_type       | ✗    | ✓     | `DataType`                                   | string                                                       | One of the [Data Types](https://github.com/stac-extensions/file/blob/v2.0.0/README.md#data-types). |
+| data_type       | ✗    | ✓     | `DataType`                                   | string                                                       | One of the [Data Types](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#data-types). |
 | bits_per_sample | ✗    | ✓     | `BitsPerSample`                              | integer                                                      | Bits per sample, e.g. 8, 16, 32, ...                         |
 | unit            | ✗    | ✓     | `SampleType`                                 | string                                                       | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/). |
 | values          | ✗    | ✓ 2.2 | `ValidData` and `InvalidData` in `BitValues` | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v1.0.0/README.md#mapping-object)\] | Specify value(s) for valid and invalid data separately.      |

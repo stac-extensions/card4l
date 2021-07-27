@@ -25,17 +25,7 @@
         },
         {
           "contains": {
-            "const": "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
-          }
-        },
-        {
-          "contains": {
             "const": "https://stac-extensions.github.io/sar/v1.0.0/schema.json"
-          }
-        },
-        {
-          "contains": {
-            "const": "https://stac-extensions.github.io/sat/v1.0.0/schema.json"
           }
         }
       ]
@@ -55,12 +45,7 @@
       ],
       "properties": {
         "card4l:orbit_data_source": {
-          "type": "string",
-          "enum": [
-            "predicted",
-            "definitive",
-            "downlinked"
-          ]
+          "type": "string"
         },
         "card4l:noise_removal_applied": {
           "type": "boolean",
