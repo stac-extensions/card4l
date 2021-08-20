@@ -13,10 +13,9 @@ There are two STAC extensions, one for Optical and one for SAR:
 
 ## Disclaimer
 
-The extensions are work in progress. The specification in the Markdown files should be mostly finished,
-but JSON Schemas and examples are missing. Links may be defect at the moment as STAC v1.0.0 RC1 has not been released yet.
-
 The extensions are not officially approved by CEOS, but there's a desire to get CEOS approval.
+Also, the STAC extensions don't allow to fulfill 100% target compliance (but most of it),
+but they surely allow to be 100% threshold compliant.
 
 The extensions were written as part of the project [openEO Platform](https://platform.openeo.org)
 with funding from [ESA](https://www.esa.int).

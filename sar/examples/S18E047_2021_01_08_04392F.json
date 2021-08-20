@@ -72,7 +72,6 @@
     "card4l:resampling_method": "bilinear",
     "card4l:northern_geometric_accuracy": 0.6,
     "card4l:eastern_geometric_accuracy": 4.4,
-    "card4l:gridding_convention": "center",
     "datetime": "2021-01-08T02:19:04.286944Z",
     "start_datetime": "2021-01-08T02:19:04.286944Z",
     "end_datetime": "2021-01-08T02:19:54.285659Z",
@@ -119,6 +118,11 @@
       "href": "./source-S1A_IW_GRDH_1SDV_20210108T021929_20210108T021954_036040_04392F_EF8A.json",
       "rel": "derived_from",
       "type": "application/json"
+    },
+    {
+      "href": "https://docs.sentinel-hub.com/api/latest/api/batch/#tiling-grids",
+      "rel": "gridding-convention",
+      "type": "text/html"
     },
     {
       "href": "https://sentinel.esa.int/web/sentinel/radiometric-calibration-of-level-1-products",

@@ -23,7 +23,7 @@
     "card4l:specification": "NRB",
     "card4l:specification_version": "5.0",
     "card4l:beam_id": "TOPS",
-    "card4l:orbit_data_source": "???",
+    "card4l:orbit_data_source": "resorb",
     "card4l:orbit_mean_altitude": 693,
     "card4l:source_processing_parameters": {
       "range_look_bandwidth": [
@@ -39,7 +39,10 @@
     },
     "card4l:incidence_angle_near_range": 30.22052269653568,
     "card4l:incidence_angle_far_range": 45.9873797960658,
-    "card4l:noise_equivalent_intensity": -26,
+    "card4l:noise_equivalent_intensity": {
+      "minimum": -30,
+      "maximum": -22
+    },
     "card4l:noise_equivalent_intensity_type": "sigma0",
     "datetime": "2021-01-08T02:19:29.286300Z",
     "start_datetime": "2021-01-08T02:19:29.286300Z",
@@ -67,7 +70,7 @@
     "sat:orbit_state": "descending",
     "sat:relative_orbit": 93,
     "sat:absolute_orbit": 36040,
-    "view:azimuth": 167.7482429286898,
+    "view:azimuth": 12.206046063329012,
     "processing:facility": "Copernicus S1 Core Ground Segment - DPA",
     "processing:software": {
       "Sentinel-1 IPF": "003.31"

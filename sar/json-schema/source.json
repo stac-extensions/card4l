@@ -66,7 +66,22 @@
           "minimum": 0
         },
         "card4l:noise_equivalent_intensity": {
-          "type": "number"
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "mean": {
+              "title": "Mean value of all the pixels in the band",
+              "type": "number"
+            },
+            "minimum": {
+              "title": "Minimum value of all the pixels in the band",
+              "type": "number"
+            },
+            "maximum": {
+              "title": "Maximum value of all the pixels in the band",
+              "type": "number"
+            }
+          }
         },
         "card4l:noise_equivalent_intensity_type": {
           "type": "string",

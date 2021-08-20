@@ -39,7 +39,10 @@
     },
     "card4l:incidence_angle_near_range": 30.3152831649154,
     "card4l:incidence_angle_far_range": 45.97317397183082,
-    "card4l:noise_equivalent_intensity": -26,
+    "card4l:noise_equivalent_intensity": {
+      "minimum": -30,
+      "maximum": -22
+    },
     "card4l:noise_equivalent_intensity_type": "sigma0",
     "datetime": "2021-01-08T02:19:04.286944Z",
     "start_datetime": "2021-01-08T02:19:04.286944Z",
@@ -67,7 +70,7 @@
     "sat:orbit_state": "descending",
     "sat:relative_orbit": 93,
     "sat:absolute_orbit": 36040,
-    "view:azimuth": 167.793953936671,
+    "view:azimuth": 12.206046063329012,
     "processing:facility": "Copernicus S1 Core Ground Segment - DPA",
     "processing:software": {
       "Sentinel-1 IPF": "003.31"

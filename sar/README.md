@@ -119,7 +119,7 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:source_processing_parameters    | ✓ 1.6.6     | ✗           | *various, see below*                                         | [Source Processing Object](#source-processing-object)   | Additional relevant processing parameters, e.g., Range- and Azimuth Look Bandwidth and LUT applied. If not available in machine-readable form, can also be specified in `processing:lineage`. |
 | card4l:incidence_angle_near_range      | ✓ 1.6.7     | ✗           | `IncAngleNearRange`                                          | number                                                  | **REQUIRED.** Convert to degree, if required.                |
 | card4l:incidence_angle_far_range       | ✓ 1.6.7     | ✗           | `IncAngleFarRange`                                           | number                                                  | **REQUIRED.** Convert to degree, if required.                |
-| card4l:noise_equivalent_intensity      | ✓ 1.6.9     | ✗           | `NoiseEquivalentIntensity`                                   | number                                                  | **REQUIRED.** Convert to decibel, if required.               |
+| card4l:noise_equivalent_intensity      | ✓ 1.6.9     | ✗           | `NoiseEquivalentIntensity`                                   | number                                                  | **REQUIRED.** [Statistics Object](#statistics-object), you can put whatever statistics are available for the source data, e.g. a range or a mean. Convert to decibel, if required. |
 | card4l:noise_equivalent_intensity_type | ✓ 1.6.9     | ✗           | `NoiseEquivalentIntensity`, attribute `type`                 | string                                                  | **REQUIRED.** One of `beta0` or `sigma0`                     |
 | card4l:noise_removal_applied           | (✓)         | ✓ 3.3       | `NoiseRemovalApplied`                                        | boolean                                                 | **REQUIRED for *Prod*.** Specifies whether noise removal has been applied (`true`) or not (`false`). If set to `true`, a [link with relation type](#stac-item-links) `noise-removal` is **required**, too. |
 | card4l:mean_faraday_rotation_angle     | ✓ 1.6.11    | ✗           | `MeanFaradayRotationAngle`                                   | number                                                  | Convert to degree, if required.                              |
@@ -134,7 +134,18 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:resampling_method               | x           | ✓ 4.1       | `ResamplingMethod`                                           | string                                                  | The resampling method used, e.g. `near`, `bilinear`, `cubic`, etc. (see [GDAL](https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r) for more) |
 | card4l:northern_geometric_accuracy     | ✗           | ✓ 4.3       | `NorthernRMSE` in `GeoCorrAccuracy`                          | number                                                  | **REQUIRED.** An estimate of the northern geometric accuracy in meters. |
 | card4l:eastern_geometric_accuracy      | ✗           | ✓ 4.3       | `EasternRMSE` in `GeoCorrAccuracy`                           | number                                                  | **REQUIRED.** An estimate of the eastern geometric accuracy in meters. |
-| card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED.** One of `center` (center), `upper-left` (UL) or `lower-right` (LR) |
+
+##### Statistics Object
+
+| Field Name    | Type   | Description                                        |
+| ------------- | ------ | -------------------------------------------------- |
+| mean          | number | mean value of all the pixels in the band           |
+| minimum       | number | minimum value of the pixels in the band            |
+| maximum       | number | maximum value of the pixels in the band            |
+
+The three properties above are the fields for mean, min and max. values.
+You can choose to provide other fields depending on what is available for your source data.
+Nevertheless, you have to provide at least one property in the Statistics Object. 
 
 ##### Speckle Filter Object
 
@@ -226,7 +237,7 @@ For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and 
 
 | Field Name           | Src     | Prod | XML Tag           | Description                                                  |
 | -------------------- | ------- | ---- | ----------------- | ------------------------------------------------------------ |
-| view:azimuth         | ✓ 1.6.5 | ✗    | `PlatformHeading` | Convert to degree, if required.                              |
+| view:azimuth         | ✓ 1.6.5 | ✗    | `PlatformHeading` | Convert to degree, if required. STAC uses the range 0 to 360°, so if you use the range -180 - 180, you need to add +180 for conversion. |
 | view:incidence_angle | ✓ 1.6.5 | ✗    | *n/a*             | Center between `card4l:incidence_angle_near_range` and `card4l:incidence_angle_far_range`. This is the sensor incidence angle. For per-pixel incidence angles, refer to the asset with the role `local-incidence-angle`. |
 
 ### STAC Item Links
@@ -248,6 +259,7 @@ For target (desired) requirements, CARD4L asks that the CRS is an EPSG code and 
 | geometric-correction           | ✗        | ✓ 4.1               | `GeoCorrAlgorithm`         | Link to the Geometric Correction algorithm details.          |
 | elevation-model                | ✗        | ✓ 4.2               | `DigitalElevationModel`    | Links to the Digital Elevation Models, both for elevation and surface. Preferably links to a STAC Item with additional metadata for the DEMs such as the line-spacing, column-spacing, horizontal and vertical accuracy. Set property `card4l:surface` to `true` to indicate surface information instead of elevation information (`false`, default). |
 | geometric-accuracy             | ✗        | ✓ 4.3               | `GeometricCorrAccuracy`    | Link to documentation of estimate of absolute localization error. |
+| gridding-convention            | ✗        | ✓ 4.4               | `GriddingConvention`       | Link that describes the gridding convention used. |
 | processing-expression          | ✓ 1.6.6  | ✓ 1.7.1 / 4.1 / ... | *n/a*                      | A processing chain (or script) that describes how the data has been processed. |
 
 Note: CARD4L XML files also allow DOIs to be given instead of URLs. DOIs must be converted to URLs for STAC!
@@ -267,7 +279,7 @@ The *italic* role names could be used as the asset's key.
 | Role Name(s)                          | Src  | Prod        | XML Tag                      | Additional properties                                        | Description                                                  |
 | ------------------------------------- | ---- | ----------- | ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | *card4l*, metadata                    | ✗    | ✓ 2.1       | *n/a*                        | `type`                                                       | Points to a metadata XML file that follows the CARD4L metadata specification. Media type: `application/xml` |
-| *data-mask*, metadata                 | ✗    | ✓ 2.2       | `DataMask`                   | `type`, `raster:bands` (with `values`, `nodata`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | **REQUIRED.** Points to the data mask file.                  |
+| *data-mask*, metadata                 | ✗    | ✓ 2.2       | `DataMask`                   | `type`, `raster:bands` (with `values` \[see notes\], `nodata`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | **REQUIRED.** Points to the data mask file.                  |
 | *contributing-area*, metadata         | ✗    | ✓ 2.3       | `LocalContributingArea`      | `type`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | **REQUIRED.** Points to the normalized scattering area file. |
 | *local-incidence-angle*,  metadata    | ✗    | ✓ 2.4       | `LocalIncAngle`              | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | **REQUIRED.** Points to the local incidence angle file. `unit` is usually `degree`. |
 | *ellipsoid-incidence-angle*, metadata | ✗    | ✓ 2.5       | `EllipsoidIncAngle`          | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`card4l:ellipsoidal_height`* | `unit` is usually `degree`.                                  |
@@ -312,10 +324,12 @@ For those details please refer to the ["Additional properties" column in the tab
   `root`, `parent`, `child`, `item` and `collection`.
 - 1.6.9: `SideLobeLevel`, `IntegratedSideLobeRatio`, `CrossCorrelationWidth`, `CrossCorelationPeakLoc` are *recommended*
   to be included in the resource linked to with the relation type [`performance-indicators`](#stac-item-links).
+- 2.2: raster:bands\[*].values is not standardized yet in STAC, this could change to file:values or something different with a similar structure in the future.
 - 2.3: From the metadata specification it seems the sample type unit should be square meters (m²) although it is per-pixel data, 
   which we think should be unitless itself.
 - 2.3 / 2.4: These fields may not be required in a future iteration of the specification as several tools don't generate such metadata, e.g. SNAP.
 - 4.3: A revision of the CEOS specification is planned and may change or relax the requirement.
 - 4.4: There's an inconsistency in the CEOS specification and the CEOS metadata specification.
-  The metadata specification asks for the gridding convention as specified here, but the text in the specification doesn't mention it. 
-  We think the description really means you just need to use a consistent grid for the data, across tiles/scenes.
+  The metadata specification asks for the gridding convention (center/ul/lr), but the text in the specification doesn't mention it. 
+  We think the description really means you just need to use and mention a consistent grid for the data, across tiles/scenes.
+  That's why we provide a URL here, which CEOS agreed with.

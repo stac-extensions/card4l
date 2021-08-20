@@ -41,8 +41,7 @@
         "card4l:measurement_convention",
         "card4l:conversion_eq",
         "card4l:northern_geometric_accuracy",
-        "card4l:eastern_geometric_accuracy",
-        "card4l:gridding_convention"
+        "card4l:eastern_geometric_accuracy"
       ],
       "$comment": "`proj:shape` is required either on the item level or on the asset level for the asset with role `data`. This requirement is not checked by this schema yet.",
       "oneOf": [
@@ -123,14 +122,6 @@
           "type": "number",
           "minimum": 0
         },
-        "card4l:gridding_convention": {
-          "type": "string",
-          "enum": [
-            "center",
-            "upper-left",
-            "lower-left"
-          ]
-        },
         "card4l:resampling_method": {
           "type": "string"
         }
@@ -161,6 +152,15 @@
             "properties": {
               "rel": {
                 "const": "radiometric-terrain-correction"
+              }
+            }
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "gridding-convention"
               }
             }
           }
