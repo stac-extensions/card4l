@@ -10,12 +10,12 @@
 This extension specifies how to create [STAC](https://github.com/radiantearth/stac-spec) Items that
 comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specification for either
 - *Optical Surface Reflectance* (SR) products in version 5.0
-  ([PDF](http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf),
-  [Word](http://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.docx))
+  ([PDF](https://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf),
+  [Word](https://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.docx))
   *or*
 - *Optical Surface Temperature* (ST) products in version 5.0
-  ([PDF](http://ceos.org/ard/files/PFS/ST/v5.0/CARD4L_Product_Family_Specification_Surface_Temperature-v5.0.pdf),
-  [Word](http://ceos.org/ard/files/PFS/ST/v5.0/CARD4L_Product_Family_Specification_Surface_Temperature-v5.0.docx)).
+  ([PDF](https://ceos.org/ard/files/PFS/ST/v5.0/CARD4L_Product_Family_Specification_Surface_Temperature-v5.0.pdf),
+  [Word](https://ceos.org/ard/files/PFS/ST/v5.0/CARD4L_Product_Family_Specification_Surface_Temperature-v5.0.docx)).
 
 **Document structure:** In general, the fields required in this extension are required to either meet
 the *threshold (minimum) requirements* by the CEOS CARD4L specification *or* are required fields in STAC.
@@ -39,11 +39,11 @@ on the data type or an actual detailed description about the fields.
 **Additional resources:**
 
 - [Examples](examples/)
-  
-  *Please note that parts of the examples are made-up as we can't fulfill all CARD4L requirements yet.*
 - [JSON Schema](json-schema/)
   
-  *Please note that assets don't get validated yet.*
+  *Please note that the schema gives only a first indication on whether your metadata is correctly formatted
+   as we can't provide a full schema for validation at the moment.*
+  *For example, the assets are not fully validated yet. Passing the schema also does not imply that you are CARD4L compliant!*
 
 ## STAC Collections
 
@@ -149,23 +149,24 @@ either `proj:epsg` or one of the alternatives.
 | ------------------------- | ------------------- | ------------------------------------------------------------ |
 | card4l-document           | *n/a*               | **REQUIRED.** Provides at least one link to the CARD4L specification document. Word (media type: `application/vnd.openxmlformats-officedocument.wordprocessingml.document`) and/or PDF (media type: `application/pdf`). |
 | derived_from              | 1.15                | Points back to the source's STAC Item. May be multiple items, if the product is derived from multiple acquisitions. |
-| about                     | 1.13                | Link to algorithms used in the generation process. See also the [notes](#notes) regarding req. 1.13. |
-| related                   | 1.14                | Link to the sources of auxiliary data used in the generation process. This is **required** if auxiliary data used in the generation process. Excludes DEMs, which use the relation `elevation-model` instead. |
-| access                    | 1.16                | STRONGLY RECOMMENDED. Link to data access information.       |
-| sensor-calibration        | 1.11                | Link to the sensor calibration parameters.                   |
-| radiometric-accuracy      | 1.12                | Link describing the assessed absolute radiometric uncertainty of the version of the data or product. |
-| geometric-correction      | 1.7                 | Link to the Geometric Correction algorithm details.          |
-| elevation-model           | 1.14                | Links to the Digital Elevation Models. Preferably links to a STAC Item with additional metadata for the DEMs. Set property `card4l:surface` to `true` to indicate surface information instead of elevation information (`false`, default). |
-| geometric-accuracy        | 1.8                 | Link to documentation of estimate of absolute localization error. |
-| cloud                     | 2.5                 | Link to documentation about the cloud detection.             |
-| cloud-shadow              | 2.6                 | Link to documentation about the cloud shadow detection.      |
-| snow-ice                  | 2.7 (ST) / 2.8 (SR) | Link to documentation about the snow and ice mask.           |
-| land-water                | 2.7 (SR)            | Link to documentation about the land and water mask (SR only). |
-| atmosphere-emissivity     | 3.2 (ST)            | **REQUIRED.** Link to documentation about corrections for atmosphere and emissivity (ST only). |
-| measurement-normalization | 3.3 (SR)            | Link to documentation about measurement normalization (SR only). |
-| atmospheric-scattering    | 3.4 (SR)            | **REQUIRED.** Link to documentation about the directional atmospheric scattering algorithms (SR only). |
-| water-vapor               | 3.5 (SR)            | **REQUIRED.** Link to documentation about the water vapour corrections (SR only). |
-| ozone                     | 3.6 (SR)            | Link to documentation about the ozone corrections (SR only). |
+| about                     | 1.13                | URL to algorithms used in the generation process. See also the [notes](#notes) regarding req. 1.13. |
+| related                   | 1.14                | URL to the sources of auxiliary data used in the generation process. This is **required** if auxiliary data used in the generation process. Excludes DEMs, which use the relation `elevation-model` instead. |
+| access                    | 1.16                | STRONGLY RECOMMENDED. URL to data access information.       |
+| sensor-calibration        | 1.11                | URL to the sensor calibration parameters.                   |
+| radiometric-accuracy      | 1.12                | URL describing the assessed absolute radiometric uncertainty of the version of the data or product. |
+| geometric-correction      | 1.7                 | URL to the Geometric Correction algorithm details.          |
+| elevation-model           | 1.14                | URLs to the Digital Elevation Model (DEM). Preferably URLs to a STAC Item with additional metadata for the DEM. |
+| surface-model             | 1.14                | URL to the Digital Surface Model (DSM). Preferably URLs to a STAC Item with additional metadata for the DSM. |
+| geometric-accuracy        | 1.8                 | URL to documentation of estimate of absolute localization error. |
+| cloud                     | 2.5                 | URL to documentation about the cloud detection.             |
+| cloud-shadow              | 2.6                 | URL to documentation about the cloud shadow detection.      |
+| snow-ice                  | 2.7 (ST) / 2.8 (SR) | URL to documentation about the snow and ice mask.           |
+| land-water                | 2.7 (SR)            | URL to documentation about the land and water mask (SR only). |
+| atmosphere-emissivity     | 3.2 (ST)            | **REQUIRED.** URL to documentation about corrections for atmosphere and emissivity (ST only). |
+| measurement-normalization | 3.3 (SR)            | URL to documentation about measurement normalization (SR only). |
+| atmospheric-scattering    | 3.4 (SR)            | **REQUIRED.** URL to documentation about the directional atmospheric scattering algorithms (SR only). |
+| water-vapor               | 3.5 (SR)            | **REQUIRED.** URL to documentation about the water vapour corrections (SR only). |
+| ozone                     | 3.6 (SR)            | URL to documentation about the ozone corrections (SR only). |
 | processing-expression     | 1.15                | A processing chain (or script) that describes how the data has been processed. |
 
 Note: CARD4L XML files also allow DOIs to be given instead of URLs. DOIs must be converted to URLs for STAC!

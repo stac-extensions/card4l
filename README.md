@@ -14,7 +14,9 @@ There are two STAC extensions, one for Optical and one for SAR:
 ## Disclaimer
 
 The extensions are not officially approved by CEOS, but there's a desire to get CEOS approval.
-Also, the STAC extensions don't allow to fulfill 100% target compliance (but most of it),
+Nevertheless, the SAR extensions have been discussed in-depth with the corresponding CEOS working group.
+Unfortunately, we did not find anyone at CEOS to discuss the Optical extensions with.
+The STAC extensions don't allow to fulfill 100% target compliance (but most of it),
 but they surely allow to be 100% threshold compliant.
 
 The extensions were written as part of the project [openEO Platform](https://platform.openeo.org)

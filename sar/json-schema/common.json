@@ -40,6 +40,7 @@
         "start_datetime",
         "end_datetime",
         "processing:facility",
+        "processing:level",
         "processing:software",
         "sar:product_type"
       ],
@@ -106,7 +107,7 @@
               "const": "NRB"
             },
             "card4l:specification_version": {
-              "const": "5.0"
+              "const": "5.5"
             }
           }
         }
@@ -129,7 +130,7 @@
             },
             "card4l:specification_version": {
               "type": "string",
-              "const": "3.0"
+              "const": "3.5"
             }
           }
         }

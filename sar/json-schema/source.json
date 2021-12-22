@@ -30,6 +30,7 @@
       "required": [
         "instruments",
         "platform",
+        "card4l:source_geometry",
         "card4l:beam_id",
         "card4l:orbit_data_source",
         "card4l:incidence_angle_near_range",
@@ -50,6 +51,13 @@
         "sat:orbit_state"
       ],
       "properties": {
+        "card4l:source_geometry": {
+          "type": "string",
+          "enum": [
+            "slant-range",
+            "ground-range"
+          ]
+        },
         "card4l:beam_id": {
           "type": "string"
         },
@@ -87,7 +95,8 @@
           "type": "string",
           "enum": [
             "beta0",
-            "sigma0"
+            "sigma0",
+            "gamma0"
           ]
         },
         "card4l:mean_faraday_rotation_angle": {

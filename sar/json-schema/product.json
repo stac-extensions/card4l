@@ -108,10 +108,10 @@
         "card4l:conversion_eq": {
           "type": "string"
         },
-        "card4l:relative_rtc_accuracy": {
+        "card4l:relative_radiometric_accuracy": {
           "type": "number"
         },
-        "card4l:absolute_rtc_accuracy": {
+        "card4l:absolute_radiometric_accuracy": {
           "type": "number"
         },
         "card4l:northern_geometric_accuracy": {
@@ -123,6 +123,12 @@
           "minimum": 0
         },
         "card4l:resampling_method": {
+          "type": "string"
+        },
+        "card4l:dem_resampling_method": {
+          "type": "string"
+        },
+        "card4l:egm_resampling_method": {
           "type": "string"
         }
       }
@@ -160,7 +166,25 @@
           "contains": {
             "properties": {
               "rel": {
-                "const": "gridding-convention"
+                "const": "elevation-model"
+              }
+            }
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "surface-model"
+              }
+            }
+          }
+        },
+        {
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "earth-gravitational-model"
               }
             }
           }

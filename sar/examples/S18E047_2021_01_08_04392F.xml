@@ -16,18 +16,18 @@
             <StartTime>2021-01-08T02:19:29.286300Z</StartTime>
             <EndTime>2021-01-08T02:19:54.285659Z</EndTime>
         </SourceDataAcquisitionTime>
-        <AcquisitionParameters>
+        <SourceDataAcquisitionParameters>
             <RadarBand>C</RadarBand>
             <RadarCenterFrequency units="Hz">5.40500045433435E9</RadarCenterFrequency>
             <ObservationMode>IW</ObservationMode>
             <Polarizations>VV VH</Polarizations>
             <AntennaPointing>Right</AntennaPointing>
             <BeamID>TOPS</BeamID>
-        </AcquisitionParameters>
+        </SourceDataAcquisitionParameters>
         <OrbitInformation>
             <PassDirection>DESCENDING</PassDirection>
             <OrbitDataSource>RESORB</OrbitDataSource>
-            <OrbitDataFile>S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF</OrbitDataFile>
+            <OrbitDataFileName>S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF</OrbitDataFileName>
             <PlatformHeading units="deg">-167.7482429286898</PlatformHeading>
             <OrbitMeanAltitude units="km">693</OrbitMeanAltitude>
         </OrbitInformation>
@@ -42,7 +42,7 @@
             <RangeNumberOfLooks>5</RangeNumberOfLooks>
             <RangeLookBandwidth units="Hz">beam IW1: 1.41E7, beam IW2: 1.21E7, beam IW3: 1.07E7</RangeLookBandwidth>
         </SourceProcParam>
-        <ImageAttributes>
+        <SourceDataImageAttributes>
             <ProductGeometry>Ground range</ProductGeometry>
             <AzimuthPixelSpacing units="m">10.0</AzimuthPixelSpacing>
             <RangePixelSpacing units="m">10.0</RangePixelSpacing>
@@ -51,7 +51,7 @@
             <IncAngleNearRange units="deg">30.22052269653568</IncAngleNearRange>
             <IncAngleFarRange units="deg">45.9873797960658</IncAngleFarRange>
             <SensorCalibration type="URL">https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-1-sar/sar-instrument/calibration</SensorCalibration>
-        </ImageAttributes>
+        </SourceDataImageAttributes>
         <PerformanceIndicators pol="VV">
             <NoiseReference type="URL">https://sentinel.esa.int/documents/247904/2142675/Thermal-Denoising-of-Products-Generated-by-Sentinel-1-IPF</NoiseReference>
             <NoiseEquivalentIntensity type="Sigma0" units="dB">-22 to -30</NoiseEquivalentIntensity>
@@ -90,7 +90,7 @@
         <OrbitInformation>
             <PassDirection>DESCENDING</PassDirection>
             <OrbitDataSource>RESORB</OrbitDataSource>
-            <OrbitDataFile>S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF</OrbitDataFile>
+            <OrbitDataFileName>S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF</OrbitDataFileName>
             <PlatformHeading units="deg">-167.793953936671</PlatformHeading>
             <OrbitMeanAltitude units="km">693</OrbitMeanAltitude>
         </OrbitInformation>
@@ -105,7 +105,7 @@
             <RangeNumberOfLooks>5</RangeNumberOfLooks>
             <RangeLookBandwidth units="Hz">beam IW1: 1.41E7, beam IW2: 1.21E7, beam IW3: 1.07E7</RangeLookBandwidth>
         </SourceProcParam>
-        <ImageAttributes>
+        <SourceDataImageAttributes>
             <ProductGeometry>Ground range</ProductGeometry>
             <AzimuthPixelSpacing units="m">10.0</AzimuthPixelSpacing>
             <RangePixelSpacing units="m">10.0</RangePixelSpacing>
@@ -114,7 +114,7 @@
             <IncAngleNearRange units="deg">30.3152831649154</IncAngleNearRange>
             <IncAngleFarRange units="deg">45.97317397183082</IncAngleFarRange>
             <SensorCalibration type="URL">https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-1-sar/sar-instrument/calibration</SensorCalibration>
-        </ImageAttributes>
+        </SourceDataImageAttributes>
         <PerformanceIndicators pol="VV">
             <NoiseReference type="URL">https://sentinel.esa.int/documents/247904/2142675/Thermal-Denoising-of-Products-Generated-by-Sentinel-1-IPF</NoiseReference>
             <NoiseEquivalentIntensity type="Sigma0" units="dB">-22 to -30</NoiseEquivalentIntensity>
@@ -132,7 +132,7 @@
             <AzimuthIntegratedSideLobeRatio units="dB">-16.1</AzimuthIntegratedSideLobeRatio>
         </PerformanceIndicators>
     </SourceAttributes>
-    <ProductAttributes>
+    <CARD4LProductAttributes>
         <DataAccess>
             <ProcessingFacility>Sentinel Hub, Sinergise</ProcessingFacility>
             <ProcessingTime>2021-06-16T14:50:38.958065Z</ProcessingTime>
@@ -150,38 +150,38 @@
             <WindowSizeCol>2</WindowSizeCol>
             <WindowSizeRow>2</WindowSizeRow>
         </Filtering>
-        <GeographicalBoundingBox corner="UL">
+        <ProductBoundingBox corner="UL">
             <Latitude units="deg">-17.0</Latitude>
             <Longitude units="deg">47.0</Longitude>
-        </GeographicalBoundingBox>
-        <GeographicalBoundingBox corner="UR">
+        </ProductBoundingBox>
+        <ProductBoundingBox corner="UR">
             <Latitude units="deg">-17.0</Latitude>
             <Longitude units="deg">48.0</Longitude>
-        </GeographicalBoundingBox>
-        <GeographicalBoundingBox corner="LL">
+        </ProductBoundingBox>
+        <ProductBoundingBox corner="LL">
             <Latitude units="deg">-18.0</Latitude>
             <Longitude units="deg">47.0</Longitude>
-        </GeographicalBoundingBox>
-        <GeographicalBoundingBox corner="LR">
+        </ProductBoundingBox>
+        <ProductBoundingBox corner="LR">
             <Latitude units="deg">-18.0</Latitude>
             <Longitude units="deg">48.0</Longitude>
-        </GeographicalBoundingBox>
-        <GeographicalExtent corner="UL">
+        </ProductBoundingBox>
+        <ProductGeographicalExtent corner="UL">
             <Latitude units="deg">-17.0</Latitude>
             <Longitude units="deg">47.0</Longitude>
-        </GeographicalExtent>
-        <GeographicalExtent corner="UR">
+        </ProductGeographicalExtent>
+        <ProductGeographicalExtent corner="UR">
             <Latitude units="deg">-17.0</Latitude>
             <Longitude units="deg">48.0</Longitude>
-        </GeographicalExtent>
-        <GeographicalExtent corner="LL">
+        </ProductGeographicalExtent>
+        <ProductGeographicalExtent corner="LL">
             <Latitude units="deg">-18.0</Latitude>
             <Longitude units="deg">47.0</Longitude>
-        </GeographicalExtent>
-        <GeographicalExtent corner="LR">
+        </ProductGeographicalExtent>
+        <ProductGeographicalExtent corner="LR">
             <Latitude units="deg">-18.0</Latitude>
             <Longitude units="deg">48.0</Longitude>
-        </GeographicalExtent>
+        </ProductGeographicalExtent>
         <ProductImageSize>
             <NumberLines>5000</NumberLines>
             <NumPixelsPerLine>5000</NumPixelsPerLine>
@@ -282,8 +282,8 @@ GEOGCRS["WGS 84",
             <GeoCorrMethod>Range Doppler Terrain Correction</GeoCorrMethod>
             <GeoCorrAlgorithm type="URL">https://sentinel.esa.int/documents/247904/1653442/Guide-to-Sentinel-1-Geocoding.pdf</GeoCorrAlgorithm>
             <GeoCorrAccuracy>
-                <NorthernRMSE units="m">0.6</NorthernRMSE>
-                <EasternRMSE units="m">4.4</EasternRMSE>
+                <NorthernSTDev units="m">0.6</NorthernSTDev>
+                <EasternSTDev units="m">4.4</EasternSTDev>
                 <rRMSE units="m">4.4</rRMSE>
                 <NorthernALE units="m">-0.2 ± 0.5</NorthernALE>
                 <EasternALE units="m">-4.4 ± 0.5</EasternALE>
@@ -293,5 +293,5 @@ GEOGCRS["WGS 84",
         </GeometricCorrection>
         <GriddingConvention type="URL">https://docs.sentinel-hub.com/api/latest/api/batch/#tiling-grids</GriddingConvention>
         <GridName>WGS84 1 degree grid</GridName>
-    </ProductAttributes>
+    </CARD4LProductAttributes>
 </product>

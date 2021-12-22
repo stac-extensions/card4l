@@ -21,7 +21,8 @@
   ],
   "properties": {
     "card4l:specification": "NRB",
-    "card4l:specification_version": "5.0",
+    "card4l:specification_version": "5.5",
+    "card4l:source_geometry": "ground-range",
     "card4l:beam_id": "TOPS",
     "card4l:orbit_data_source": "resorb",
     "card4l:orbit_mean_altitude": 693,
@@ -72,6 +73,7 @@
     "sat:absolute_orbit": 36040,
     "view:azimuth": 12.206046063329012,
     "processing:facility": "Copernicus S1 Core Ground Segment - DPA",
+    "processing:level": "L2",
     "processing:software": {
       "Sentinel-1 IPF": "003.31"
     }

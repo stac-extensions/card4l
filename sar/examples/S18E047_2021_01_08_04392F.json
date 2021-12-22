@@ -58,7 +58,7 @@
   ],
   "properties": {
     "card4l:specification": "NRB",
-    "card4l:specification_version": "5.0",
+    "card4l:specification_version": "5.5",
     "card4l:noise_removal_applied": true,
     "card4l:speckle_filtering": {
       "type": "block average",
@@ -82,6 +82,7 @@
     ],
     "platform": "sentinel-1a",
     "processing:facility": "Sentinel Hub, Sinergise",
+    "processing:level": "L2",
     "processing:software": {
       "Batch API": "v4.34.0"
     },
@@ -137,8 +138,17 @@
     {
       "href": "https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198",
       "rel": "elevation-model",
-      "type": "text/html",
-      "card4l:surface": true
+      "type": "text/html"
+    },
+    {
+      "href": "https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198",
+      "rel": "surface-model",
+      "type": "text/html"
+    },
+    {
+      "href": "https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198",
+      "rel": "earth-gravitational-model",
+      "type": "text/html"
     },
     {
       "href": "https://sentinel.esa.int/documents/247904/1653442/Guide-to-Sentinel-1-Geocoding.pdf",
