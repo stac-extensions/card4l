@@ -260,7 +260,7 @@ which then requires one of `proj:wkt2` or `proj:projjson` to be specified.
 | about                          | (✓)      | (✓)                 | *n/a*                      | URL to other documentation, e.g. algorithms used in the generation process. |
 | related                        | ✗        | ✓ 1.7.2             | `AncillaryData`            | URL to the sources of ancillary or auxiliary data used in the generation process. Excludes DEMs, which use the relation `elevation-model` instead. |
 | access                         | ✓ 1.6.1  | ✓ 1.7.1             | *n/a*                      | URL to data access information.                             |
-| satellite                      | ✓ 1.6.2  | ✗                   | `SatelliteReference`       | URL to information about the satellite (constellation) the data originates from. |
+| satellite                      | ✓ 1.6.2  | ✗                   | `SatelliteReference`       | URL to the relevant CEOS Missions, Instruments and Measurements Database record. |
 | performance-indicators         | ✓ 1.6.9  | ✗                   | `PerformanceIndicators`    | URL to performance indicators on data intensity mean noise level. |
 | state-vectors                  | ✓ 1.6.5  | ✗                   | `StateVector`              | URL to an orbit data file containing at least 5 state vectors. |
 | sensor-calibration             | ✓ 1.6.8  | ✗                   | `SensorCalibration`        | URL to the sensor calibration parameters.                   |
