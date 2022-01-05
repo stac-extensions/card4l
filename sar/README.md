@@ -339,9 +339,5 @@ For those details please refer to the ["Additional properties" column in the tab
 - 1.6.1 / 1.7.1: `SourceDataRepository` and `RepositoryURL` are covered by STAC link structures. 
   All CARD4L compliant STAC Catalog are **required** to make intensive use of STAC link relation types such as
   `root`, `parent`, `child`, `item` and `collection`.
-- 1.6.9: `PeakSideLobeRatio` and `IntegratedSideLobeRatio` are *recommended* to be included in the resource linked to with the relation type
-  [`performance-indicators`](#stac-item-links).
-- 1.7.9: The CARD4L specification is not clear whether a string representation of a CRS is required
-  or whether an EPSG code would fullfil the requirement already.
 - 2.2: `raster:bands[*].values` is not standardized yet in STAC, this could change to `file:values`
   or something different with a similar structure in the future.
