@@ -25,17 +25,17 @@
     "card4l:source_geometry": "ground-range",
     "card4l:beam_id": "TOPS",
     "card4l:orbit_data_source": "resorb",
-    "card4l:orbit_mean_altitude": 693,
+    "card4l:orbit_mean_altitude": 693000,
     "card4l:source_processing_parameters": {
       "range_look_bandwidth": [
-        0.0141,
-        0.0121,
-        0.0107
+        14100000,
+        12100000,
+        10700000
       ],
       "azimuth_look_bandwidth": [
-        0.00000327,
-        0.00000313,
-        0.00000314
+        3270,
+        3130,
+        3140
       ]
     },
     "card4l:incidence_angle_near_range": 30.22052269653568,
@@ -54,7 +54,7 @@
     ],
     "platform": "sentinel-1a",
     "sar:frequency_band": "C",
-    "sar:center_frequency": 5.405,
+    "sar:center_frequency": 5405000000,
     "sar:instrument_mode": "IW",
     "sar:polarizations": [
       "VV",
