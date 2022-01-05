@@ -212,6 +212,7 @@ None of the fields is required.
 | proj:epsg                 | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod*.** See comment below*. |
 | proj:wkt2 / proj:projjson | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod* if `proj:epsg` is `null`.** See comment below*. |
 | proj:bbox                 | (✓)  | ✓ 1.7.5 | `ProductBoundingBox`        | **REQUIRED for *Prod* if the native CRS is not WGS84.** This is the bounding box in the native CRS of the product. Can be omitted if the native CRS is WGS84. |
+| proj:transform            |  ✗   | (✓)     | *n/a*                       | Recommended to include the affine transformation coefficients for the default grid. |
 
 \* For *Prod* the metadata must specify the map projection (see 1.7.9).
 `proj:epsg` is **required** by STAC. If there's no suitable EPSG code, set the field to `null`,
