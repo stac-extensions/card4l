@@ -143,6 +143,7 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:egm_resampling_method           | ✗           | ✓ 4.2       | `EGMResamplingMethod`                                        | string                                                  | The resampling method used for the EGM, see above for example values. |
 | card4l:northern_geometric_accuracy     | ✗           | ✓ 4.3       | `NorthernSTDev` / `NorthernBias` in `GeoCorrAccuracy`        | number                                                  | **REQUIRED.** An estimate of the northern geometric accuracy in meters. |
 | card4l:eastern_geometric_accuracy      | ✗           | ✓ 4.3       | `EasternSTDev` / `EasternBias` in `GeoCorrAccuracy`          | number                                                  | **REQUIRED.** An estimate of the eastern geometric accuracy in meters. |
+| card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED.** A brief free text description of the gridding convention used. Can alternatively be provided as a [reference link](#stac-item-links) if available. |
 
 ##### Statistics Object
 
@@ -344,5 +345,3 @@ For those details please refer to the ["Additional properties" column in the tab
   or whether an EPSG code would fullfil the requirement already.
 - 2.2: `raster:bands[*].values` is not standardized yet in STAC, this could change to `file:values`
   or something different with a similar structure in the future.
-- 4.4: In the CARD4L metadata specification the Gridding Convenvtion details seem to be required although not required in the textual specification.
-  We assume it is not required.
