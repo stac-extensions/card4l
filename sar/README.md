@@ -199,9 +199,9 @@ None of the fields is required.
 
 | Field Name            | Src     | Prod    | XML Tag              | Description                                                  |
 | --------------------- | ------- | ------- | -------------------- | ------------------------------------------------------------ |
-| processing:facility   | ✓ 1.6.6 | ✓ 1.7.1 | `ProcessingFacility` | **REQUIRED.**                                                |
-| processing:level      | ✓ 1.6.6 | ✓ 1.7.1 | *n/a*                | **REQUIRED.** String likely needs to be split into software name and version number. |
-| processing:software   | ✓ 1.6.6 | ✓ 1.7.1 | `SoftwareVersion`    | **REQUIRED.** String likely needs to be split into software name and version number. |
+| processing:facility   | ✓ 1.6.6 | ✓ 1.7.1 | `ProcessingFacility` | **REQUIRED.** The name of the facility that produced the data. |
+| processing:level      | ✓ 1.6.6 | ✓ 1.7.1 | *n/a*                | **REQUIRED.** See [here](https://github.com/stac-extensions/processing#suggested-processing-levels) for suggested processing levels. |
+| processing:software   | ✓ 1.6.6 | ✓ 1.7.1 | `SoftwareVersion`    | **REQUIRED.** A dictionary with software name/version number for key/value describing one or more softwares that produced the data. |
 | processing:lineage    | ✓       | ✓       | *n/a*                | A human-readable description of the full processing workflow and parameters, e.g. algorithms and corrections applied. |
 | processing:expression | ✓       | ✓       | *n/a*                | A machine-readable description of the full processing workflow and parameters, e.g. a Dask graph, an openEO process or a SNAP graph. Alternatively, you can also link to a processing chain with the relation type `processing-expression` (see below). |
 
