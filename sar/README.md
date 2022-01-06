@@ -342,3 +342,4 @@ For those details please refer to the ["Additional properties" column in the tab
 - 1.7.9: The CARD4L specification is not clear whether a string representation of a CRS is required or whether an EPSG code would fulfil the requirement already.
 - 2.2: `raster:bands[*].values` is not standardized yet in STAC, this could change to `file:values`
   or something different with a similar structure in the future.
+- 4.4: In the CARD4L metadata specification the Gridding Convention details seem to be required although not required in the textual specification.
