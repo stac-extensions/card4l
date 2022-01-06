@@ -224,8 +224,8 @@
             "card4l:measurement_convention": {
               "type": "string",
               "enum": [
-                "amplitude",
-                "power"
+                "linear amplitude",
+                "linear power"
               ]
             }
           }
@@ -248,8 +248,8 @@
             "card4l:measurement_convention": {
               "type": "string",
               "enum": [
-                "amplitude",
-                "power",
+                "linear amplitude",
+                "linear power",
                 "angle"
               ]
             }
