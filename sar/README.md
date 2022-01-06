@@ -227,7 +227,7 @@ which then requires one of `proj:wkt2` or `proj:projjson` to be specified.
 | --------------------------- | ------- | ----- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | sar:instrument_mode         | ✓ 1.6.4 | (✓)   | `ObservationMode`                                            | **REQUIRED for *Src*.**                                      |
 | sar:frequency_band          | ✓ 1.6.4 | (✓)   | `RadarBand`                                                  | **REQUIRED for *Src*.**                                      |
-| sar:center_frequency        | ✓ 1.6.4 | ✗     | `RadarCenterFrequency`                                       | **REQUIRED.** In hertz (Hz).                                 |
+| sar:center_frequency        | ✓ 1.6.4 | ✗     | `RadarCenterFrequency`                                       | **REQUIRED.** Convert to GHz if required.                                 |
 | sar:polarizations           | ✓ 1.6.4 | (✓)   | `Polarizations`                                              | **REQUIRED for *Src*.**                                      |
 | sar:product_type            | ✓ 1.6.6 | ✓ 3.1 | `ProductLevel` (Src), `Measurements`, attribute `type` (Prod, POL only) | **REQUIRED.** *Src*: Find suitable [product type in the SAR extension](https://github.com/stac-extensions/sar/blob/v1.0.0/README.md#item-properties). *Prod*: `NRB` for Normalized Radar Backscatter products, `COVMAT` for Normalized Radar Covariance Matrix products or `PRD` for Polarimetric Radar Decomposition products. |
 | sar:observation_direction   | ✓ 1.6.4 | ✗     | `AntennaPointing`                                            | **REQUIRED.** Lower-case                                     |
