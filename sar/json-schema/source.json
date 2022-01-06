@@ -125,6 +125,14 @@
               }
             }
           }
+        },
+        "card4l:peak_sidelobe_ratio": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:integrated_sidelobe_ratio": {
+          "type": "number",
+          "minimum": 0
         }
       }
     },
