@@ -130,6 +130,9 @@
         },
         "card4l:egm_resampling_method": {
           "type": "string"
+        },
+        "card4l:gridding_convention": {
+          "type": "string"
         }
       }
     },
@@ -252,6 +255,34 @@
                 "linear power",
                 "angle"
               ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "card4l:gridding_convention"
+          ]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "contains": {
+            "properties": {
+              "rel": {
+                "const": "gridding-convention"
+              }
             }
           }
         }

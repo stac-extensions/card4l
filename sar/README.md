@@ -143,7 +143,7 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:egm_resampling_method           | ✗           | ✓ 4.2       | `EGMResamplingMethod`                                        | string                                                  | The resampling method used for the EGM, see above for example values. |
 | card4l:northern_geometric_accuracy     | ✗           | ✓ 4.3       | `NorthernSTDev` / `NorthernBias` in `GeoCorrAccuracy`        | number                                                  | **REQUIRED.** An estimate of the northern geometric accuracy in meters. |
 | card4l:eastern_geometric_accuracy      | ✗           | ✓ 4.3       | `EasternSTDev` / `EasternBias` in `GeoCorrAccuracy`          | number                                                  | **REQUIRED.** An estimate of the eastern geometric accuracy in meters. |
-| card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED.** A brief free text description of the gridding convention used. Can alternatively be provided as a [reference link](#stac-item-links) if available. |
+| card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED if no reference URL/DOI has been provided as a [link with relation type](#stac-item-links) `gridding-convention`** A brief free text description of the gridding convention used. |
 
 ##### Statistics Object
 
