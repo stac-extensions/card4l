@@ -67,7 +67,7 @@
     },
     "card4l:pixel_coordinate_convention": "center",
     "card4l:measurement_type": "gamma0",
-    "card4l:measurement_convention": "power",
+    "card4l:measurement_convention": "linear power",
     "card4l:conversion_eq": "10*log10(DN)",
     "card4l:resampling_method": "bilinear",
     "card4l:northern_geometric_accuracy": 0.6,

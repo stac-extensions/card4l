@@ -33,9 +33,9 @@
         0.0107
       ],
       "azimuth_look_bandwidth": [
-        0.000000327,
-        0.000000313,
-        0.000000314
+        3.27e-7,
+        3.13e-7,
+        3.14e-7
       ]
     },
     "card4l:incidence_angle_near_range": 30.3152831649154,
