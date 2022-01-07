@@ -107,8 +107,12 @@ Note that all these fields here are aligned with the CARD4L SAR extension.
 
 | Field Name     | Req.   | Description                                                  |
 | -------------- | ------ | ------------------------------------------------------------ |
-| eo:cloud_cover | 1.17   |                                                              |
+| eo:cloud_cover | 1.17   | Cloud cover as one of the quality flags.                     |
 | eo:bands       | (1.10) | You may include all bands specified in the assets again as an overview. |
+
+1.17:  More data quality flags should be set. Just providing eo:cloud_cover is not enough,
+but other quality flags such as [snow cover](https://github.com/stac-extensions/eo/pull/9)
+are not tandardized in STAC yet.
 
 #### Processing
 
@@ -135,11 +139,11 @@ either `proj:epsg` or one of the alternatives.
 
 | Field Name           | Req.  | Description                                                  |
 | -------------------- | ----- | ------------------------------------------------------------ |
-| view:off_nadir       | *n/a* | The average off-nadir angle, for per-pixel angles. Convert to degree, if required. |
-| view:incidence_angle | \*    | **REQUIRED.** The average incidence angle, for per-pixel angles, refer to the asset with the key `incidence-angle`. Convert to degree, if required. |
-| view:azimuth         | \*    | **REQUIRED.** The average azimuth angle, for per-pixel angles, refer to the asset with the key `azimuth`. Convert to degree, if required. |
-| view:sun_azimuth     | \*    | **REQUIRED.** The average sun azimuth angle, for per-pixel angles, refer to the asset with the key `sun-azimuth`. Convert to degree, if required. |
-| view:sun_elevation   | \*    | **REQUIRED.** The average sub elevation angle, for per-pixel angles, refer to the asset with the key `sun-elevation`. Convert to degree, if required. |
+| view:off_nadir       | *n/a* | The average off-nadir angle, for per-pixel angles. In degrees. |
+| view:incidence_angle | \*    | **REQUIRED.** The average incidence angle, for per-pixel angles, refer to the asset with the key `incidence-angle`. In degrees. |
+| view:azimuth         | \*    | **REQUIRED.** The average azimuth angle, for per-pixel angles, refer to the asset with the key `azimuth`. In degrees. |
+| view:sun_azimuth     | \*    | **REQUIRED.** The average sun azimuth angle, for per-pixel angles, refer to the asset with the key `sun-azimuth`. In degrees. |
+| view:sun_elevation   | \*    | **REQUIRED.** The average sub elevation angle, for per-pixel angles, refer to the asset with the key `sun-elevation`. In degrees. |
 
 \* = Requirement 2.8 for Surface Temperature (ST) / 2.11 for Surface Reflectance (SR)
 
@@ -206,6 +210,9 @@ The *italic* role names could be used as the asset's key.
 | *terrain-occlusion*, metadata          | 2.10 (SR)            | `type`, **`raster:bands`** (with **`values`**)               | Points to a file that indicates whether a pixel is not visible to the sensor due to terrain occlusion during off-nadir viewing. |
 | *terrain-illumination*, metadata       | 2.12 (SR)            | `type`, `raster:bands` (with `data_type`, `bits_per_sample`), `file:byte_order` | Points to a file with coefficients used for terrain illumination correction are provided for each pixel. |
 
+Note: `raster:bands[*].values` is not standardized yet in STAC, this could change to
+`file:values` or something different with a similar structure in the future.
+
 #### Additional Asset Properties
 
 The following table lists properties that may occur in the assets.
@@ -234,7 +241,6 @@ For those details please refer to the ["Additional properties" column in the tab
 
 - 1.13: The algorithms can be given either in `processing:software` or as link with relation type `about`. 
   One of them is **required** by CARD4L.
-- 1.17: Other data quality flags than `eo:cloud_cover` should be set.
 - 2.13 (SR): CARD4L lists no specific requirements thus it's missing in this document, too.
 - 3.2 (SR) / 3.3 (ST): Measurement Uncertainty is not required and it was not clear in which form this should be provided. 
   Also the CARD4L specification states for SR that
