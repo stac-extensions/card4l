@@ -25,7 +25,7 @@
     "card4l:source_geometry": "ground-range",
     "card4l:beam_id": "TOPS",
     "card4l:orbit_data_source": "resorb",
-    "card4l:orbit_mean_altitude": 693,
+    "card4l:orbit_mean_altitude": 693000,
     "card4l:source_processing_parameters": {
       "range_look_bandwidth": [
         0.0141,
@@ -33,9 +33,9 @@
         0.0107
       ],
       "azimuth_look_bandwidth": [
-        0.00000327,
-        0.00000313,
-        0.00000314
+        0.000000327,
+        0.000000313,
+        0.000000314
       ]
     },
     "card4l:incidence_angle_near_range": 30.3152831649154,

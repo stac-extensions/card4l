@@ -29,7 +29,7 @@
             <OrbitDataSource>RESORB</OrbitDataSource>
             <OrbitDataFileName>S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF</OrbitDataFileName>
             <PlatformHeading units="deg">-167.7482429286898</PlatformHeading>
-            <OrbitMeanAltitude units="km">693</OrbitMeanAltitude>
+            <OrbitMeanAltitude units="m">693000</OrbitMeanAltitude>
         </OrbitInformation>
         <SourceProcParam>
             <ProcessingFacility>Copernicus S1 Core Ground Segment - DPA</ProcessingFacility>
@@ -92,7 +92,7 @@
             <OrbitDataSource>RESORB</OrbitDataSource>
             <OrbitDataFileName>S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF</OrbitDataFileName>
             <PlatformHeading units="deg">-167.793953936671</PlatformHeading>
-            <OrbitMeanAltitude units="km">693</OrbitMeanAltitude>
+            <OrbitMeanAltitude units="m">693000</OrbitMeanAltitude>
         </OrbitInformation>
         <SourceProcParam>
             <ProcessingFacility>Copernicus S1 Core Ground Segment - DPA</ProcessingFacility>
