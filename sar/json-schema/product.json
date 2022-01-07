@@ -277,7 +277,7 @@
       "type": "object",
       "properties": {
         "links": {
-          "type": "object",
+          "type": "array",
           "contains": {
             "properties": {
               "rel": {
