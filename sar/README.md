@@ -181,8 +181,8 @@ None of the fields is required.
 | Field Name             | Data Type | XML Tag                | Description                                                  |
 | ---------------------- | --------- | ---------------------- | ------------------------------------------------------------ |
 | lut_applied            | string    | `lutApplied`           |                                                              |
-| range_look_bandwidth   | \[number] | `RangeLookBandwidth`   | Range Look Bandwidth per swath in hertz (Hz).                |
-| azimuth_look_bandwidth | \[number] | `AzimuthLookBandwidth` | Azimuth Look Bandwidth per swath in hertz (Hz).              |
+| range_look_bandwidth   | \[number] | `RangeLookBandwidth`   | Range Look Bandwidth per swath, convert to GHz if required.                |
+| azimuth_look_bandwidth | \[number] | `AzimuthLookBandwidth` | Azimuth Look Bandwidth per swath, convert to GHz if required.              |
 | ...                    | ...       | *n/a*                  | Add all source data processing parameters.                   |
 
 #### Common Metadata

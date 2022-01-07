@@ -28,14 +28,14 @@
     "card4l:orbit_mean_altitude": 693000,
     "card4l:source_processing_parameters": {
       "range_look_bandwidth": [
-        14100000,
-        12100000,
-        10700000
+        0.0141,
+        0.0121,
+        0.0107
       ],
       "azimuth_look_bandwidth": [
-        3270,
-        3130,
-        3140
+        0.000000327,
+        0.000000313,
+        0.000000314
       ]
     },
     "card4l:incidence_angle_near_range": 30.22052269653568,
