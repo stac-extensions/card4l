@@ -325,10 +325,11 @@ For those details please refer to the ["Additional properties" column in the tab
 | raster:bands              | ✗       | ✓       | see below | \[[Raster Band Object](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#raster-band-object)\] | Bands with at least the required fields for the corresponding asset role (see above and below). |
 | card4l:ellipsoidal_height | ✗       | ✓       | `EllipsoidalHeight`                             | number                                                       | Indicate which ellipsoidal height was used, in meters.       |
 | card4l:border_pixels      | ✗       | ✓ 1.7.7 | `NumBorderPixels`                               | integer                                                      | Number of border pixels (**required** only if applicable). |
-| proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset. See comment below*.|
+| proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset. See comment below*. |
 | proj:transform            |  ✗      | (✓)     | *n/a*                                           | \[number]                                                    | The affine transformation coefficients for the default grid. See comment below*. |
 
-\* `proj:shape` and `proj:transform` only need to be specified at the Item Asset level if the values vary between Assets. Specify in Item properties otherwise. See also comment in [Projection](#Projection).
+\* `proj:shape` and `proj:transform` only need to be specified at the Item Asset level if the values vary between 
+Assets. Specify in Item properties otherwise. See also comment in [Projection](#Projection).
 
 ##### raster:bands
 
