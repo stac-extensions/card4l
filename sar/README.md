@@ -215,11 +215,14 @@ None of the fields is required.
 | proj:epsg                 | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod*.** See comment below*. |
 | proj:wkt2 / proj:projjson | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod* if `proj:epsg` is `null`.** See comment below*. |
 | proj:bbox                 | (✓)  | ✓ 1.7.5 | `ProductBoundingBox`        | **REQUIRED for *Prod* if the native CRS is not WGS84.** This is the bounding box in the native CRS of the product. Can be omitted if the native CRS is WGS84. |
-| proj:transform            |  ✗   | (✓)     | *n/a*                       | Recommended to include the affine transformation coefficients for the default grid. |
+| proj:shape                |  ✗   | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine` | **REQUIRED for *Prod*.** Number of pixels in Y and X directions for the default grid. See comment below**. |
+| proj:transform            |  ✗   | (✓)     | *n/a*                       | Recommended to include the affine transformation coefficients for the default grid. See comment below**. |
 
 \* For *Prod* the metadata must specify the map projection (see 1.7.9).
 `proj:epsg` is **required** by STAC. If there's no suitable EPSG code, set the field to `null`,
 which then requires one of `proj:wkt2` or `proj:projjson` to be specified.
+
+\** Values are assumed to apply to all Assets of an Item. If this is not the case, these fields should be specified at the [Item Asset level](#stac-item-assets) instead.
 
 #### SAR
 
@@ -295,16 +298,16 @@ The *italic* role names could be used as the asset's key.
 | Role Name(s)                          | Src  | Prod        | XML Tag                      | Additional properties                                        | Description                                                  |
 | ------------------------------------- | ---- | ----------- | ---------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | *card4l*, metadata                    | ✗    | ✓ 2.1       | *n/a*                        | `type`                                                       | Points to a metadata XML file that follows the CARD4L metadata specification. Media type: `application/xml` |
-| *data-mask*, metadata                 | ✗    | ✓ 2.2       | `DataMask`                   | `type`, `raster:bands` (with `values` \[see notes\], `nodata`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | **REQUIRED.** Points to the data mask file.                  |
-| *contributing-area*, metadata         | ✗    | ✓ 2.3       | `LocalContributingArea`      | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | Points to the normalized scattering area file. |
-| *local-incidence-angle*,  metadata    | ✗    | ✓ 2.4       | `LocalIncAngle`              | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | **REQUIRED.** Points to the DEM-based local incidence angle file. `unit` is usually `degree`. |
-| *ellipsoid-incidence-angle*, metadata | ✗    | ✓ 2.5       | `EllipsoidIncAngle`          | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`card4l:ellipsoidal_height`* | `unit` is usually `degree`.                                  |
-| *noise-power*, card4l, metadata       | ✗    | ✓ 2.6       | `NoisePower`                 | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | **REQUIRED if noise removal was applied.** `unit` is usually NESZ or NEBZ. |
-| *gamma-sigma-ratio*, metadata         | ✗    | ✓ 2.7       | `GammaToSigmaRatio`          | `type`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* |                                                              |
-| (*acquisition-id* or *date-offset*), metadata | ✗ | ✓ 2.8  | `AcquisitionIDImage`         | `type`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | **REQUIRED for multi-source products only.** Acquisition ID or acquisition date for each pixel is identified (see 2.8 for details). |
-| (*elevation-model* or *surface-model* or *earth-gravitational-model*), metadata | ✗ | ✓ 2.9 | `PerPixelDEM` | `type`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`* | Per-pixel DEM/DSM/EGM as used in product generation. |
-| *backscatter*, data                   | ✗    | ✓ 3.1 (NRB) | `BackscatterMeasurementData` | `type`, `created`, `sar:polarizations`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, `proj:shape`, *`card4l:border_pixels`* | **REQUIRED for *NRB*.** Points to the backscatter measurements for the polarizations specified in `sar:polarizations`. |
-| (*covmat* and/or *prd*), data         | ✗    | ✓ 3.1 (POL) | `Measurements`               | `type`, `created`, `sar:polarizations` (CovMat only), `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, `proj:shape`, *`card4l:border_pixels`* | **REQUIRED for *POL*.** Points to the Normalized Polarimetric Radar Covariance Matrix (CovMat) *or* the Polarimetric Radar Decomposition (PRD) |
+| *data-mask*, metadata                 | ✗    | ✓ 2.2       | `DataMask`                   | `type`, `raster:bands` (with `values` \[see notes\], `nodata`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`* | **REQUIRED.** Points to the data mask file.                  |
+| *contributing-area*, metadata         | ✗    | ✓ 2.3       | `LocalContributingArea`      | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`* | Points to the normalized scattering area file. |
+| *local-incidence-angle*,  metadata    | ✗    | ✓ 2.4       | `LocalIncAngle`              | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`* | **REQUIRED.** Points to the DEM-based local incidence angle file. `unit` is usually `degree`. |
+| *ellipsoid-incidence-angle*, metadata | ✗    | ✓ 2.5       | `EllipsoidIncAngle`          | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`*, *`card4l:ellipsoidal_height`* | `unit` is usually `degree`.                                  |
+| *noise-power*, card4l, metadata       | ✗    | ✓ 2.6       | `NoisePower`                 | `type`, `raster:bands` (with `unit`, `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`* | **REQUIRED if noise removal was applied.** `unit` is usually NESZ or NEBZ. |
+| *gamma-sigma-ratio*, metadata         | ✗    | ✓ 2.7       | `GammaToSigmaRatio`          | `type`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`* |                                                              |
+| (*acquisition-id* or *date-offset*), metadata | ✗ | ✓ 2.8  | `AcquisitionIDImage`         | `type`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`* | **REQUIRED for multi-source products only.** Acquisition ID or acquisition date for each pixel is identified (see 2.8 for details). |
+| (*elevation-model* or *surface-model* or *earth-gravitational-model*), metadata | ✗ | ✓ 2.9 | `PerPixelDEM` | `type`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`* | Per-pixel DEM/DSM/EGM as used in product generation. |
+| *backscatter*, data                   | ✗    | ✓ 3.1 (NRB) | `BackscatterMeasurementData` | `type`, `created`, `sar:polarizations`, `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`*, *`card4l:border_pixels`* | **REQUIRED for *NRB*.** Points to the backscatter measurements for the polarizations specified in `sar:polarizations`. |
+| (*covmat* and/or *prd*), data         | ✗    | ✓ 3.1 (POL) | `Measurements`               | `type`, `created`, `sar:polarizations` (CovMat only), `raster:bands` (with `data_type` and `bits_per_sample`), `file:byte_order`, *`file:header_size`*, *`proj:transform`*, *`proj:shape`*, *`card4l:border_pixels`* | **REQUIRED for *POL*.** Points to the Normalized Polarimetric Radar Covariance Matrix (CovMat) *or* the Polarimetric Radar Decomposition (PRD) |
 
 #### Additional Asset Properties
 
@@ -322,7 +325,11 @@ For those details please refer to the ["Additional properties" column in the tab
 | raster:bands              | ✗       | ✓       | see below | \[[Raster Band Object](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#raster-band-object)\] | Bands with at least the required fields for the corresponding asset role (see above and below). |
 | card4l:ellipsoidal_height | ✗       | ✓       | `EllipsoidalHeight`                             | number                                                       | Indicate which ellipsoidal height was used, in meters.       |
 | card4l:border_pixels      | ✗       | ✓ 1.7.7 | `NumBorderPixels`                               | integer                                                      | Number of border pixels (**required** only if applicable). |
-| proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset.                                      |
+| proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset. See comment below*. |
+| proj:transform            |  ✗      | (✓)     | *n/a*                                           | \[number]                                                    | The affine transformation coefficients for the default grid. See comment below*. |
+
+\* `proj:shape` and `proj:transform` only need to be specified at the Item Asset level if the values vary between 
+Assets. Specify in Item properties otherwise. See also comment in [Projection](#Projection).
 
 ##### raster:bands
 

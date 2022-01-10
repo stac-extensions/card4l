@@ -88,6 +88,18 @@
     },
     "proj:epsg": 4326,
     "proj:wkt2": "GEOGCRS[\"WGS 84\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],CS[ellipsoidal,2],AXIS[\"geodetic latitude (Lat)\",north,ORDER[1],ANGLEUNIT[\"degree\",0.0174532925199433]],AXIS[\"geodetic longitude (Lon)\",east,ORDER[2],ANGLEUNIT[\"degree\",0.0174532925199433]],ID[\"EPSG\",4326]]",
+    "proj:shape": [
+      5000,
+      5000
+    ],
+    "proj:transform": [
+      47,
+      0.0002,
+      0,
+      -17,
+      0,
+      -0.0002
+    ],
     "sar:frequency_band": "C",
     "sar:instrument_mode": "IW",
     "sar:polarizations": [
@@ -183,18 +195,6 @@
       "card4l:border_pixels": 0,
       "file:header_size": 0,
       "file:byte_order": "little-endian",
-      "proj:shape": [
-        5000,
-        5000
-      ],
-      "proj:transform": [
-        47,
-        0.0002,
-        0,
-        -17,
-        0,
-        -0.0002
-      ],
       "raster:bands": [
         {
           "data_type": "float32",
@@ -217,18 +217,6 @@
       "card4l:border_pixels": 0,
       "file:header_size": 0,
       "file:byte_order": "little-endian",
-      "proj:shape": [
-        5000,
-        5000
-      ],
-      "proj:transform": [
-        47,
-        0.0002,
-        0,
-        -17,
-        0,
-        -0.0002
-      ],
       "raster:bands": [
         {
           "data_type": "float32",
@@ -246,18 +234,6 @@
       "roles": [
         "metadata",
         "local-incidence-angle"
-      ],
-      "proj:shape": [
-        5000,
-        5000
-      ],
-      "proj:transform": [
-        47,
-        0.0002,
-        0,
-        -17,
-        0,
-        -0.0002
       ],
       "file:byte_order": "little-endian",
       "raster:bands": [
@@ -277,18 +253,6 @@
         "metadata",
         "contributing-area"
       ],
-      "proj:shape": [
-        5000,
-        5000
-      ],
-      "proj:transform": [
-        47,
-        0.0002,
-        0,
-        -17,
-        0,
-        -0.0002
-      ],
       "file:byte_order": "little-endian",
       "raster:bands": [
         {
@@ -305,18 +269,6 @@
       "roles": [
         "metadata",
         "data-mask"
-      ],
-      "proj:shape": [
-        5000,
-        5000
-      ],
-      "proj:transform": [
-        47,
-        0.0002,
-        0,
-        -17,
-        0,
-        -0.0002
       ],
       "file:byte_order": "little-endian",
       "raster:bands": [
