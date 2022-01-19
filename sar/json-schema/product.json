@@ -99,13 +99,18 @@
         "card4l:absolute_radiometric_accuracy": {
           "type": "number"
         },
+        "card4l:geometric_accuracy_type": {
+          "type": "string",
+          "enum": [
+            "gtc",
+            "slant-range"
+          ]
+        },
         "card4l:northern_geometric_accuracy": {
-          "type": "number",
-          "minimum": 0
+          "$ref": "#/definitions/geometric_accuracy"
         },
         "card4l:eastern_geometric_accuracy": {
-          "type": "number",
-          "minimum": 0
+          "$ref": "#/definitions/geometric_accuracy"
         },
         "card4l:resampling_method": {
           "type": "string"
@@ -273,5 +278,22 @@
         }
       }
     }
-  ]
+  ],
+  "definitions": {
+    "geometric_accuracy": {
+      "type": "object",
+      "required": [
+        "bias",
+        "stddev"
+      ],
+      "properties": {
+        "bias": {
+          "type": "number"
+        },
+        "stddev": {
+          "type": "number"
+        }
+      }
+    }
+  }
 }

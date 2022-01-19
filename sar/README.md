@@ -90,12 +90,12 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 
 | Field Name      | Src     | Prod    | XML Tag                                                      | Description                                                  |
 | --------------- | ------- | ------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| stac_extensions | ✓       | ✓       | *n/a*                                                        | **REQUIRED.** Must contain all extensions used. See below for details\*. |
+| stac_extensions | ✓       | ✓       | *n/a*                                                        | **REQUIRED.** Must contain all extensions used. See below for details \[0]. |
 | id              | ✓ 1.6.6 | ✓       | `ProductID`                                                  | **REQUIRED.**                                                |
 | geometry        | ✓ 1.6.7 | ✓ 1.7.6 | `SourceGeographicalExtent` (Src), `ProductGeographicalExtent` (Prod) | **REQUIRED.**                                                |
 | bbox            | ✓ 1.6.7 | ✓ 1.7.5 | derived from `geometry` (Src), `ProductBoundingBox` (Prod)   | **REQUIRED.** This is the WGS84 variant of the bbox. If the product is provided in another CRS, `proj:bbox` must provide the bounding box in the native CRS (see [below](#projection)). |
 
-\* The following values for `stac_extensions` apply:
+\[0] The following values for `stac_extensions` apply:
 
 | Value                                                              | Src  | Prod |
 | ------------------------------------------------------------------ | ---- | ---- |
@@ -143,8 +143,9 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:resampling_method               | ✗           | ✓ 4.1       | `ResamplingMethod`                                           | string                                                  | The resampling method used, e.g. `near`, `bilinear`, `cubic`, etc. (see [GDAL](https://gdal.org/programs/gdalwarp.html#cmdoption-gdalwarp-r) for more) |
 | card4l:dem_resampling_method           | ✗           | ✓ 4.2       | `DEMResamplingMethod`                                        | string                                                  | The resampling method used for the DEM, see above for example values. |
 | card4l:egm_resampling_method           | ✗           | ✓ 4.2       | `EGMResamplingMethod`                                        | string                                                  | The resampling method used for the EGM, see above for example values. |
-| card4l:northern_geometric_accuracy     | ✗           | ✓ 4.3       | `NorthernSTDev` / `NorthernBias` in `GeoCorrAccuracy`        | number                                                  | **REQUIRED.** An estimate of the northern geometric accuracy in meters. |
-| card4l:eastern_geometric_accuracy      | ✗           | ✓ 4.3       | `EasternSTDev` / `EasternBias` in `GeoCorrAccuracy`          | number                                                  | **REQUIRED.** An estimate of the eastern geometric accuracy in meters. |
+| card4l:geometric_accuracy_type         | ✗           | ✓ 4.3       | `type` in `GeoCorrAccuracy`                                  | string                                                  | **REQUIRED.** Either `slant-range` or `gtc` (Geocoded Terrain Corrected). |
+| card4l:northern_geometric_accuracy     | ✗           | ✓ 4.3       | `GeoCorrAccuracy`                                            | [Geometric Accuracy Object](#geometric-accuracy-object) | **REQUIRED.** An estimate of the northern or line geometric accuracy. |
+| card4l:eastern_geometric_accuracy      | ✗           | ✓ 4.3       | `GeoCorrAccuracy`                                            | [Geometric Accuracy Object](#geometric-accuracy-object) | **REQUIRED.** An estimate of the eastern or sample geometric accuracy. |
 | card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED.** A brief free text description of the gridding convention used, see also the [link relation type](#stac-item-links) `gridding-convention`. |
 
 ##### Statistics Object
@@ -187,6 +188,18 @@ None of the fields is required.
 | azimuth_look_bandwidth | Map\<string, number> | `AzimuthLookBandwidth` | Azimuth Look Bandwidth per beam, in Gigahertz (GHz). The beam ID is the object key and the value is the bandwidth. |
 | ...                    | ...                  | *n/a*                  | Add all source data processing parameters.                   |
 
+##### Geometric Accuracy Object
+
+| Field Name | Data Type | XML Tag                                                      | Description              |
+| ---------- | --------- | ------------------------------------------------------------ | ------------------------ |
+| bias       | number    | `NothernBias` / `LineBias` / `EasternBias` / `SampleBias` \[1] | **REQUIRED.** In meters. |
+| stddev     | number    | `NothernSTDev` / `LineSTDev` / `EasternSTDev` / `SampleSTDev` \[1] | **REQUIRED.** In meters. |
+
+\[1] Depending on the type given in `card4l:geometric_accuracy_type` different specifications are referred to:
+
+- `gtc`: Mirrors `Northern...` and `Eastern...` XML tags
+- `slant-range`:  Mirrors `Line...` and `Sample...` XML tags
+
 #### Common Metadata
 
 | Field Name     | Src     | Prod    | XML Tag                                         | Description                                                  |
@@ -218,9 +231,9 @@ None of the fields is required.
 | proj:wkt2 / proj:projjson | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod*.** Either WKT2 or PROJJSON needs to be given in addition to the EPSG code. It is also allowed to give both. |
 | proj:bbox                 | (✓)  | ✓ 1.7.5 | `ProductBoundingBox`        | **REQUIRED for *Prod* if the native CRS is not WGS84.** This is the bounding box in the native CRS of the product. Can be omitted if the native CRS is WGS84. |
 | proj:shape                |  ✗   | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine` | **REQUIRED for *Prod*.** Number of pixels in Y and X directions for the default grid. See comment below**. |
-| proj:transform            |  ✗   | (✓)     | *n/a*                       | Recommended to include the affine transformation coefficients for the default grid. See comment below**. |
+| proj:transform            |  ✗   | (✓)     | *n/a*                       | Recommended to include the affine transformation coefficients for the default grid. See comment below \[2]. |
 
-\** Values are assumed to apply to all Assets of an Item. If this is not the case, these fields should be specified at the [Item Asset level](#stac-item-assets) instead.
+\[2] Values are assumed to apply to all Assets of an Item. If this is not the case, these fields should be specified at the [Item Asset level](#stac-item-assets) instead.
 
 #### SAR
 
@@ -256,6 +269,10 @@ None of the fields is required.
 | view:incidence_angle | ✓ 1.6.5 | ✗    | *n/a*             | In degrees. Center between `card4l:incidence_angle_near_range` and `card4l:incidence_angle_far_range`. This is the sensor incidence angle. For per-pixel incidence angles, refer to the asset with the role `local-incidence-angle`. |
 
 ### STAC Item Links
+
+All CARD4L compliant STAC Catalog are **required** to make intensive use of STAC link relation types such as
+`root`, `parent`, `child`, `item` and `collection`,
+which then covers explicit requirements such as 1.6.1 and 1.7.1 (e.g. `SourceDataRepository` and `RepositoryURL`) through STAC links. 
 
 | Relation Type                  | Src      | Prod                | XML Tag                    | Description                                                  |
 | ------------------------------ | -------- | ------------------- | -------------------------- | ------------------------------------------------------------ |
@@ -323,10 +340,10 @@ For those details please refer to the ["Additional properties" column in the tab
 | raster:bands              | ✗       | ✓       | see below                                       | \[[Raster Band Object](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#raster-band-object)\] | Bands with at least the required fields for the corresponding asset role (see above and below). |
 | card4l:ellipsoidal_height | ✗       | ✓       | `EllipsoidalHeight`                             | number                                                       | Indicate which ellipsoidal (mean) height was used, in meters. |
 | card4l:border_pixels      | ✗       | ✓ 1.7.7 | `NumBorderPixels`                               | integer                                                      | Number of border pixels (**required** only if applicable).   |
-| proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset. See comment below*.                  |
+| proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset. See comment below \[3].              |
 | proj:transform            | ✗       | (✓)     | *n/a*                                           | \[number]                                                    | The affine transformation coefficients for the default grid. See comment below*. |
 
-\* `proj:shape` and `proj:transform` only need to be specified at the Item Asset level if the values vary between 
+\[3] `proj:shape` and `proj:transform` only need to be specified at the Item Asset level if the values vary between 
 Assets. Specify in Item properties otherwise. See also comment in [Projection](#Projection).
 
 ##### raster:bands
@@ -336,13 +353,8 @@ Assets. Specify in Item properties otherwise. See also comment in [Projection](#
 | data_type       | ✗    | ✓     | `DataType`                                   | string                                                       | One of the [Data Types](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#data-types). |
 | bits_per_sample | ✗    | ✓     | `BitsPerSample`                              | integer                                                      | Bits per sample, e.g. 8, 16, 32, ...                         |
 | unit            | ✗    | ✓     | `SampleType`                                 | string                                                       | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/). |
-| values          | ✗    | ✓ 2.2 | `ValidData` and `InvalidData` in `BitValues` | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v1.0.0/README.md#mapping-object)\] | Specify value(s) for valid and invalid data separately.      |
+| values          | ✗    | ✓ 2.2 | `ValidData` and `InvalidData` in `BitValues` | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v1.0.0/README.md#mapping-object)\] | Specify value(s) for valid and invalid data separately. \[4] |
 | nodata          | ✗    | ✓ 2.2 | `NoData` in `BitValues`                      | \[any]                                                       | Value(s) for no-data.                                        |
 
-## Notes
-
-- 1.6.1 / 1.7.1: `SourceDataRepository` and `RepositoryURL` are covered by STAC link structures. 
-  All CARD4L compliant STAC Catalog are **required** to make intensive use of STAC link relation types such as
-  `root`, `parent`, `child`, `item` and `collection`.
-- 2.2: `raster:bands[*].values` is not standardized yet in STAC, this could change to `file:values`
-  or something different with a similar structure in the future.
+\[4] `raster:bands[*].values` is not standardized yet in STAC, this could change to `file:values`
+or something different with a similar structure in the future.
