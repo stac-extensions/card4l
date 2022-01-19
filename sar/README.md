@@ -124,8 +124,8 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:source_geometry                 | ✓ 1.6.7     | ✗           | `SourceDataGeometry`                                         | string                                                  | **REQUIRED.** One of `slant-range` or `ground-range`.        |
 | card4l:incidence_angle_near_range      | ✓ 1.6.7     | ✗           | `IncAngleNearRange`                                          | number                                                  | **REQUIRED.** In degrees.                                    |
 | card4l:incidence_angle_far_range       | ✓ 1.6.7     | ✗           | `IncAngleFarRange`                                           | number                                                  | **REQUIRED.** In degrees.                                    |
-| card4l:resolution_azimuth              | ✓ 1.6.7     | ✗           | `AzimuthResolution`                                          | Map<string, number>                                     | **REQUIRED.** The azimuth resolution per beam, in meters (m). The beam ID is the object key and the value is the resolution. See also `sar:resolution_azimuth`. |
-| card4l:resolution_range                | ✓ 1.6.7     | ✗           | `RangeResolution`                                            | Map<string, number>                                     | **REQUIRED.** The range resolution per beam, in meters (m). The beam ID is the object key and the value is the resolution. See also `sar:resolution_range`. |
+| card4l:resolution_azimuth              | ✓ 1.6.7     | ✗           | `AzimuthResolution`                                          | Map\<string, number>                                    | **REQUIRED.** The azimuth resolution per beam, in meters (m). The beam ID is the object key and the value is the resolution. See also `sar:resolution_azimuth`. |
+| card4l:resolution_range                | ✓ 1.6.7     | ✗           | `RangeResolution`                                            | Map\<string, number>                                    | **REQUIRED.** The range resolution per beam, in meters (m). The beam ID is the object key and the value is the resolution. See also `sar:resolution_range`. |
 | card4l:noise_equivalent_intensity      | ✓ 1.6.9     | ✗           | `Estimates` in `NoiseEquivalentIntensity`                    | [Statistics Object](#statistics-object)                 | **REQUIRED.** Fill the object with statistics that are available for the source data, e.g. min, max and mean. Convert each to decibel, if required. |
 | card4l:noise_equivalent_intensity_type | ✓ 1.6.9     | ✗           | `NoiseEquivalentIntensity`, attribute `type`                 | string                                                  | **REQUIRED.** One of `beta0`, `sigma0`, or `gamma0`.         |
 | card4l:peak_sidelobe_ratio             | ✓ 1.6.9     | ✗           | `PeakSideLobeRatio`                                          | number                                                  | Peak sidelobe ratio (PSLR) in decibel.                       |
@@ -180,12 +180,12 @@ If not available in machine-readable form, can also be specified in `processing:
 The following fields are all suggested in CARD4L requirement 1.6.6. 
 None of the fields is required.
 
-| Field Name             | Data Type | XML Tag                | Description                                                  |
-| ---------------------- | --------- | ---------------------- | ------------------------------------------------------------ |
-| lut_applied            | string    | `lutApplied`           |                                                              |
-| range_look_bandwidth   | \[number] | `RangeLookBandwidth`   | Range Look Bandwidth per swath in Gigahertz (GHz). |
-| azimuth_look_bandwidth | \[number] | `AzimuthLookBandwidth` | Azimuth Look Bandwidth per swath in Gigahertz (GHz). |
-| ...                    | ...       | *n/a*                  | Add all source data processing parameters.                   |
+| Field Name             | Data Type            | XML Tag                | Description                                                  |
+| ---------------------- | -------------------- | ---------------------- | ------------------------------------------------------------ |
+| lut_applied            | string               | `lutApplied`           |                                                              |
+| range_look_bandwidth   | Map\<string, number> | `RangeLookBandwidth`   | Range Look Bandwidth per beam, in Gigahertz (GHz). The beam ID is the object key and the value is the bandwidth. |
+| azimuth_look_bandwidth | Map\<string, number> | `AzimuthLookBandwidth` | Azimuth Look Bandwidth per beam, in Gigahertz (GHz). The beam ID is the object key and the value is the bandwidth. |
+| ...                    | ...                  | *n/a*                  | Add all source data processing parameters.                   |
 
 #### Common Metadata
 

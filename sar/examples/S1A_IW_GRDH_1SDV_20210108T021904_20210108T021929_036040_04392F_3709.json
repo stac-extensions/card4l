@@ -26,6 +26,18 @@
     "card4l:beam_id": "TOPS",
     "card4l:orbit_data_source": "resorb",
     "card4l:orbit_mean_altitude": 693000,
+    "card4l:source_processing_parameters": {
+      "range_look_bandwidth": {
+        "iw1": 0.0141,
+        "iw2": 0.0121,
+        "iw3": 0.0107
+      },
+      "azimuth_look_bandwidth": {
+        "iw1": 3.27e-7,
+        "iw2": 3.13e-7,
+        "iw3": 3.14e-7
+      }
+    },
     "card4l:resolution_azimuth": {
       "iw1": 22.5,
       "iw2": 22.6,

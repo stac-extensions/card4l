@@ -129,15 +129,17 @@
               "type": "string"
             },
             "range_look_bandwidth": {
-              "type": "array",
-              "items": {
-                "type": "number"
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 0
               }
             },
             "azimuth_look_bandwidth": {
-              "type": "array",
-              "items": {
-                "type": "number"
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 0
               }
             }
           }
