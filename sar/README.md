@@ -145,7 +145,7 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:egm_resampling_method           | ✗           | ✓ 4.2       | `EGMResamplingMethod`                                        | string                                                  | The resampling method used for the EGM, see above for example values. |
 | card4l:northern_geometric_accuracy     | ✗           | ✓ 4.3       | `NorthernSTDev` / `NorthernBias` in `GeoCorrAccuracy`        | number                                                  | **REQUIRED.** An estimate of the northern geometric accuracy in meters. |
 | card4l:eastern_geometric_accuracy      | ✗           | ✓ 4.3       | `EasternSTDev` / `EasternBias` in `GeoCorrAccuracy`          | number                                                  | **REQUIRED.** An estimate of the eastern geometric accuracy in meters. |
-| card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED if no reference URL/DOI has been provided as a [link with relation type](#stac-item-links) `gridding-convention`** A brief free text description of the gridding convention used. |
+| card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED.** A brief free text description of the gridding convention used, see also the [link relation type](#stac-item-links) `gridding-convention`. |
 
 ##### Statistics Object
 
@@ -214,15 +214,11 @@ None of the fields is required.
 
 | Field Name                | Src  | Prod    | XML Tag                     | Description                                  |
 | ------------------------- | ---- | ------- | --------------------------- | -------------------------------------------- |
-| proj:epsg                 | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod*.** See comment below*. |
-| proj:wkt2 / proj:projjson | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod* if `proj:epsg` is `null`.** See comment below*. |
+| proj:epsg                 | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod*.** EPSG code as integer or `null` if there is no suitable EPSG code. |
+| proj:wkt2 / proj:projjson | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod*.** Either WKT2 or PROJJSON needs to be given in addition to the EPSG code. It is also allowed to give both. |
 | proj:bbox                 | (✓)  | ✓ 1.7.5 | `ProductBoundingBox`        | **REQUIRED for *Prod* if the native CRS is not WGS84.** This is the bounding box in the native CRS of the product. Can be omitted if the native CRS is WGS84. |
 | proj:shape                |  ✗   | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine` | **REQUIRED for *Prod*.** Number of pixels in Y and X directions for the default grid. See comment below**. |
 | proj:transform            |  ✗   | (✓)     | *n/a*                       | Recommended to include the affine transformation coefficients for the default grid. See comment below**. |
-
-\* For *Prod* the metadata must specify the map projection (see 1.7.9).
-`proj:epsg` is **required** by STAC. If there's no suitable EPSG code, set the field to `null`,
-which then requires one of `proj:wkt2` or `proj:projjson` to be specified.
 
 \** Values are assumed to apply to all Assets of an Item. If this is not the case, these fields should be specified at the [Item Asset level](#stac-item-assets) instead.
 
@@ -324,11 +320,11 @@ For those details please refer to the ["Additional properties" column in the tab
 | sar:polarizations         | (✓)     | ✓       | *n/a*                                           | \[string\]                                                   | The polarization(s) of the asset.                            |
 | file:header_size          | ✗       | ✓ 1.7.7 | `HeaderSize`                                    | integer                                                      | File header size in bytes (**required** if applicable to the file format). |
 | file:byte_order           | ✗       | ✓       | `ByteOrder`                                     | string                                                       | One of `big-endian` or `little-endian`                       |
-| raster:bands              | ✗       | ✓       | see below | \[[Raster Band Object](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#raster-band-object)\] | Bands with at least the required fields for the corresponding asset role (see above and below). |
-| card4l:ellipsoidal_height | ✗       | ✓       | `EllipsoidalHeight`                             | number                                                       | Indicate which ellipsoidal height was used, in meters.       |
-| card4l:border_pixels      | ✗       | ✓ 1.7.7 | `NumBorderPixels`                               | integer                                                      | Number of border pixels (**required** only if applicable). |
-| proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset. See comment below*. |
-| proj:transform            |  ✗      | (✓)     | *n/a*                                           | \[number]                                                    | The affine transformation coefficients for the default grid. See comment below*. |
+| raster:bands              | ✗       | ✓       | see below                                       | \[[Raster Band Object](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#raster-band-object)\] | Bands with at least the required fields for the corresponding asset role (see above and below). |
+| card4l:ellipsoidal_height | ✗       | ✓       | `EllipsoidalHeight`                             | number                                                       | Indicate which ellipsoidal (mean) height was used, in meters. |
+| card4l:border_pixels      | ✗       | ✓ 1.7.7 | `NumBorderPixels`                               | integer                                                      | Number of border pixels (**required** only if applicable).   |
+| proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset. See comment below*.                  |
+| proj:transform            | ✗       | (✓)     | *n/a*                                           | \[number]                                                    | The affine transformation coefficients for the default grid. See comment below*. |
 
 \* `proj:shape` and `proj:transform` only need to be specified at the Item Asset level if the values vary between 
 Assets. Specify in Item properties otherwise. See also comment in [Projection](#Projection).
@@ -348,8 +344,5 @@ Assets. Specify in Item properties otherwise. See also comment in [Projection](#
 - 1.6.1 / 1.7.1: `SourceDataRepository` and `RepositoryURL` are covered by STAC link structures. 
   All CARD4L compliant STAC Catalog are **required** to make intensive use of STAC link relation types such as
   `root`, `parent`, `child`, `item` and `collection`.
-- 1.7.9: The CARD4L specification is not clear whether a string representation of a CRS is required
-  or whether an EPSG code would fulfill the requirement already.
 - 2.2: `raster:bands[*].values` is not standardized yet in STAC, this could change to `file:values`
   or something different with a similar structure in the future.
-- 4.4: In the CARD4L metadata specification the Gridding Convention details seem to be required although not required in the textual specification.
