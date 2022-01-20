@@ -112,6 +112,9 @@
         "card4l:eastern_geometric_accuracy": {
           "$ref": "#/definitions/geometric_accuracy"
         },
+        "card4l:geometric_accuracy_radial_rmse": {
+          "type": "number"
+        },
         "card4l:resampling_method": {
           "type": "string"
         },

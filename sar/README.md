@@ -146,6 +146,7 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:geometric_accuracy_type         | ✗           | ✓ 4.3       | `type` in `GeoCorrAccuracy`                                  | string                                                  | **REQUIRED.** Either `slant-range` or `gtc` (Geocoded Terrain Corrected). |
 | card4l:northern_geometric_accuracy     | ✗           | ✓ 4.3       | `GeoCorrAccuracy`                                            | [Geometric Accuracy Object](#geometric-accuracy-object) | **REQUIRED.** An estimate of the northern or line geometric accuracy. |
 | card4l:eastern_geometric_accuracy      | ✗           | ✓ 4.3       | `GeoCorrAccuracy`                                            | [Geometric Accuracy Object](#geometric-accuracy-object) | **REQUIRED.** An estimate of the eastern or sample geometric accuracy. |
+| card4l:geometric_accuracy_radial_rmse  | ✗           | ✓ 4.3       | `rRMSE` in `GeoCorrAccuracy`                                 | number                                                  | Radial root mean square error (rRMSE) for output product sub-sample accuracy, in meters. |
 | card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED.** A brief free text description of the gridding convention used, see also the [link relation type](#stac-item-links) `gridding-convention`. |
 
 ##### Statistics Object
