@@ -70,8 +70,17 @@
     "card4l:measurement_convention": "linear power",
     "card4l:conversion_eq": "10*log10(DN)",
     "card4l:resampling_method": "bilinear",
-    "card4l:northern_geometric_accuracy": 0.6,
-    "card4l:eastern_geometric_accuracy": 4.4,
+    "card4l:geometric_accuracy_type": "gtc",
+    "card4l:northern_geometric_accuracy": {
+      "stddev": 0.5,
+      "bias": -0.2
+    },
+    "card4l:eastern_geometric_accuracy": {
+      "stddev": 0.5,
+      "bias": -4.4
+    },
+    "card4l:geometric_accuracy_radial_rmse": 4.4,
+    "card4l:gridding_convention": "WGS84 1 degree grid, see https://docs.sentinel-hub.com/api/latest/api/batch/#tiling-grids for details.",
     "datetime": "2021-01-08T02:19:04.286944Z",
     "start_datetime": "2021-01-08T02:19:04.286944Z",
     "end_datetime": "2021-01-08T02:19:54.285659Z",

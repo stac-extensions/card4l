@@ -41,34 +41,19 @@
         "card4l:measurement_convention",
         "card4l:conversion_eq",
         "card4l:northern_geometric_accuracy",
-        "card4l:eastern_geometric_accuracy"
+        "card4l:eastern_geometric_accuracy",
+        "card4l:gridding_convention"
       ],
       "$comment": "`proj:shape` is required either on the item level or on the asset level for the asset with role `data`. This requirement is not checked by this schema yet.",
-      "oneOf": [
+      "anyOf": [
         {
-          "properties": {
-            "proj:epsg": {
-              "type": "integer"
-            }
-          }
+          "required": [
+            "proj:wkt2"
+          ]
         },
         {
-          "properties": {
-            "proj:epsg": {
-              "type": "null"
-            }
-          },
-          "anyOf": [
-            {
-              "required": [
-                "proj:wkt2"
-              ]
-            },
-            {
-              "required": [
-                "proj:projjson"
-              ]
-            }
+          "required": [
+            "proj:projjson"
           ]
         }
       ],
@@ -114,13 +99,21 @@
         "card4l:absolute_radiometric_accuracy": {
           "type": "number"
         },
+        "card4l:geometric_accuracy_type": {
+          "type": "string",
+          "enum": [
+            "gtc",
+            "slant-range"
+          ]
+        },
         "card4l:northern_geometric_accuracy": {
-          "type": "number",
-          "minimum": 0
+          "$ref": "#/definitions/geometric_accuracy"
         },
         "card4l:eastern_geometric_accuracy": {
-          "type": "number",
-          "minimum": 0
+          "$ref": "#/definitions/geometric_accuracy"
+        },
+        "card4l:geometric_accuracy_radial_rmse": {
+          "type": "number"
         },
         "card4l:resampling_method": {
           "type": "string"
@@ -288,5 +281,22 @@
         }
       }
     }
-  ]
+  ],
+  "definitions": {
+    "geometric_accuracy": {
+      "type": "object",
+      "required": [
+        "bias",
+        "stddev"
+      ],
+      "properties": {
+        "bias": {
+          "type": "number"
+        },
+        "stddev": {
+          "type": "number"
+        }
+      }
+    }
+  }
 }

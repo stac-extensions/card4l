@@ -35,6 +35,8 @@
         "card4l:orbit_data_source",
         "card4l:incidence_angle_near_range",
         "card4l:incidence_angle_far_range",
+        "card4l:resolution_azimuth",
+        "card4l:resolution_range",
         "card4l:noise_equivalent_intensity",
         "card4l:noise_equivalent_intensity_type",
         "sar:instrument_mode",
@@ -72,6 +74,20 @@
         "card4l:incidence_angle_far_range": {
           "type": "number",
           "minimum": 0
+        },
+        "card4l:resolution_azimuth": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "card4l:resolution_range": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
         },
         "card4l:noise_equivalent_intensity": {
           "type": "object",
@@ -113,15 +129,17 @@
               "type": "string"
             },
             "range_look_bandwidth": {
-              "type": "array",
-              "items": {
-                "type": "number"
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 0
               }
             },
             "azimuth_look_bandwidth": {
-              "type": "array",
-              "items": {
-                "type": "number"
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 0
               }
             }
           }
