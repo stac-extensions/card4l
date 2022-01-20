@@ -149,6 +149,13 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 | card4l:geometric_accuracy_radial_rmse  | ✗           | ✓ 4.3       | `rRMSE` in `GeoCorrAccuracy`                                 | number                                                  | Radial root mean square error (rRMSE) for output product sub-sample accuracy, in meters. |
 | card4l:gridding_convention             | ✗           | ✓ 4.4       | `GriddingConvention`                                         | string                                                  | **REQUIRED.** A brief free text description of the gridding convention used, see also the [link relation type](#stac-item-links) `gridding-convention`. |
 
+Note that the following fields are aligned with the CARD4L Optical extension:
+- `card4l:specification`
+- `card4l:specification_version`
+- `card4l:northern_geometric_accuracy`
+- `card4l:eastern_geometric_accuracy`
+- `card4l:geometric_accuracy_radial_rmse`
+
 ##### Statistics Object
 
 | Field Name    | Type   | Description                                        |
@@ -191,10 +198,10 @@ None of the fields is required.
 
 ##### Geometric Accuracy Object
 
-| Field Name | Data Type | XML Tag                                                      | Description              |
-| ---------- | --------- | ------------------------------------------------------------ | ------------------------ |
-| bias       | number    | `NothernBias` / `LineBias` / `EasternBias` / `SampleBias` \[1] | **REQUIRED.** In meters. |
-| stddev     | number    | `NothernSTDev` / `LineSTDev` / `EasternSTDev` / `SampleSTDev` \[1] | **REQUIRED.** In meters. |
+| Field Name | Data Type | XML Tag                                                            | Description              |
+| ---------- | --------- | ------------------------------------------------------------------ | ------------------------ |
+| bias       | number    | `NothernBias` / `LineBias` / `EasternBias` / `SampleBias` \[1]     | **REQUIRED.** Bias, in meters. |
+| stddev     | number    | `NothernSTDev` / `LineSTDev` / `EasternSTDev` / `SampleSTDev` \[1] | **REQUIRED.** Standard deviation, in meters. |
 
 \[1] Depending on the type given in `card4l:geometric_accuracy_type` different specifications are referred to:
 
@@ -291,7 +298,7 @@ which then covers explicit requirements such as 1.6.1 and 1.7.1 (e.g. `SourceDat
 | radiometric-terrain-correction | ✗        | ✓ 3.4               | `RTCAlgorithm`             | **REQUIRED.** URL to the Radiometric Terrain Correction algorithm details. |
 | radiometric-accuracy           | ✗        | ✓ 3.5               | `RadAccuracyReference`     | URL describing the radiometric uncertainty of the product. |
 | geometric-correction           | ✗        | ✓ 4.1               | `GeoCorrAlgorithm`         | URL to the Geometric Correction algorithm details.          |
-| elevation-model *or* surface-model | ✗      | ✓ 4.2               | `DEMReference`             | **REQUIRED.** URL to the Digital Elevation Model (DEM) or Digital Surface Model (DSM) used for Geometric Terrain Correction. Preferably URLs to a STAC Item with additional metadata such as the line-spacing, column-spacing, horizontal and vertical accuracy. |
+| elevation-model *or* surface-model | ✗    | ✓ 4.2               | `DEMReference`             | **REQUIRED.** URL to the Digital Elevation Model (DEM) or Digital Surface Model (DSM) used for Geometric Terrain Correction. Preferably URLs to a STAC Item with additional metadata such as the line-spacing, column-spacing, horizontal and vertical accuracy. |
 | earth-gravitational-model      | ✗        | ✓ 4.2               | `EGMReference`             | **REQUIRED.** URL to the Earth Gravitational Model (EGM) used for Geometric Correction. Preferably URLs to a STAC Item with additional metadata for the EGM (see above). |
 | geometric-accuracy             | ✗        | ✓ 4.3               | `GeometricCorrAccuracy`    | URL to documentation of estimate of absolute localization error. |
 | gridding-convention            | ✗        | ✓ 4.4               | `GriddingConvention`       | URL that describes the gridding convention used. |

@@ -62,11 +62,11 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 
 | Field Name      | Req.  | Description                                                  |
 | --------------- | ----- | ------------------------------------------------------------ |
-| stac_extensions | *n/a* | **REQUIRED.** Must contain all extensions used.  See below for details\*. |
+| stac_extensions | *n/a* | **REQUIRED.** Must contain all extensions used.  See below for details \[1]. |
 | geometry        | 1.4   | **REQUIRED.** The geometry of the acquisition.               |
 | bbox            | 1.4   | **REQUIRED.** The bounding box of the acquisition.           |
 
-\* The following values for `stac_extensions` apply:
+\[1] The following values for `stac_extensions` apply:
 
 | Value                                                                 | Required |
 | --------------------------------------------------------------------- | -------- |
@@ -82,14 +82,22 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 
 #### CARD4L
 
-| Field Name                         | Data Type | Req.  | Description                                                  |
-| ---------------------------------- | --------- | ----- | ------------------------------------------------------------ |
-| card4l:specification               | string    | *n/a* | **REQUIRED.** The CARD4L specification implemented, either `SR` (Optical, Surface Reflectance) or `ST` (Optical, Surface Temperature). |
-| card4l:specification_version       | string    | *n/a* | **REQUIRED.** The CARD4L specification version. Currently always `5.0`. |
-| card4l:northern_geometric_accuracy | number    | 1.8   | An estimate of the northern geometric accuracy in meters.    |
-| card4l:eastern_geometric_accuracy  | number    | 1.8   | An estimate of the eastern geometric accuracy in meters.     |
+| Field Name                            | Data Type | Req.  | Description                                                  |
+| ------------------------------------- | --------- | ----- | ------------------------------------------------------------ |
+| card4l:specification                  | string    | *n/a* | **REQUIRED.** The CARD4L specification implemented, either `SR` (Optical, Surface Reflectance) or `ST` (Optical, Surface Temperature). |
+| card4l:specification_version          | string    | *n/a* | **REQUIRED.** The CARD4L specification version. Currently always `5.0`. |
+| card4l:northern_geometric_accuracy    | [Geometric Accuracy Object](#geometric-accuracy-object) | 1.8 | An estimate of the northern geometric accuracy. |
+| card4l:eastern_geometric_accuracy     | [Geometric Accuracy Object](#geometric-accuracy-object) | 1.8 | An estimate of the eastern geometric accuracy. |
+| card4l:geometric_accuracy_radial_rmse | number    | 1.8   | Radial root mean square error (rRMSE) for sub-sample accuracy, in meters. |
 
-Note that all these fields here are aligned with the CARD4L SAR extension.
+Note that all these fields here are aligned with the STAC CARD4L SAR extension.
+
+##### Geometric Accuracy Object
+
+| Field Name | Data Type | Description              |
+| ---------- | --------- | ------------------------ |
+| bias       | number    | **REQUIRED.** Bias, in meters. |
+| stddev     | number    | **REQUIRED.** Standard deviation, in meters. |
 
 #### Common Metadata
 
@@ -140,12 +148,12 @@ either `proj:epsg` or one of the alternatives.
 | Field Name           | Req.  | Description                                                  |
 | -------------------- | ----- | ------------------------------------------------------------ |
 | view:off_nadir       | *n/a* | The average off-nadir angle, for per-pixel angles. In degrees. |
-| view:incidence_angle | \*    | **REQUIRED.** The average incidence angle, for per-pixel angles, refer to the asset with the key `incidence-angle`. In degrees. |
-| view:azimuth         | \*    | **REQUIRED.** The average azimuth angle, for per-pixel angles, refer to the asset with the key `azimuth`. In degrees. |
-| view:sun_azimuth     | \*    | **REQUIRED.** The average sun azimuth angle, for per-pixel angles, refer to the asset with the key `sun-azimuth`. In degrees. |
-| view:sun_elevation   | \*    | **REQUIRED.** The average sub elevation angle, for per-pixel angles, refer to the asset with the key `sun-elevation`. In degrees. |
+| view:incidence_angle | \[2]  | **REQUIRED.** The average incidence angle, for per-pixel angles, refer to the asset with the key `incidence-angle`. In degrees. |
+| view:azimuth         | \[2]  | **REQUIRED.** The average azimuth angle, for per-pixel angles, refer to the asset with the key `azimuth`. In degrees. |
+| view:sun_azimuth     | \[2]  | **REQUIRED.** The average sun azimuth angle, for per-pixel angles, refer to the asset with the key `sun-azimuth`. In degrees. |
+| view:sun_elevation   | \[2]  | **REQUIRED.** The average sub elevation angle, for per-pixel angles, refer to the asset with the key `sun-elevation`. In degrees. |
 
-\* = Requirement 2.8 for Surface Temperature (ST) / 2.11 for Surface Reflectance (SR)
+\[2] Requirement 2.8 for Surface Temperature (ST) / 2.11 for Surface Reflectance (SR)
 
 ### STAC Item Links
 
@@ -241,7 +249,7 @@ For those details please refer to the ["Additional properties" column in the tab
 
 - 1.13: The algorithms can be given either in `processing:software` or as link with relation type `about`. 
   One of them is **required** by CARD4L.
-- 2.13 (SR): CARD4L lists no specific requirements thus it's missing in this document, too.
+- 2.13 (SR): CARD4L lists no specific requirements thus it's missing in this document.
 - 3.2 (SR) / 3.3 (ST): Measurement Uncertainty is not required and it was not clear in which form this should be provided. 
   Also the CARD4L specification states for SR that
   
@@ -250,5 +258,6 @@ For those details please refer to the ["Additional properties" column in the tab
   
   Thus this requirement is not captured in this document.
 - 3.3 (SR): Measurement Normalisation is not required and it was not clear in which form this should be provided. 
-  Thus this requirement is not captured in this document, but we have added a link relation type to link to information on measurement normalisation.
-- 4.1 (SR): This requirement doesn't list any direct requirements for the metadata.
+  Thus this requirement is not captured in this document, but we have added the link relation type
+  `measurement-normalization` to link to information on measurement normalisation.
+- 4.1 (SR): CARD4L lists no specific requirements thus it's missing in this document.

@@ -88,12 +88,13 @@
       ],
       "properties": {
         "card4l:northern_geometric_accuracy": {
-          "type": "number",
-          "minimum": 0
+          "$ref": "#/definitions/geometric_accuracy"
         },
         "card4l:eastern_geometric_accuracy": {
-          "type": "number",
-          "minimum": 0
+          "$ref": "#/definitions/geometric_accuracy"
+        },
+        "card4l:geometric_accuracy_radial_rmse": {
+          "type": "number"
         }
       }
     },
@@ -210,5 +211,22 @@
         }
       }
     }
-  ]
+  ],
+  "definitions": {
+    "geometric_accuracy": {
+      "type": "object",
+      "required": [
+        "bias",
+        "stddev"
+      ],
+      "properties": {
+        "bias": {
+          "type": "number"
+        },
+        "stddev": {
+          "type": "number"
+        }
+      }
+    }
+  }
 }
