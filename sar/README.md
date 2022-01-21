@@ -257,8 +257,8 @@ None of the fields is required.
 | sar:looks_range             | ✓ 1.6.6 | ✗     | `RangeNumberOfLooks`                                         | **REQUIRED.**                                                |
 | sar:pixel_spacing_azimuth   | ✓ 1.6.7 | ✗     | `AzimuthPixelSpacing`                                        | **REQUIRED.** In meters (m).                                 |
 | sar:pixel_spacing_range     | ✓ 1.6.7 | ✗     | `RangePixelSpacing`                                          | **REQUIRED.** In meters (m).                                 |
-| sar:resolution_azimuth      | ✓ 1.6.7 | ✗     | `AzimuthResolution`                                          | **REQUIRED.** The mean of `card4l:resolution_azimuth`, in meters (m). |
-| sar:resolution_range        | ✓ 1.6.7 | ✗     | `RangeResolution`                                            | **REQUIRED.** The mean of `card4l:resolution_range`, in meters (m). |
+| sar:resolution_azimuth      | ✓ 1.6.7 | ✗     | `AzimuthResolution`                                          | **REQUIRED.** The maximum ability to distinguish two adjacent targets parallel to the flight path, which is the lowest value of `card4l:resolution_azimuth`, in meters (m). |
+| sar:resolution_range        | ✓ 1.6.7 | ✗     | `RangeResolution`                                            | **REQUIRED.** The maximum ability to distinguish two adjacent targets perpendicular to the flight path, which is the lowest value of `card4l:resolution_range`, in meters (m). |
 | sar:looks_equivalent_number | ✓ 1.6.9 | ✗     | `EquivalentNumberOfLooks`                                    |                                                              |
 
 #### Satellite
