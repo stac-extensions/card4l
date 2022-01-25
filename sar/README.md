@@ -1,7 +1,7 @@
 # STAC CARD4L SAR Extension Specification
 
 - **Title:** CARD4L SAR
-- **Identifier:** <https://stac-extensions.github.io/card4l/v1.0.0/sar/schema.json>
+- **Identifier:** <https://stac-extensions.github.io/card4l/v0.1.0/sar/schema.json>
 - **Field Name Prefix:** card4l (shared with the CARD4L Optical Extension)
 - **Scope:** Item
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
@@ -99,8 +99,8 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 
 | Value                                                              | Src  | Prod |
 | ------------------------------------------------------------------ | ---- | ---- |
-| `https://stac-extensions.github.io/card4l/v1.0.0/sar/source.json`  | ✓    | ✗    |
-| `https://stac-extensions.github.io/card4l/v1.0.0/sar/product.json` | ✗    | ✓    |
+| `https://stac-extensions.github.io/card4l/v0.1.0/sar/source.json`  | ✓    | ✗    |
+| `https://stac-extensions.github.io/card4l/v0.1.0/sar/product.json` | ✗    | ✓    |
 | `https://stac-extensions.github.io/file/v2.0.0/schema.json`        | ✗    | ✓    |
 | `https://stac-extensions.github.io/processing/v1.1.0/schema.json`  | ✓    | ✓    |
 | `https://stac-extensions.github.io/projection/v1.0.0/schema.json`  | (✓)  | ✓    |
