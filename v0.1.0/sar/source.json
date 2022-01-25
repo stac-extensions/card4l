@@ -1,0 +1,173 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stac-extensions.github.io/card4l/v0.1.0/sar/source.json#",
+  "title": "CARD4L SAR Extension",
+  "description": "STAC CARD4L SAR Extension for STAC Items.",
+  "type": "object",
+  "properties": {
+    "stac_extensions": {
+      "type": "array",
+      "allOf": [
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/card4l/v0.1.0/sar/source.json"
+          }
+        },
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/sat/v1.0.0/schema.json"
+          }
+        },
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/view/v1.0.0/schema.json"
+          }
+        }
+      ]
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "instruments",
+        "platform",
+        "card4l:source_geometry",
+        "card4l:beam_id",
+        "card4l:orbit_data_source",
+        "card4l:incidence_angle_near_range",
+        "card4l:incidence_angle_far_range",
+        "card4l:resolution_azimuth",
+        "card4l:resolution_range",
+        "card4l:noise_equivalent_intensity",
+        "card4l:noise_equivalent_intensity_type",
+        "sar:instrument_mode",
+        "sar:frequency_band",
+        "sar:center_frequency",
+        "sar:polarizations",
+        "sar:observation_direction",
+        "sar:looks_azimuth",
+        "sar:looks_range",
+        "sar:pixel_spacing_azimuth",
+        "sar:pixel_spacing_range",
+        "sar:resolution_azimuth",
+        "sar:resolution_range",
+        "sat:orbit_state"
+      ],
+      "properties": {
+        "card4l:source_geometry": {
+          "type": "string",
+          "enum": [
+            "slant-range",
+            "ground-range"
+          ]
+        },
+        "card4l:beam_id": {
+          "type": "string"
+        },
+        "card4l:orbit_mean_altitude": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:incidence_angle_near_range": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:incidence_angle_far_range": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:resolution_azimuth": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "card4l:resolution_range": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "card4l:noise_equivalent_intensity": {
+          "type": "object",
+          "minProperties": 1,
+          "properties": {
+            "mean": {
+              "title": "Mean value of all the pixels in the band",
+              "type": "number"
+            },
+            "minimum": {
+              "title": "Minimum value of all the pixels in the band",
+              "type": "number"
+            },
+            "maximum": {
+              "title": "Maximum value of all the pixels in the band",
+              "type": "number"
+            }
+          }
+        },
+        "card4l:noise_equivalent_intensity_type": {
+          "type": "string",
+          "enum": [
+            "beta0",
+            "sigma0",
+            "gamma0"
+          ]
+        },
+        "card4l:mean_faraday_rotation_angle": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:ionosphere_indicator": {
+          "type": "boolean"
+        },
+        "card4l:source_processing_parameters": {
+          "type": "object",
+          "properties": {
+            "lut_applied": {
+              "type": "string"
+            },
+            "range_look_bandwidth": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "azimuth_look_bandwidth": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "card4l:peak_sidelobe_ratio": {
+          "type": "number",
+          "minimum": 0
+        },
+        "card4l:integrated_sidelobe_ratio": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": {
+        "allOf": [
+          {
+            "$comment": "TODO"
+          }
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "common.json"
+    }
+  ]
+}

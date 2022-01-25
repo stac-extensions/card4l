@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stac-extensions.github.io/card4l/v0.1.0/sar/commons.json#",
+  "title": "CARD4L SAR Commons",
+  "description": "STAC CARD4L SAR Commons for STAC Items.",
+  "type": "object",
+  "required": [
+    "stac_extensions",
+    "id",
+    "geometry",
+    "bbox",
+    "type",
+    "properties",
+    "links",
+    "assets"
+  ],
+  "properties": {
+    "stac_extensions": {
+      "type": "array",
+      "allOf": [
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/processing/v1.1.0/schema.json"
+          }
+        },
+        {
+          "contains": {
+            "const": "https://stac-extensions.github.io/sar/v1.0.0/schema.json"
+          }
+        }
+      ]
+    },
+    "type": {
+      "const": "Feature"
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "datetime",
+        "start_datetime",
+        "end_datetime",
+        "processing:facility",
+        "processing:level",
+        "processing:software",
+        "sar:product_type"
+      ],
+      "properties": {
+        "card4l:orbit_data_source": {
+          "type": "string"
+        },
+        "card4l:noise_removal_applied": {
+          "type": "boolean",
+          "$comment": "The requirement to add a link with rel type `noise-removal` if this value is `true` is not part of the schema yet."
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "href",
+          "rel"
+        ]
+      },
+      "contains": {
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "rel": {
+            "const": "card4l-document"
+          },
+          "type": {
+            "enum": [
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+              "application/pdf"
+            ]
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": {
+        "allOf": [
+          {
+            "$comment": "TODO"
+          }
+        ]
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "$comment": "NRB-only requirements",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "card4l:specification",
+            "card4l:specification_version"
+          ],
+          "properties": {
+            "card4l:specification": {
+              "const": "NRB"
+            },
+            "card4l:specification_version": {
+              "const": "5.5"
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "POL-only requirements",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "card4l:specification",
+            "card4l:specification_version"
+          ],
+          "properties": {
+            "card4l:specification": {
+              "type": "string",
+              "const": "POL"
+            },
+            "card4l:specification_version": {
+              "type": "string",
+              "const": "3.5"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
