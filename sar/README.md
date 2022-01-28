@@ -238,7 +238,7 @@ None of the fields is required.
 | proj:epsg                 | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod*.** EPSG code as integer or `null` if there is no suitable EPSG code. |
 | proj:wkt2 / proj:projjson | (✓)  | ✓ 1.7.9 | `CoordinateReferenceSystem` | **REQUIRED for *Prod*.** Either WKT2 or PROJJSON needs to be given in addition to the EPSG code. It is also allowed to give both. |
 | proj:bbox                 | (✓)  | ✓ 1.7.5 | `ProductBoundingBox`        | **REQUIRED for *Prod* if the native CRS is not WGS84.** This is the bounding box in the native CRS of the product. Can be omitted if the native CRS is WGS84. |
-| proj:shape                |  ✗   | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine` | **REQUIRED for *Prod*.** Number of pixels in Y and X directions for the default grid. See comment below**. |
+| proj:shape                |  ✗   | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine` | **REQUIRED for *Prod*.** Number of pixels in Y and X directions for the default grid. See comment below \[2]. |
 | proj:transform            |  ✗   | (✓)     | *n/a*                       | Recommended to include the affine transformation coefficients for the default grid. See comment below \[2]. |
 
 \[2] Values are assumed to apply to all Assets of an Item. If this is not the case, these fields should be specified at the [Item Asset level](#stac-item-assets) instead.
@@ -349,7 +349,7 @@ For those details please refer to the ["Additional properties" column in the tab
 | card4l:ellipsoidal_height | ✗       | ✓       | `EllipsoidalHeight`                             | number                                                       | Indicate which ellipsoidal (mean) height was used, in meters. |
 | card4l:border_pixels      | ✗       | ✓ 1.7.7 | `NumBorderPixels`                               | integer                                                      | Number of border pixels (**required** only if applicable).   |
 | proj:shape                | ✗       | ✓ 1.7.7 | `NumberLines`, `NumberPixelsPerLine`            | \[integer]                                                   | The shape of the asset. See comment below \[3].              |
-| proj:transform            | ✗       | (✓)     | *n/a*                                           | \[number]                                                    | The affine transformation coefficients for the default grid. See comment below*. |
+| proj:transform            | ✗       | (✓)     | *n/a*                                           | \[number]                                                    | The affine transformation coefficients for the default grid. See comment below \[3]. |
 
 \[3] `proj:shape` and `proj:transform` only need to be specified at the Item Asset level if the values vary between 
 Assets. Specify in Item properties otherwise. See also comment in [Projection](#Projection).

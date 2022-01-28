@@ -198,7 +198,7 @@
     },
     {
       "href": "s3://sentinel-s1-l1c/GRD/2021/1/8/IW/DV/S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF",
-      "rel": "orbit-data-file",
+      "rel": "state-vectors",
       "title": "Orbit Data File with state vectors"
     },
     {
