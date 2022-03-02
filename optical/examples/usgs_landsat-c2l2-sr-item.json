@@ -46,8 +46,6 @@
     ]
   },
   "properties": {
-    "card4l:specification": "SR",
-    "card4l:specification_version": "5.0",
     "datetime": "2022-02-28T23:55:54.240245Z",
     "eo:cloud_cover": 93.83,
     "view:sun_azimuth": 88.11424233,
@@ -136,6 +134,7 @@
           "center_wavelength": 0.44
         }
       ],
+      "raster:bands" : [{"nodata": 0}],
       "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/oli-tirs/2022/092/067/LC09_L2SP_092067_20220228_20220302_02_T1/LC09_L2SP_092067_20220228_20220302_02_T1_SR_B1.TIF",
       "alternate": {
         "s3": {
@@ -160,6 +159,7 @@
           "center_wavelength": 0.48
         }
       ],
+      "raster:bands" : [{"nodata": 0}],
       "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/oli-tirs/2022/092/067/LC09_L2SP_092067_20220228_20220302_02_T1/LC09_L2SP_092067_20220228_20220302_02_T1_SR_B2.TIF",
       "alternate": {
         "s3": {
@@ -184,6 +184,7 @@
           "center_wavelength": 0.56
         }
       ],
+      "raster:bands" : [{"nodata": 0}],
       "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/oli-tirs/2022/092/067/LC09_L2SP_092067_20220228_20220302_02_T1/LC09_L2SP_092067_20220228_20220302_02_T1_SR_B3.TIF",
       "alternate": {
         "s3": {
@@ -208,6 +209,7 @@
           "center_wavelength": 0.65
         }
       ],
+      "raster:bands" : [{"nodata": 0}],
       "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/oli-tirs/2022/092/067/LC09_L2SP_092067_20220228_20220302_02_T1/LC09_L2SP_092067_20220228_20220302_02_T1_SR_B4.TIF",
       "alternate": {
         "s3": {
@@ -233,6 +235,7 @@
           "center_wavelength": 0.86
         }
       ],
+      "raster:bands" : [{"nodata": 0}],
       "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/oli-tirs/2022/092/067/LC09_L2SP_092067_20220228_20220302_02_T1/LC09_L2SP_092067_20220228_20220302_02_T1_SR_B5.TIF",
       "alternate": {
         "s3": {
@@ -258,6 +261,7 @@
           "center_wavelength": 1.6
         }
       ],
+      "raster:bands" : [{"nodata": 0}],
       "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/oli-tirs/2022/092/067/LC09_L2SP_092067_20220228_20220302_02_T1/LC09_L2SP_092067_20220228_20220302_02_T1_SR_B6.TIF",
       "alternate": {
         "s3": {
@@ -283,6 +287,7 @@
           "center_wavelength": 2.2
         }
       ],
+      "raster:bands" : [{"nodata": 0}],
       "href": "https://landsatlook.usgs.gov/data/collection02/level-2/standard/oli-tirs/2022/092/067/LC09_L2SP_092067_20220228_20220302_02_T1/LC09_L2SP_092067_20220228_20220302_02_T1_SR_B7.TIF",
       "alternate": {
         "s3": {
@@ -426,11 +431,6 @@
     {
       "rel": "root",
       "href": "https://landsatlook.usgs.gov/stac-server/"
-    },
-    {
-      "rel": "card4l-document",
-      "href": "https://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
-      "type": "application/pdf"
     }
   ],
   "collection": "landsat-c2l2-sr"
