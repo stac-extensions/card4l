@@ -46,6 +46,8 @@
     ]
   },
   "properties": {
+    "card4l:specification": "SR",
+    "card4l:specification_version": "5.0",
     "datetime": "2022-02-28T23:55:54.240245Z",
     "eo:cloud_cover": 93.83,
     "view:sun_azimuth": 88.11424233,
@@ -424,6 +426,11 @@
     {
       "rel": "root",
       "href": "https://landsatlook.usgs.gov/stac-server/"
+    },
+    {
+      "rel": "card4l-document",
+      "href": "https://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
+      "type": "application/pdf"
     }
   ],
   "collection": "landsat-c2l2-sr"
