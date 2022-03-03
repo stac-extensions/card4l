@@ -8,7 +8,8 @@
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
     "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
     "https://stac-extensions.github.io/alternate-assets/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/storage/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/storage/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.1.0/schema.json"
   ],
   "id": "LC09_L2SP_092067_20220228_20220302_02_T1_SR",
   "description": "Landsat Collection 2 Level-2 Surface Reflectance Product",
@@ -468,6 +469,14 @@
       "rel": "card4l-document",
       "href": "https://ceos.org/ard/files/PFS/SR/v5.0/CARD4L_Product_Family_Specification_Surface_Reflectance-v5.0.pdf",
       "type": "application/pdf"
+    },
+    {
+      "rel": "atmospheric-scattering",
+      "href": "https://example.com/fake-example-atmospheric-scattering.xml"
+    },
+    {
+      "rel": "water-vapor",
+      "href": "https://example.com/fake-example-water-vapor.xml"
     }
   ],
   "collection": "landsat-c2l2-sr"
