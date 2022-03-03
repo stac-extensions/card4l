@@ -472,11 +472,11 @@
     },
     {
       "rel": "atmospheric-scattering",
-      "href": "https://example.com/fake-example-atmospheric-scattering.xml"
+      "href": "https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-reflectance"
     },
     {
       "rel": "water-vapor",
-      "href": "https://example.com/fake-example-water-vapor.xml"
+      "href": "https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-reflectance"
     }
   ],
   "collection": "landsat-c2l2-sr"
