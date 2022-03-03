@@ -54,7 +54,6 @@
     "view:sun_azimuth": 88.11424233,
     "view:sun_elevation": 58.84464619,
     "view:incidence_angle": 0,
-    "view:azimuth": null,
     "platform": "LANDSAT_9",
     "instruments": [
       "OLI",
