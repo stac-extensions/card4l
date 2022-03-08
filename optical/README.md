@@ -240,7 +240,7 @@ For those details please refer to the ["Additional properties" column in the tab
 | Field Name      | Req.  | Data Type                                                    | Description                                                  |
 | --------------- | ----- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | data_type       | *n/a* | string                                                       | One of the [Data Types](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#data-types). |
-| unit            | *n/a* | string                                                       | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/). |
+| unit            | *n/a* | string                                                       | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/) units (singular). |
 | bits_per_sample | *n/a* | integer                                                      | Bits per sample                                              |
 | nodata          | 2.2   | \[any]                                                       | for data. Value(s) for no-data.                              |
 | values          | n/a   | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v2.0.0/README.md#mapping-object)\] | Lists the value that are in the file and describes their meaning. |
