@@ -340,7 +340,7 @@ For those details please refer to the ["Additional properties" column in the tab
 
 | Field Name                | Src     | Prod    | XML Tag                                         | Data Type                                                    | Description                                                  |
 | ------------------------- | ------- | ------- | ----------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| type                      | (✓)     | ✓       | `DataFormat`                                    | string                                                       | The media type of the file format.                           |
+| type                      | (✓)     | ✓       | `DataFormat`                                    | string                                                       | The [media type](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#asset-media-type) of the file format.                           |
 | created                   | ✓ 1.6.6 | ✓ 1.7.1 | `ProcessingDate` (Src), `ProcessingTime` (Prod) | string                                                       | The time of the processing is specified via the `created` property of the asset as specified in the [STAC Common metadata](https://github.com/radiantearth/stac-spec/tree/v1.0.0/item-spec/common-metadata.md#date-and-time). |
 | sar:polarizations         | (✓)     | ✓       | *n/a*                                           | \[string\]                                                   | The polarization(s) of the asset.                            |
 | file:header_size          | ✗       | ✓ 1.7.7 | `HeaderSize`                                    | integer                                                      | File header size in bytes (**required** if applicable to the file format). |
@@ -359,10 +359,10 @@ Assets. Specify in Item properties otherwise. See also comment in [Projection](#
 | Field Name      | Src  | Prod  | XML Tag                                      | Data Type                                                    | Description                                                  |
 | --------------- | ---- | ----- | -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | data_type       | ✗    | ✓     | `DataType`                                   | string                                                       | One of the [Data Types](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#data-types). |
-| bits_per_sample | ✗    | ✓     | `BitsPerSample`                              | integer                                                      | Bits per sample, e.g. 8, 16, 32, ...                         |
 | unit            | ✗    | ✓     | `SampleType`                                 | string                                                       | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/) units (singular). |
-| values          | ✗    | ✓ 2.2 | `ValidData` and `InvalidData` in `BitValues` | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v1.0.0/README.md#mapping-object)\] | Specify value(s) for valid and invalid data separately. \[4] |
-| nodata          | ✗    | ✓ 2.2 | `NoData` in `BitValues`                      | \[any]                                                       | Value(s) for no-data.                                        |
+| bits_per_sample | ✗    | ✓     | `BitsPerSample`                              | integer                                                      | Actual number of bits per sample (e.g., 8, 16, 32, ...) |
+| values          | ✗    | ✓ 2.2 | `ValidData` and `InvalidData` in `BitValues` | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v2.1.0/README.md#mapping-object)\] | Specify value(s) for valid and invalid data separately. \[4] |
+| nodata          | ✗    | ✓ 2.2 | `NoData` in `BitValues`                      | \[any]                                                       | Value(s) for no-data. |
 
 \[4] `raster:bands[*].values` is not standardized yet in STAC, this could change to `file:values`
 or something different with a similar structure in the future.

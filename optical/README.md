@@ -229,7 +229,7 @@ For those details please refer to the ["Additional properties" column in the tab
 
 | Field Name      | Req.      | Data Type                                                    | Description                                                  |
 | --------------- | --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| type            | *n/a*     | string                                                       | STRONGLY RECOMMENDED. The media type of the file format.     |
+| type            | *n/a*     | string                                                       | STRONGLY RECOMMENDED. The [media type](https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md#asset-media-type) of the file format.     |
 | created         | *n/a*     | string                                                       | The time of the processing is specified via the `created` property of the asset as specified in the [STAC Common metadata](https://github.com/radiantearth/stac-spec/tree/v1.0.0/item-spec/common-metadata.md#date-and-time). |
 | eo:bands        | 1.10      | \[[Band Object](https://github.com/stac-extensions/eo/blob/v1.0.0/README.md#band-object)\] | Bands with at least the following fields included: `name` and `center_wavelength`. Add additional fields such as `full_width_half_max` to better meet the *target (desired) requirements*. See the CARD4L requirement 1.10 for further details. |
 | raster:bands    | see below | \[[Raster Band Object](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#raster-band-object)\] | Bands with at least the required fields for the corresponding asset role (see above and below). |
@@ -241,9 +241,9 @@ For those details please refer to the ["Additional properties" column in the tab
 | --------------- | ----- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | data_type       | *n/a* | string                                                       | One of the [Data Types](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#data-types). |
 | unit            | *n/a* | string                                                       | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/) units (singular). |
-| bits_per_sample | *n/a* | integer                                                      | Bits per sample                                              |
-| nodata          | 2.2   | \[any]                                                       | for data. Value(s) for no-data.                              |
-| values          | n/a   | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v2.0.0/README.md#mapping-object)\] | Lists the value that are in the file and describes their meaning. |
+| bits_per_sample | *n/a* | integer                                                      | Actual number of bits per sample (e.g., 8, 16, 32, ...) |
+| values          | *n/a* | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v2.1.0/README.md#mapping-object)\] | Lists the value that are in the file and describes their meaning. |
+| nodata          | 2.2   | \[any]                                                       | Value(s) for no-data. |
 
 ## Notes
 
