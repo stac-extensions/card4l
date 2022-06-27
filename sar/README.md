@@ -1,7 +1,7 @@
 # STAC CARD4L SAR Extension Specification
 
 - **Title:** CARD4L SAR
-- **Identifier:** <https://stac-extensions.github.io/card4l/v1.0.0/sar/schema.json>
+- **Identifier:** <https://stac-extensions.github.io/card4l/v0.1.0/sar/schema.json>
 - **Field Name Prefix:** card4l (shared with the CARD4L Optical Extension)
 - **Scope:** Item
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
@@ -99,8 +99,8 @@ only additional requirements and mappings to fulfill the CARD4L requirements are
 
 | Value                                                              | Src  | Prod |
 | ------------------------------------------------------------------ | ---- | ---- |
-| `https://stac-extensions.github.io/card4l/v1.0.0/sar/source.json`  | ✓    | ✗    |
-| `https://stac-extensions.github.io/card4l/v1.0.0/sar/product.json` | ✗    | ✓    |
+| `https://stac-extensions.github.io/card4l/v0.1.0/sar/source.json`  | ✓    | ✗    |
+| `https://stac-extensions.github.io/card4l/v0.1.0/sar/product.json` | ✗    | ✓    |
 | `https://stac-extensions.github.io/file/v2.0.0/schema.json`        | ✗    | ✓    |
 | `https://stac-extensions.github.io/processing/v1.1.0/schema.json`  | ✓    | ✓    |
 | `https://stac-extensions.github.io/projection/v1.0.0/schema.json`  | (✓)  | ✓    |
@@ -257,8 +257,8 @@ None of the fields is required.
 | sar:looks_range             | ✓ 1.6.6 | ✗     | `RangeNumberOfLooks`                                         | **REQUIRED.**                                                |
 | sar:pixel_spacing_azimuth   | ✓ 1.6.7 | ✗     | `AzimuthPixelSpacing`                                        | **REQUIRED.** In meters (m).                                 |
 | sar:pixel_spacing_range     | ✓ 1.6.7 | ✗     | `RangePixelSpacing`                                          | **REQUIRED.** In meters (m).                                 |
-| sar:resolution_azimuth      | ✓ 1.6.7 | ✗     | `AzimuthResolution`                                          | **REQUIRED.** The mean of `card4l:resolution_azimuth`, in meters (m). |
-| sar:resolution_range        | ✓ 1.6.7 | ✗     | `RangeResolution`                                            | **REQUIRED.** The mean of `card4l:resolution_range`, in meters (m). |
+| sar:resolution_azimuth      | ✓ 1.6.7 | ✗     | `AzimuthResolution`                                          | **REQUIRED.** The maximum ability to distinguish two adjacent targets parallel to the flight path, which is the lowest value of `card4l:resolution_azimuth`, in meters (m). |
+| sar:resolution_range        | ✓ 1.6.7 | ✗     | `RangeResolution`                                            | **REQUIRED.** The maximum ability to distinguish two adjacent targets perpendicular to the flight path, which is the lowest value of `card4l:resolution_range`, in meters (m). |
 | sar:looks_equivalent_number | ✓ 1.6.9 | ✗     | `EquivalentNumberOfLooks`                                    |                                                              |
 
 #### Satellite
@@ -359,10 +359,10 @@ Assets. Specify in Item properties otherwise. See also comment in [Projection](#
 | Field Name      | Src  | Prod  | XML Tag                                      | Data Type                                                    | Description                                                  |
 | --------------- | ---- | ----- | -------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | data_type       | ✗    | ✓     | `DataType`                                   | string                                                       | One of the [Data Types](https://github.com/stac-extensions/raster/blob/v1.1.0/README.md#data-types). |
-| bits_per_sample | ✗    | (✓)   | `BitsPerSample`                              | integer                                                      | Actual number of bits per sample (e.g., 8, 16, 32, ...) |
-| unit            | ✗    | ✓     | `SampleType`                                 | string                                                       | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/). |
+| unit            | ✗    | ✓     | `SampleType`                                 | string                                                       | The unit of the values in the asset, preferably compliant to [UDUNITS-2](https://ncics.org/portfolio/other-resources/udunits2/) units (singular). |
+| bits_per_sample | ✗    | ✓     | `BitsPerSample`                              | integer                                                      | Actual number of bits per sample (e.g., 8, 16, 32, ...) |
 | values          | ✗    | ✓ 2.2 | `ValidData` and `InvalidData` in `BitValues` | \[[Mapping Object](https://github.com/stac-extensions/file/blob/v2.1.0/README.md#mapping-object)\] | Specify value(s) for valid and invalid data separately. \[4] |
-| nodata          | ✗    | ✓ 2.2 | `NoData` in `BitValues`                      | \[any]                                                       | Value(s) for no-data.                                        |
+| nodata          | ✗    | ✓ 2.2 | `NoData` in `BitValues`                      | \[any]                                                       | Value(s) for no-data. |
 
 \[4] `raster:bands[*].values` is not standardized yet in STAC, this could change to `file:values`
 or something different with a similar structure in the future.

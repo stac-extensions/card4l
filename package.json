@@ -1,10 +1,10 @@
 {
-  "name": "stac-extensions",
-  "version": "1.0.0",
+  "name": "stac-card4l",
+  "version": "0.1.0",
   "scripts": {
     "test": "npm run check-markdown && npm run check-examples",
     "check-markdown": "remark . -f -r .github/remark.yaml",
-    "check-examples": "stac-node-validator . --format --lint --verbose --schemaMap https://stac-extensions.github.io/card4l/v1.0.0/optical/schema.json=./optical/json-schema/schema.json --schemaMap https://stac-extensions.github.io/card4l/v1.0.0/sar/source.json=./sar/json-schema/source.json --schemaMap https://stac-extensions.github.io/card4l/v1.0.0/sar/product.json=./sar/json-schema/product.json --schemaMap https://stac-extensions.github.io/card4l/v1.0.0/sar/common.json=./sar/json-schema/common.json"
+    "check-examples": "stac-node-validator . --format --lint --verbose --schemaMap https://stac-extensions.github.io/card4l/v0.1.0/optical/schema.json=./optical/json-schema/schema.json --schemaMap https://stac-extensions.github.io/card4l/v0.1.0/sar/source.json=./sar/json-schema/source.json --schemaMap https://stac-extensions.github.io/card4l/v0.1.0/sar/product.json=./sar/json-schema/product.json --schemaMap https://stac-extensions.github.io/card4l/v0.1.0/sar/common.json=./sar/json-schema/common.json"
   },
   "dependencies": {
     "remark-cli": "^8.0.0",
