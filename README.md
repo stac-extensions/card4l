@@ -1,5 +1,11 @@
 # STAC CARD4L Extensions
 
+- **Title:** CARD4L (Optical and SAR)
+- **Field Name Prefix:** card4l
+- **Scope:** Item
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
+- **Owner**: @m-mohr
+
 This repository contains two STAC extensions that specifies how to create STAC Items (and Collections)
 that comply to the [CEOS CARD4L](http://ceos.org/ard/) product family specifications for either:
 - Optical - Surface Reflectance
