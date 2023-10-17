@@ -19,6 +19,9 @@ There are two STAC extensions, one for Optical and one for SAR:
 
 ## Disclaimer
 
+**WE ARE WORKING ON A SUCCESSOR: <https://github.com/stac-extensions/ceos-ard>**
+**IT IS PLANNED TO DEPRECATE THIS EXTENSION ONCE THE NEW EXTENSION IS PUBLISHED.**
+
 The extensions are not officially approved by CEOS, but there's a desire to get CEOS approval.
 Nevertheless, the extensions have been discussed with CEOS.
 The STAC extensions don't allow to fulfill 100% target compliance (but most of it),
