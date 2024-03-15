@@ -142,8 +142,14 @@
     "card4l:incidence_angle_near_range": 30.3152831649154,
     "card4l:incidence_angle_far_range": 45.97317397183082,
     "card4l:noise_equivalent_intensity": {
-      "minimum": -30,
-      "maximum": -22
+      "VH": {
+        "minimum": -30,
+        "maximum": -22
+      },
+      "VV": {
+        "minimum": -30,
+        "maximum": -22
+      }
     },
     "card4l:noise_equivalent_intensity_type": "sigma0",
     "datetime": "2021-01-08T02:19:04.286944Z",
@@ -192,7 +198,7 @@
     },
     {
       "href": "s3://sentinel-s1-l1c/GRD/2021/1/8/IW/DV/S1A_OPER_AUX_RESORB_OPOD_20210108T062130_V20210108T012450_20210108T044220.EOF",
-      "rel": "orbit-data-file",
+      "rel": "state-vectors",
       "title": "Orbit Data File with state vectors"
     },
     {
